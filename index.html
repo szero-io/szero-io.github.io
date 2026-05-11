@@ -243,11 +243,10 @@
 
     /* scroll hint */
     .scroll-hint {
-      position: absolute;
+      position: fixed;
       bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
+      right: 2.5rem;
+      z-index: 50;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -256,10 +255,12 @@
       font-size: 0.62rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      animation: fadeInUp 1s ease 1.5s both;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
     }
-    @media (max-width: 768px) {
-      .scroll-hint { display: none; }
+    .scroll-hint.visible {
+      opacity: 1;
     }
     .scroll-hint .arrow {
       width: 1px;
@@ -536,9 +537,68 @@
       line-height: 1.7;
     }
 
+    /* ─── EXPERTISE ───────────────────────────── */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    /* ─── PARTNERS ────────────────────────────── */
+    .partners-list {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+
+    .partner-item {
+      display: flex;
+      align-items: baseline;
+      gap: 2rem;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s, padding-left 0.2s;
+    }
+    .partner-item:last-child { border-bottom: none; }
+    .partner-item:hover {
+      background: #f8f8f8;
+      padding-left: 2.5rem;
+    }
+
+    .partner-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      min-width: 220px;
+      flex-shrink: 0;
+      color: var(--fg);
+    }
+
+    .partner-desc {
+      font-size: 0.78rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
     /* ─── APPROACH ────────────────────────────── */
     .approach {
-      border-top: 1px solid var(--border);
+      background: var(--fg);
+      color: var(--bg);
+    }
+    .approach .section-label { color: #888; }
+    .approach .section-label::after { background: #333; }
+    .approach .section-title { color: var(--bg); }
+    .approach .step { border-bottom-color: #333; }
+    .approach .step-num { color: #666; }
+    .approach .step-title { color: var(--bg); }
+    .approach .step-desc { color: #888; }
+    .approach .ascii-block {
+      background: rgba(255,255,255,0.04);
+      border-color: #333;
+      color: #666;
     }
 
     .approach-grid {
@@ -614,7 +674,52 @@
       50% { transform: translateY(-8px); }
     }
 
-    /* ─── FLEET visualization ─────────────────── */
+    /* ─── PLATFORM GALLERY ──────────────────── */
+    .platform-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .platform-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 2rem 1rem 1.5rem;
+      border: 1px solid var(--border);
+      background: white;
+      text-align: center;
+      cursor: default;
+      transition: background 0.18s, border-color 0.18s, transform 0.18s;
+    }
+    .platform-tile:hover {
+      background: var(--fg);
+      border-color: var(--fg);
+      transform: translateY(-3px);
+      color: var(--bg);
+    }
+    .platform-tile:hover svg, .platform-tile:hover .lucide {
+      stroke: var(--bg);
+    }
+    .platform-tile:hover .platform-tag {
+      color: #888;
+    }
+    .platform-tile-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    .platform-tile-icon svg, .platform-tile-icon .lucide {
+      width: 1.8rem;
+      height: 1.8rem;
+      stroke: var(--fg);
+      transition: stroke 0.18s;
+    }
+
+    /* ─── FLEET visualization ─────────────────────── */
     .fleet-section {
       background: var(--fg);
       color: var(--bg);
@@ -765,6 +870,19 @@
         padding: 2rem 1.5rem;
         text-align: center;
       }
+
+      .expertise-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .partner-item {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .partner-name {
+        min-width: unset;
+      }
     }
 
     /* ─── TYPING INDICATOR ────────────────────── */
@@ -798,6 +916,7 @@
     .cap-item:hover .cap-icon, .domain-card:hover .domain-icon { transform: translateY(-6px) scale(1.06); filter: drop-shadow(0 10px 20px rgba(10,10,10,0.06)); opacity:1; }
 
 </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0a0a'/><text x='16' y='22' font-family='monospace' font-size='14' font-weight='800' fill='white' text-anchor='middle'>S0</text></svg>">
 </head>
 <body>
 
@@ -810,8 +929,10 @@
   </a>
   <ul class="nav-links">
     <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#expertise">Expertise</a></li>
     <li><a href="#platforms">Platforms</a></li>
     <li><a href="#domains">Domains</a></li>
+    <li><a href="#partners">Partners</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -842,7 +963,7 @@
       </svg>
     </div>
 
-    <p class="hero-eyebrow">Cognitive Robotics · Fleet Intelligence</p>
+    <p class="hero-eyebrow">Applied AI · Cognitive Robotics · Embodied Intelligence</p>
 
     <h1 class="hero-title">
       <span class="s0-big">S0</span>
@@ -855,7 +976,7 @@
     </div>
 
     <p class="hero-sub">
-      We build the brains of robots that do real work — autonomous systems that perceive, decide, act, and coordinate across the physical world.
+      We build the cognitive layer for systems that work across the physical and digital world — enterprise workflows, factory floors, robot fleets.
     </p>
 
     <div class="hero-cta">
@@ -875,22 +996,22 @@
   <div class="container">
     <p class="section-label">Manifesto</p>
     <p class="manifesto-text">
-      Every system has an initial state. <em>S0</em> is where everything begins — the blank slate before the first action, before the first reward signal, before the first decision. We start from zero so robots can become <em>capable of everything</em>.
+      <em>S0</em> is the initial state — the starting point of every system before its first action, its first observation, its first reward signal. Every capable machine was once nothing. We build the layer that changes that.
     </p>
     <p class="manifesto-text" style="margin-top:2rem; font-size: clamp(1rem, 2.2vw, 1.45rem);">
-      Cognition isn't a feature. It's the foundation. We're not building actuators — we're building <em>minds</em>.
+      Intelligence has to be designed in from the start. Whether the system runs on a factory floor, a financial institution, or an enterprise workflow — cognition is what makes it work. That's what we build.
     </p>
 
     <!-- State machine viz -->
     <div class="state-viz" id="stateMachine">
       <div class="state-node s0">S0</div>
-      <span class="state-arrow" id="arr1">──→</span>
+      <span class="state-arrow" id="arr1">&#8594;</span>
       <div class="state-node" id="s1">S1</div>
-      <span class="state-arrow" id="arr2">──→</span>
+      <span class="state-arrow" id="arr2">&#8594;</span>
       <div class="state-node" id="s2">S2</div>
-      <span class="state-arrow" id="arr3">──→</span>
+      <span class="state-arrow" id="arr3">&#8594;</span>
       <div class="state-node" id="s3">S3</div>
-      <span class="state-arrow" id="arr4">──→</span>
+      <span class="state-arrow" id="arr4">&#8594;</span>
       <div class="state-node" id="s4">···</div>
     </div>
   </div>
@@ -905,38 +1026,68 @@
       <div class="cap-item fade-in cap-icon-lg">
         <p class="cap-number">01</p>
         <span class="cap-icon"><i data-lucide="brain"></i></span>
-        <h3 class="cap-title">Cognitive Control</h3>
-        <p class="cap-desc">Deep learning architectures for real-time perception, world-modeling, and closed-loop decision making. Policy networks trained in simulation, deployed in reality.</p>
+        <h3 class="cap-title">Cognitive Policies</h3>
+        <p class="cap-desc">Learned decision-making for any domain. From perception to action — policy networks that generalize across environments, physical or digital.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <p class="cap-number">02</p>
         <span class="cap-icon"><i data-lucide="network"></i></span>
-        <h3 class="cap-title">Fleet Coordination</h3>
-        <p class="cap-desc">Multi-agent orchestration across heterogeneous platforms. Decentralized task allocation, conflict resolution, and emergent collective behavior.</p>
+        <h3 class="cap-title">Agent Coordination</h3>
+        <p class="cap-desc">Multi-agent systems working toward shared goals. Decentralized task allocation across robot fleets, enterprise pipelines, and hybrid deployments.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <p class="cap-number">03</p>
         <span class="cap-icon"><i data-lucide="layers"></i></span>
-        <h3 class="cap-title">Sim-to-Real Transfer</h3>
-        <p class="cap-desc">High-fidelity simulation pipelines with domain randomization. Policies that generalize. Zero-shot deployment into the physical world.</p>
+        <h3 class="cap-title">Transfer &amp; Adaptation</h3>
+        <p class="cap-desc">Moving capabilities between environments. Simulation-to-hardware for physical systems; domain fine-tuning and RLHF for language models.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <p class="cap-number">04</p>
         <span class="cap-icon"><i data-lucide="cpu"></i></span>
-        <h3 class="cap-title">Edge Inference</h3>
-        <p class="cap-desc">On-device neural execution optimized for robotics compute. Low-latency, power-efficient, safety-critical. No cloud dependency in the loop.</p>
+        <h3 class="cap-title">Edge Deployment</h3>
+        <p class="cap-desc">Neural inference where the compute lives — on-device for robots, on-prem for enterprises. Safety-critical, low-latency, no cloud dependency.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <p class="cap-number">05</p>
         <span class="cap-icon"><i data-lucide="scan"></i></span>
-        <h3 class="cap-title">Sensor Fusion</h3>
-        <p class="cap-desc">Unified perception from LiDAR, RGB, depth, IMU, and proprioception. Robust state estimation under sensor noise and occlusion.</p>
+        <h3 class="cap-title">Data &amp; Perception</h3>
+        <p class="cap-desc">Building coherent representations from raw inputs — sensors and cameras for robots, documents and data streams for digital systems.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <p class="cap-number">06</p>
         <span class="cap-icon"><i data-lucide="refresh-cw"></i></span>
-        <h3 class="cap-title">Continuous Learning</h3>
-        <p class="cap-desc">Reinforcement learning pipelines for on-the-job improvement. Policies that adapt to task distribution shift without catastrophic forgetting.</p>
+        <h3 class="cap-title">Continuous Improvement</h3>
+        <p class="cap-desc">Systems that get better the more they run. RL for physical deployments, RLHF for language models. On-deployment adaptation within safety bounds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="container">
+    <p class="section-label fade-in">Expertise</p>
+    <h2 class="section-title fade-in">Deep technical roots</h2>
+    <div class="expertise-grid">
+      <div class="cap-item fade-in cap-icon-lg">
+        <span class="cap-icon"><i data-lucide="brain"></i></span>
+        <h3 class="cap-title">Reinforcement Learning</h3>
+        <p class="cap-desc">Policy gradient methods — PPO, GRPO, DPO — with curriculum design and RLHF. Built and deployed in production environments across multiple industries.</p>
+      </div>
+      <div class="cap-item fade-in cap-icon-lg">
+        <span class="cap-icon"><i data-lucide="box"></i></span>
+        <h3 class="cap-title">Simulation & Digital Twins</h3>
+        <p class="cap-desc">Physics-accurate environments in Isaac Sim and MuJoCo. Digital twins for validating control policies before hardware deployment.</p>
+      </div>
+      <div class="cap-item fade-in cap-icon-lg">
+        <span class="cap-icon"><i data-lucide="layers"></i></span>
+        <h3 class="cap-title">Software Architecture</h3>
+        <p class="cap-desc">Systems design for AI-first products — from data pipelines and model serving to recommendation engines and multi-tenant platforms.</p>
+      </div>
+      <div class="cap-item fade-in cap-icon-lg">
+        <span class="cap-icon"><i data-lucide="database"></i></span>
+        <h3 class="cap-title">Model Grounding</h3>
+        <p class="cap-desc">SFT, RLHF, and DPO applied to language models, vision-language models, and vision-language-action models. Making foundation models reliable in the real world.</p>
       </div>
     </div>
   </div>
@@ -946,37 +1097,52 @@
 <section id="platforms" class="platforms">
   <div class="container">
     <p class="section-label fade-in">Platforms</p>
-    <h2 class="section-title fade-in">Any body. Any task.</h2>
+    <h2 class="section-title fade-in">Any platform. Any task.</h2>
     <div class="platforms-intro">
       <p class="platforms-desc fade-in">
-        Our software stack is platform-agnostic by design. A single cognitive architecture governs limbs, rotors, wheels, and everything in between. The body is a peripheral. The mind is the product.
+        One cognitive architecture across physical and digital operating environments. The deployment surface changes; the intelligence layer stays the same.
       </p>
-      <div class="platform-list fade-in">
-        <div class="platform-item">
-          <span class="platform-icon icon-wrap"><i data-lucide="user"></i></span>
-          <span class="platform-name">Humanoids</span>
-          <span class="platform-tag">Bipedal</span>
-        </div>
-        <div class="platform-item">
-          <span class="platform-icon icon-wrap"><i data-lucide="paw-print"></i></span>
-          <span class="platform-name">Quadrupeds</span>
-          <span class="platform-tag">Legged</span>
-        </div>
-        <div class="platform-item">
-          <span class="platform-icon icon-wrap"><i data-lucide="plane"></i></span>
-          <span class="platform-name">Drones</span>
-          <span class="platform-tag">Aerial</span>
-        </div>
-        <div class="platform-item">
-          <span class="platform-icon icon-wrap"><i data-lucide="truck"></i></span>
-          <span class="platform-name">Ground Vehicles</span>
-          <span class="platform-tag">Wheeled</span>
-        </div>
-        <div class="platform-item">
-          <span class="platform-icon icon-wrap"><i data-lucide="hand"></i></span>
-          <span class="platform-name">Manipulators</span>
-          <span class="platform-tag">Arm / Gripper</span>
-        </div>
+    </div>
+    <div class="platform-gallery fade-in">
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap"><i data-lucide="user"></i></div>
+        <span class="platform-name">Humanoids</span>
+        <span class="platform-tag">Bipedal</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap"><i data-lucide="paw-print"></i></div>
+        <span class="platform-name">Quadrupeds</span>
+        <span class="platform-tag">Legged</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap"><i data-lucide="plane"></i></div>
+        <span class="platform-name">Drones</span>
+        <span class="platform-tag">Aerial</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap"><i data-lucide="truck"></i></div>
+        <span class="platform-name">Ground Vehicles</span>
+        <span class="platform-tag">Wheeled</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap"><i data-lucide="hand"></i></div>
+        <span class="platform-name">Manipulators</span>
+        <span class="platform-tag">Arm / Gripper</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap"><i data-lucide="bot"></i></div>
+        <span class="platform-name">Enterprise Agents</span>
+        <span class="platform-tag">Workflow</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap"><i data-lucide="landmark"></i></div>
+        <span class="platform-name">Decision Systems</span>
+        <span class="platform-tag">Finance · Energy</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap"><i data-lucide="flask-conical"></i></div>
+        <span class="platform-name">Research Infra</span>
+        <span class="platform-tag">RL · Benchmarks</span>
       </div>
     </div>
   </div>
@@ -991,7 +1157,7 @@
       <canvas id="fleetCanvas"></canvas>
     </div>
     <p class="fleet-desc fade-in">
-      S0 manages fleets of mixed robot types operating toward shared objectives. Humanoids handle precision tasks; drones provide aerial scouting; quadrupeds navigate unstructured terrain. The fleet thinks together.
+      S0 coordinates mixed fleets working toward shared objectives. Each agent type handles what it does best — humanoids for precision tasks, drones for aerial coverage, quadrupeds for rough terrain. The coordination layer keeps them working as one.
     </p>
   </div>
 </section>
@@ -1003,24 +1169,80 @@
     <h2 class="section-title fade-in">Where we operate</h2>
     <div class="domains-grid">
       <div class="domain-card fade-in">
-        <div class="domain-icon"><i data-lucide="sprout"></i></div>
-        <h3 class="domain-title">Agronomy</h3>
-        <p class="domain-desc">Autonomous crop monitoring, precision spraying, harvest assistance, and soil analysis across large-scale agricultural environments.</p>
+        <div class="domain-icon"><i data-lucide="factory"></i></div>
+        <h3 class="domain-title">Industrial Automation</h3>
+        <p class="domain-desc">Humanoid teleoperation and sim-to-real transfer for assembly and logistics. Digital twin infrastructure for validating policies before physical deployment.</p>
       </div>
       <div class="domain-card fade-in">
-        <div class="domain-icon"><i data-lucide="factory"></i></div>
-        <h3 class="domain-title">Manufacturing</h3>
-        <p class="domain-desc">Flexible assembly, quality inspection, materials handling, and human-robot collaboration on production lines with changing specifications.</p>
+        <div class="domain-icon"><i data-lucide="cpu"></i></div>
+        <h3 class="domain-title">Autonomous Agents</h3>
+        <p class="domain-desc">Agents that build and improve other agents. Enterprise workflow automation with LLM orchestration, self-evolving architectures, and RLHF feedback loops.</p>
+      </div>
+      <div class="domain-card fade-in">
+        <div class="domain-icon"><i data-lucide="landmark"></i></div>
+        <h3 class="domain-title">Financial Services</h3>
+        <p class="domain-desc">Automated document analysis and AI-assisted decision pipelines for credit operations, debt recovery, and portfolio management.</p>
+      </div>
+      <div class="domain-card fade-in">
+        <div class="domain-icon"><i data-lucide="zap"></i></div>
+        <h3 class="domain-title">Energy &amp; Utilities</h3>
+        <p class="domain-desc">Language models trained on operational and regulatory data. RLHF-aligned assistants for grid operators, maintenance engineers, and technical support.</p>
+      </div>
+      <div class="domain-card fade-in">
+        <div class="domain-icon"><i data-lucide="graduation-cap"></i></div>
+        <h3 class="domain-title">Research &amp; Education</h3>
+        <p class="domain-desc">Benchmark design for RL and embodied agents. AI-powered tools for adaptive learning and academic workflow automation.</p>
       </div>
       <div class="domain-card fade-in">
         <div class="domain-icon"><i data-lucide="building-2"></i></div>
         <h3 class="domain-title">Infrastructure</h3>
-        <p class="domain-desc">Structural inspection, maintenance operations, and autonomous surveying for civil infrastructure, power grids, and industrial facilities.</p>
+        <p class="domain-desc">Aerial and ground inspection robots for bridges, power lines, and industrial facilities. Autonomous surveying with structured reporting pipelines.</p>
       </div>
-      <div class="domain-card fade-in">
-        <div class="domain-icon"><i data-lucide="trees"></i></div>
-        <h3 class="domain-title">Environment</h3>
-        <p class="domain-desc">Monitoring of natural ecosystems, wildfire detection, reforestation assistance, and environmental data collection at scale.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="container">
+    <p class="section-label fade-in">Partners</p>
+    <h2 class="section-title fade-in">Industries we've built for</h2>
+    <div class="partners-list">
+      <div class="partner-item fade-in">
+        <span class="partner-name">Industrial Manufacturing</span>
+        <span class="partner-desc">Humanoid teleoperation for assembly and logistics. Sim-to-real transfer validated against digital twins before physical deployment.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name">Autonomous Workflows</span>
+        <span class="partner-desc">Agents that design and improve other agents. Enterprise workflow automation with LLM orchestration and RLHF-driven refinement.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name">Financial Institutions</span>
+        <span class="partner-desc">Document analysis and AI-assisted decision pipelines for credit, debt recovery, and portfolio operations.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name">Energy &amp; Utilities</span>
+        <span class="partner-desc">Language models trained on operational and regulatory knowledge. RLHF-aligned assistants for grid operators and maintenance engineers.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name">Research Institutions</span>
+        <span class="partner-desc">Benchmark development for RL and embodied agents. AI tooling for adaptive learning and academic workflow automation.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name">Civil Infrastructure</span>
+        <span class="partner-desc">Aerial and ground inspection robots for bridges, power lines, and industrial sites. Autonomous surveying with structured output pipelines.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name">Defense &amp; Security</span>
+        <span class="partner-desc">Multi-asset coordination with decentralized decision-making. Perception systems for adverse conditions and edge inference without cloud dependency.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name">Logistics &amp; Delivery</span>
+        <span class="partner-desc">Autonomous ground vehicles for depot operations. Warehouse humanoids for picking, packing, and last-mile delivery workflows.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name">Healthcare</span>
+        <span class="partner-desc">Precision manipulation for lab automation and surgical assistance. Autonomous patient monitoring and AI-assisted clinical workflows.</span>
       </div>
     </div>
   </div>
@@ -1037,28 +1259,28 @@
           <span class="step-num">01</span>
           <div class="step-content">
             <h4 class="step-title">Define the MDP</h4>
-            <p class="step-desc">Every deployment starts with rigorous formalization of the task as a Markov decision process — states, actions, rewards, and constraints.</p>
+            <p class="step-desc">Every deployment starts by formalizing the task as a Markov decision process — states, actions, rewards, constraints.</p>
           </div>
         </div>
         <div class="step">
           <span class="step-num">02</span>
           <div class="step-content">
             <h4 class="step-title">Simulate, iterate</h4>
-            <p class="step-desc">High-fidelity simulation with adversarial domain randomization. Policies are stress-tested before a single real actuator moves.</p>
+            <p class="step-desc">High-fidelity simulation with domain randomization. Policies are stress-tested before a single actuator moves in the real world.</p>
           </div>
         </div>
         <div class="step">
           <span class="step-num">03</span>
           <div class="step-content">
             <h4 class="step-title">Transfer & validate</h4>
-            <p class="step-desc">Structured sim-to-real transfer with progressive curriculum. Continuous validation loops against real-world edge cases.</p>
+            <p class="step-desc">Structured sim-to-real transfer with a progressive curriculum. Continuous validation against real-world edge cases.</p>
           </div>
         </div>
         <div class="step">
           <span class="step-num">04</span>
           <div class="step-content">
             <h4 class="step-title">Deploy & improve</h4>
-            <p class="step-desc">On-device learning pipelines keep deployed policies sharp. The robot improves on the job, within safety constraints.</p>
+            <p class="step-desc">On-device learning keeps policies sharp in the field. The robot improves on the job, within safety bounds.</p>
           </div>
         </div>
       </div>
@@ -1099,7 +1321,7 @@
     <h2 class="section-title fade-in">
       Ready to initialize?
     </h2>
-    <p class="cta-sub fade-in">We're assembling the founding team and initial partnerships. If you're building serious robotics, let's talk.</p>
+    <p class="cta-sub fade-in">We're building the founding team and first partnerships. If you're working on serious robotics, let's talk.</p>
     <div class="fade-in">
       <a href="mailto:hello@szero.io" class="btn btn-primary">hello@szero.io</a>
     </div>
@@ -1115,7 +1337,7 @@
   <ul class="footer-links">
     <li><a href="#">Research</a></li>
     <li><a href="#">Careers</a></li>
-    <li><a href="https://szero.io">szero.io</a></li>
+    <li><a href="https://szero.site">szero.site</a></li>
     <li><a href="mailto:hello@szero.io">Contact</a></li>
   </ul>
   <span class="footer-copy">© 2026 System Zero. All rights reserved.</span>
@@ -1128,6 +1350,25 @@ window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 40);
 });
 
+// ─── SCROLL HINT (idle, bottom-right) ────────
+const scrollHint = document.querySelector('.scroll-hint');
+let idleTimer;
+function showScrollHint() {
+  if (window.scrollY < 80) scrollHint.classList.add('visible');
+}
+function resetIdleTimer() {
+  scrollHint.classList.remove('visible');
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(showScrollHint, 2500);
+}
+window.addEventListener('scroll', () => {
+  scrollHint.classList.remove('visible');
+  clearTimeout(idleTimer);
+  if (window.scrollY > 80) scrollHint.classList.remove('visible');
+});
+['mousemove', 'keydown', 'touchstart'].forEach(e => window.addEventListener(e, resetIdleTimer, { passive: true }));
+idleTimer = setTimeout(showScrollHint, 2500);
+
 // ─── TYPEWRITER ──────────────────────────────
 const lines = [
   'initializing cognitive stack...',
@@ -1135,7 +1376,10 @@ const lines = [
   'fleet online: 4/4 nodes',
   'policy.forward(obs) → action',
   'reward: +1.0 // task complete',
-  'building robot minds.',
+  'deploy(env="factory", policy=trained)',
+  'deploy(env="finance", model=finetuned)',
+  'deploy(env="fleet", coord=decentralized)',
+  'any domain. same foundation.',
 ];
 let lineIdx = 0, charIdx = 0, deleting = false, tw = document.getElementById('typewriter');
 function type() {
