@@ -95,6 +95,27 @@
     }
     .nav-links a:hover { color: var(--fg); }
 
+    /* ─── LANG SWITCHER ───────────────────────── */
+    .lang-switcher {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      margin-left: 1.5rem;
+    }
+    .lang-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.15rem;
+      padding: 0.15rem 0.2rem;
+      opacity: 0.4;
+      transition: opacity 0.2s, transform 0.2s;
+      line-height: 1;
+      border-radius: 2px;
+    }
+    .lang-btn:hover { opacity: 0.75; transform: scale(1.12); }
+    .lang-btn.active { opacity: 1; transform: scale(1.12); }
+
     /* ─── HERO ────────────────────────────────── */
     .hero {
       min-height: 100vh;
@@ -928,13 +949,17 @@
     <span class="full">System Zero</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#capabilities">Capabilities</a></li>
-    <li><a href="#expertise">Expertise</a></li>
-    <li><a href="#platforms">Platforms</a></li>
-    <li><a href="#domains">Domains</a></li>
-    <li><a href="#partners">Partners</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#capabilities" data-i18n="nav.capabilities">Capabilities</a></li>
+    <li><a href="#expertise" data-i18n="nav.expertise">Expertise</a></li>
+    <li><a href="#platforms" data-i18n="nav.platforms">Platforms</a></li>
+    <li><a href="#domains" data-i18n="nav.domains">Domains</a></li>
+    <li><a href="#partners" data-i18n="nav.partners">Partners</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
   </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="en" title="English">🇺🇸</button>
+    <button class="lang-btn" data-lang="pt-br" title="Português">🇧🇷</button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -963,7 +988,7 @@
       </svg>
     </div>
 
-    <p class="hero-eyebrow">Applied AI · Cognitive Robotics · Embodied Intelligence</p>
+    <p class="hero-eyebrow" data-i18n="hero.eyebrow">Applied AI · Cognitive Robotics · Embodied Intelligence</p>
 
     <h1 class="hero-title">
       <span class="s0-big">S0</span>
@@ -975,18 +1000,18 @@
       <span id="typewriter"></span><span class="cursor"></span>
     </div>
 
-    <p class="hero-sub">
+    <p class="hero-sub" data-i18n="hero.sub">
       We build the cognitive layer for systems that work across the physical and digital world — enterprise workflows, factory floors, robot fleets.
     </p>
 
     <div class="hero-cta">
-      <a href="#capabilities" class="btn btn-primary">Explore</a>
-      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      <a href="#capabilities" class="btn btn-primary" data-i18n="hero.cta.explore">Explore</a>
+      <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta.touch">Get in touch</a>
     </div>
   </div>
 
   <div class="scroll-hint">
-    <span>scroll</span>
+    <span data-i18n="hero.scroll">scroll</span>
     <div class="arrow"></div>
   </div>
 </section>
@@ -994,11 +1019,11 @@
 <!-- MANIFESTO -->
 <section class="manifesto">
   <div class="container">
-    <p class="section-label">Manifesto</p>
-    <p class="manifesto-text">
+    <p class="section-label" data-i18n="manifesto.label">Manifesto</p>
+    <p class="manifesto-text" data-i18n-html="manifesto.p1">
       <em>S0</em> is the initial state — the starting point of every system before its first action, its first observation, its first reward signal. Every capable machine was once nothing. We build the layer that changes that.
     </p>
-    <p class="manifesto-text" style="margin-top:2rem; font-size: clamp(1rem, 2.2vw, 1.45rem);">
+    <p class="manifesto-text" style="margin-top:2rem; font-size: clamp(1rem, 2.2vw, 1.45rem);" data-i18n="manifesto.p2">
       Intelligence has to be designed in from the start. Whether the system runs on a factory floor, a financial institution, or an enterprise workflow — cognition is what makes it work. That's what we build.
     </p>
 
@@ -1020,44 +1045,44 @@
 <!-- CAPABILITIES -->
 <section id="capabilities">
   <div class="container">
-    <p class="section-label fade-in">Core Capabilities</p>
-    <h2 class="section-title fade-in">What we build</h2>
+    <p class="section-label fade-in" data-i18n="caps.label">Core Capabilities</p>
+    <h2 class="section-title fade-in" data-i18n="caps.title">What we build</h2>
     <div class="caps-grid">
       <div class="cap-item fade-in cap-icon-lg">
         <p class="cap-number">01</p>
         <span class="cap-icon"><i data-lucide="brain"></i></span>
-        <h3 class="cap-title">Cognitive Policies</h3>
-        <p class="cap-desc">Learned decision-making for any domain. From perception to action — policy networks that generalize across environments, physical or digital.</p>
+        <h3 class="cap-title" data-i18n="cap.01.title">Cognitive Policies</h3>
+        <p class="cap-desc" data-i18n="cap.01.desc">Learned decision-making for any domain. From perception to action — policy networks that generalize across environments, physical or digital.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <p class="cap-number">02</p>
         <span class="cap-icon"><i data-lucide="network"></i></span>
-        <h3 class="cap-title">Agent Coordination</h3>
-        <p class="cap-desc">Multi-agent systems working toward shared goals. Decentralized task allocation across robot fleets, enterprise pipelines, and hybrid deployments.</p>
+        <h3 class="cap-title" data-i18n="cap.02.title">Agent Coordination</h3>
+        <p class="cap-desc" data-i18n="cap.02.desc">Multi-agent systems working toward shared goals. Decentralized task allocation across robot fleets, enterprise pipelines, and hybrid deployments.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <p class="cap-number">03</p>
         <span class="cap-icon"><i data-lucide="layers"></i></span>
-        <h3 class="cap-title">Transfer &amp; Adaptation</h3>
-        <p class="cap-desc">Moving capabilities between environments. Simulation-to-hardware for physical systems; domain fine-tuning and RLHF for language models.</p>
+        <h3 class="cap-title" data-i18n="cap.03.title">Transfer &amp; Adaptation</h3>
+        <p class="cap-desc" data-i18n="cap.03.desc">Moving capabilities between environments. Simulation-to-hardware for physical systems; domain fine-tuning and RLHF for language models.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <p class="cap-number">04</p>
         <span class="cap-icon"><i data-lucide="cpu"></i></span>
-        <h3 class="cap-title">Edge Deployment</h3>
-        <p class="cap-desc">Neural inference where the compute lives — on-device for robots, on-prem for enterprises. Safety-critical, low-latency, no cloud dependency.</p>
+        <h3 class="cap-title" data-i18n="cap.04.title">Edge Deployment</h3>
+        <p class="cap-desc" data-i18n="cap.04.desc">Neural inference where the compute lives — on-device for robots, on-prem for enterprises. Safety-critical, low-latency, no cloud dependency.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <p class="cap-number">05</p>
         <span class="cap-icon"><i data-lucide="scan"></i></span>
-        <h3 class="cap-title">Data &amp; Perception</h3>
-        <p class="cap-desc">Building coherent representations from raw inputs — sensors and cameras for robots, documents and data streams for digital systems.</p>
+        <h3 class="cap-title" data-i18n="cap.05.title">Data &amp; Perception</h3>
+        <p class="cap-desc" data-i18n="cap.05.desc">Building coherent representations from raw inputs — sensors and cameras for robots, documents and data streams for digital systems.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <p class="cap-number">06</p>
         <span class="cap-icon"><i data-lucide="refresh-cw"></i></span>
-        <h3 class="cap-title">Continuous Improvement</h3>
-        <p class="cap-desc">Systems that get better the more they run. RL for physical deployments, RLHF for language models. On-deployment adaptation within safety bounds.</p>
+        <h3 class="cap-title" data-i18n="cap.06.title">Continuous Improvement</h3>
+        <p class="cap-desc" data-i18n="cap.06.desc">Systems that get better the more they run. RL for physical deployments, RLHF for language models. On-deployment adaptation within safety bounds.</p>
       </div>
     </div>
   </div>
@@ -1066,28 +1091,28 @@
 <!-- EXPERTISE -->
 <section id="expertise">
   <div class="container">
-    <p class="section-label fade-in">Expertise</p>
-    <h2 class="section-title fade-in">Deep technical roots</h2>
+    <p class="section-label fade-in" data-i18n="exp.label">Expertise</p>
+    <h2 class="section-title fade-in" data-i18n="exp.title">Deep technical roots</h2>
     <div class="expertise-grid">
       <div class="cap-item fade-in cap-icon-lg">
         <span class="cap-icon"><i data-lucide="brain"></i></span>
-        <h3 class="cap-title">Reinforcement Learning</h3>
-        <p class="cap-desc">Policy gradient methods — PPO, GRPO, DPO — with curriculum design and RLHF. Built and deployed in production environments across multiple industries.</p>
+        <h3 class="cap-title" data-i18n="exp.01.title">Reinforcement Learning</h3>
+        <p class="cap-desc" data-i18n="exp.01.desc">Policy gradient methods — PPO, GRPO, DPO — with curriculum design and RLHF. Built and deployed in production environments across multiple industries.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <span class="cap-icon"><i data-lucide="box"></i></span>
-        <h3 class="cap-title">Simulation & Digital Twins</h3>
-        <p class="cap-desc">Physics-accurate environments in Isaac Sim and MuJoCo. Digital twins for validating control policies before hardware deployment.</p>
+        <h3 class="cap-title" data-i18n="exp.02.title">Simulation &amp; Digital Twins</h3>
+        <p class="cap-desc" data-i18n="exp.02.desc">Physics-accurate environments in Isaac Sim and MuJoCo. Digital twins for validating control policies before hardware deployment.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <span class="cap-icon"><i data-lucide="layers"></i></span>
-        <h3 class="cap-title">Software Architecture</h3>
-        <p class="cap-desc">Systems design for AI-first products — from data pipelines and model serving to recommendation engines and multi-tenant platforms.</p>
+        <h3 class="cap-title" data-i18n="exp.03.title">Software Architecture</h3>
+        <p class="cap-desc" data-i18n="exp.03.desc">Systems design for AI-first products — from data pipelines and model serving to recommendation engines and multi-tenant platforms.</p>
       </div>
       <div class="cap-item fade-in cap-icon-lg">
         <span class="cap-icon"><i data-lucide="database"></i></span>
-        <h3 class="cap-title">Model Grounding</h3>
-        <p class="cap-desc">SFT, RLHF, and DPO applied to language models, vision-language models, and vision-language-action models. Making foundation models reliable in the real world.</p>
+        <h3 class="cap-title" data-i18n="exp.04.title">Model Grounding</h3>
+        <p class="cap-desc" data-i18n="exp.04.desc">SFT, RLHF, and DPO applied to language models, vision-language models, and vision-language-action models. Making foundation models reliable in the real world.</p>
       </div>
     </div>
   </div>
@@ -1096,53 +1121,53 @@
 <!-- PLATFORMS -->
 <section id="platforms" class="platforms">
   <div class="container">
-    <p class="section-label fade-in">Platforms</p>
-    <h2 class="section-title fade-in">Any platform. Any task.</h2>
+    <p class="section-label fade-in" data-i18n="plat.label">Platforms</p>
+    <h2 class="section-title fade-in" data-i18n="plat.title">Any platform. Any task.</h2>
     <div class="platforms-intro">
-      <p class="platforms-desc fade-in">
+      <p class="platforms-desc fade-in" data-i18n="plat.desc">
         One cognitive architecture across physical and digital operating environments. The deployment surface changes; the intelligence layer stays the same.
       </p>
     </div>
     <div class="platform-gallery fade-in">
       <div class="platform-tile">
         <div class="platform-tile-icon icon-wrap"><i data-lucide="user"></i></div>
-        <span class="platform-name">Humanoids</span>
-        <span class="platform-tag">Bipedal</span>
+        <span class="platform-name" data-i18n="plat.humanoids">Humanoids</span>
+        <span class="platform-tag" data-i18n="plat.humanoids.tag">Bipedal</span>
       </div>
       <div class="platform-tile">
         <div class="platform-tile-icon icon-wrap"><i data-lucide="paw-print"></i></div>
-        <span class="platform-name">Quadrupeds</span>
-        <span class="platform-tag">Legged</span>
+        <span class="platform-name" data-i18n="plat.quadrupeds">Quadrupeds</span>
+        <span class="platform-tag" data-i18n="plat.quadrupeds.tag">Legged</span>
       </div>
       <div class="platform-tile">
         <div class="platform-tile-icon icon-wrap"><i data-lucide="plane"></i></div>
-        <span class="platform-name">Drones</span>
-        <span class="platform-tag">Aerial</span>
+        <span class="platform-name" data-i18n="plat.drones">Drones</span>
+        <span class="platform-tag" data-i18n="plat.drones.tag">Aerial</span>
       </div>
       <div class="platform-tile">
         <div class="platform-tile-icon icon-wrap"><i data-lucide="truck"></i></div>
-        <span class="platform-name">Ground Vehicles</span>
-        <span class="platform-tag">Wheeled</span>
+        <span class="platform-name" data-i18n="plat.ground">Ground Vehicles</span>
+        <span class="platform-tag" data-i18n="plat.ground.tag">Wheeled</span>
       </div>
       <div class="platform-tile">
         <div class="platform-tile-icon icon-wrap"><i data-lucide="hand"></i></div>
-        <span class="platform-name">Manipulators</span>
-        <span class="platform-tag">Arm / Gripper</span>
+        <span class="platform-name" data-i18n="plat.manipulators">Manipulators</span>
+        <span class="platform-tag" data-i18n="plat.manipulators.tag">Arm / Gripper</span>
       </div>
       <div class="platform-tile">
         <div class="platform-tile-icon icon-wrap"><i data-lucide="bot"></i></div>
-        <span class="platform-name">Enterprise Agents</span>
-        <span class="platform-tag">Workflow</span>
+        <span class="platform-name" data-i18n="plat.enterprise">Enterprise Agents</span>
+        <span class="platform-tag" data-i18n="plat.enterprise.tag">Workflow</span>
       </div>
       <div class="platform-tile">
         <div class="platform-tile-icon icon-wrap"><i data-lucide="landmark"></i></div>
-        <span class="platform-name">Decision Systems</span>
-        <span class="platform-tag">Finance · Energy</span>
+        <span class="platform-name" data-i18n="plat.decision">Decision Systems</span>
+        <span class="platform-tag" data-i18n="plat.decision.tag">Finance · Energy</span>
       </div>
       <div class="platform-tile">
         <div class="platform-tile-icon icon-wrap"><i data-lucide="flask-conical"></i></div>
-        <span class="platform-name">Research Infra</span>
-        <span class="platform-tag">RL · Benchmarks</span>
+        <span class="platform-name" data-i18n="plat.research">Research Infra</span>
+        <span class="platform-tag" data-i18n="plat.research.tag">RL · Benchmarks</span>
       </div>
     </div>
   </div>
@@ -1151,12 +1176,12 @@
 <!-- FLEET VISUALIZATION -->
 <section class="fleet-section">
   <div class="container">
-    <p class="section-label">Fleet Intelligence</p>
-    <h2 class="section-title fade-in">Heterogeneous coordination</h2>
+    <p class="section-label" data-i18n="fleet.label">Fleet Intelligence</p>
+    <h2 class="section-title fade-in" data-i18n="fleet.title">Heterogeneous coordination</h2>
     <div class="fleet-canvas-wrapper">
       <canvas id="fleetCanvas"></canvas>
     </div>
-    <p class="fleet-desc fade-in">
+    <p class="fleet-desc fade-in" data-i18n="fleet.desc">
       S0 coordinates mixed fleets working toward shared objectives. Each agent type handles what it does best — humanoids for precision tasks, drones for aerial coverage, quadrupeds for rough terrain. The coordination layer keeps them working as one.
     </p>
   </div>
@@ -1165,38 +1190,38 @@
 <!-- DOMAINS -->
 <section id="domains">
   <div class="container">
-    <p class="section-label fade-in">Domains</p>
-    <h2 class="section-title fade-in">Where we operate</h2>
+    <p class="section-label fade-in" data-i18n="dom.label">Domains</p>
+    <h2 class="section-title fade-in" data-i18n="dom.title">Where we operate</h2>
     <div class="domains-grid">
       <div class="domain-card fade-in">
         <div class="domain-icon"><i data-lucide="factory"></i></div>
-        <h3 class="domain-title">Industrial Automation</h3>
-        <p class="domain-desc">Humanoid teleoperation and sim-to-real transfer for assembly and logistics. Digital twin infrastructure for validating policies before physical deployment.</p>
+        <h3 class="domain-title" data-i18n="dom.01.title">Industrial Automation</h3>
+        <p class="domain-desc" data-i18n="dom.01.desc">Humanoid teleoperation and sim-to-real transfer for assembly and logistics. Digital twin infrastructure for validating policies before physical deployment.</p>
       </div>
       <div class="domain-card fade-in">
         <div class="domain-icon"><i data-lucide="cpu"></i></div>
-        <h3 class="domain-title">Autonomous Agents</h3>
-        <p class="domain-desc">Agents that build and improve other agents. Enterprise workflow automation with LLM orchestration, self-evolving architectures, and RLHF feedback loops.</p>
+        <h3 class="domain-title" data-i18n="dom.02.title">Autonomous Agents</h3>
+        <p class="domain-desc" data-i18n="dom.02.desc">Agents that build and improve other agents. Enterprise workflow automation with LLM orchestration, self-evolving architectures, and RLHF feedback loops.</p>
       </div>
       <div class="domain-card fade-in">
         <div class="domain-icon"><i data-lucide="landmark"></i></div>
-        <h3 class="domain-title">Financial Services</h3>
-        <p class="domain-desc">Automated document analysis and AI-assisted decision pipelines for credit operations, debt recovery, and portfolio management.</p>
+        <h3 class="domain-title" data-i18n="dom.03.title">Financial Services</h3>
+        <p class="domain-desc" data-i18n="dom.03.desc">Automated document analysis and AI-assisted decision pipelines for credit operations, debt recovery, and portfolio management.</p>
       </div>
       <div class="domain-card fade-in">
         <div class="domain-icon"><i data-lucide="zap"></i></div>
-        <h3 class="domain-title">Energy &amp; Utilities</h3>
-        <p class="domain-desc">Language models trained on operational and regulatory data. RLHF-aligned assistants for grid operators, maintenance engineers, and technical support.</p>
+        <h3 class="domain-title" data-i18n="dom.04.title">Energy &amp; Utilities</h3>
+        <p class="domain-desc" data-i18n="dom.04.desc">Language models trained on operational and regulatory data. RLHF-aligned assistants for grid operators, maintenance engineers, and technical support.</p>
       </div>
       <div class="domain-card fade-in">
         <div class="domain-icon"><i data-lucide="graduation-cap"></i></div>
-        <h3 class="domain-title">Research &amp; Education</h3>
-        <p class="domain-desc">Benchmark design for RL and embodied agents. AI-powered tools for adaptive learning and academic workflow automation.</p>
+        <h3 class="domain-title" data-i18n="dom.05.title">Research &amp; Education</h3>
+        <p class="domain-desc" data-i18n="dom.05.desc">Benchmark design for RL and embodied agents. AI-powered tools for adaptive learning and academic workflow automation.</p>
       </div>
       <div class="domain-card fade-in">
         <div class="domain-icon"><i data-lucide="building-2"></i></div>
-        <h3 class="domain-title">Infrastructure</h3>
-        <p class="domain-desc">Aerial and ground inspection robots for bridges, power lines, and industrial facilities. Autonomous surveying with structured reporting pipelines.</p>
+        <h3 class="domain-title" data-i18n="dom.06.title">Infrastructure</h3>
+        <p class="domain-desc" data-i18n="dom.06.desc">Aerial and ground inspection robots for bridges, power lines, and industrial facilities. Autonomous surveying with structured reporting pipelines.</p>
       </div>
     </div>
   </div>
@@ -1205,44 +1230,44 @@
 <!-- PARTNERS -->
 <section id="partners">
   <div class="container">
-    <p class="section-label fade-in">Partners</p>
-    <h2 class="section-title fade-in">Industries we've built for</h2>
+    <p class="section-label fade-in" data-i18n="part.label">Partners</p>
+    <h2 class="section-title fade-in" data-i18n="part.title">Industries we've built for</h2>
     <div class="partners-list">
       <div class="partner-item fade-in">
-        <span class="partner-name">Industrial Manufacturing</span>
-        <span class="partner-desc">Humanoid teleoperation for assembly and logistics. Sim-to-real transfer validated against digital twins before physical deployment.</span>
+        <span class="partner-name" data-i18n="part.01.name">Industrial Manufacturing</span>
+        <span class="partner-desc" data-i18n="part.01.desc">Humanoid teleoperation for assembly and logistics. Sim-to-real transfer validated against digital twins before physical deployment.</span>
       </div>
       <div class="partner-item fade-in">
-        <span class="partner-name">Autonomous Workflows</span>
-        <span class="partner-desc">Agents that design and improve other agents. Enterprise workflow automation with LLM orchestration and RLHF-driven refinement.</span>
+        <span class="partner-name" data-i18n="part.02.name">Autonomous Workflows</span>
+        <span class="partner-desc" data-i18n="part.02.desc">Agents that design and improve other agents. Enterprise workflow automation with LLM orchestration and RLHF-driven refinement.</span>
       </div>
       <div class="partner-item fade-in">
-        <span class="partner-name">Financial Institutions</span>
-        <span class="partner-desc">Document analysis and AI-assisted decision pipelines for credit, debt recovery, and portfolio operations.</span>
+        <span class="partner-name" data-i18n="part.03.name">Financial Institutions</span>
+        <span class="partner-desc" data-i18n="part.03.desc">Document analysis and AI-assisted decision pipelines for credit, debt recovery, and portfolio operations.</span>
       </div>
       <div class="partner-item fade-in">
-        <span class="partner-name">Energy &amp; Utilities</span>
-        <span class="partner-desc">Language models trained on operational and regulatory knowledge. RLHF-aligned assistants for grid operators and maintenance engineers.</span>
+        <span class="partner-name" data-i18n="part.04.name">Energy &amp; Utilities</span>
+        <span class="partner-desc" data-i18n="part.04.desc">Language models trained on operational and regulatory knowledge. RLHF-aligned assistants for grid operators and maintenance engineers.</span>
       </div>
       <div class="partner-item fade-in">
-        <span class="partner-name">Research Institutions</span>
-        <span class="partner-desc">Benchmark development for RL and embodied agents. AI tooling for adaptive learning and academic workflow automation.</span>
+        <span class="partner-name" data-i18n="part.05.name">Research Institutions</span>
+        <span class="partner-desc" data-i18n="part.05.desc">Benchmark development for RL and embodied agents. AI tooling for adaptive learning and academic workflow automation.</span>
       </div>
       <div class="partner-item fade-in">
-        <span class="partner-name">Civil Infrastructure</span>
-        <span class="partner-desc">Aerial and ground inspection robots for bridges, power lines, and industrial sites. Autonomous surveying with structured output pipelines.</span>
+        <span class="partner-name" data-i18n="part.06.name">Civil Infrastructure</span>
+        <span class="partner-desc" data-i18n="part.06.desc">Aerial and ground inspection robots for bridges, power lines, and industrial sites. Autonomous surveying with structured output pipelines.</span>
       </div>
       <div class="partner-item fade-in">
-        <span class="partner-name">Defense &amp; Security</span>
-        <span class="partner-desc">Multi-asset coordination with decentralized decision-making. Perception systems for adverse conditions and edge inference without cloud dependency.</span>
+        <span class="partner-name" data-i18n="part.07.name">Defense &amp; Security</span>
+        <span class="partner-desc" data-i18n="part.07.desc">Multi-asset coordination with decentralized decision-making. Perception systems for adverse conditions and edge inference without cloud dependency.</span>
       </div>
       <div class="partner-item fade-in">
-        <span class="partner-name">Logistics &amp; Delivery</span>
-        <span class="partner-desc">Autonomous ground vehicles for depot operations. Warehouse humanoids for picking, packing, and last-mile delivery workflows.</span>
+        <span class="partner-name" data-i18n="part.08.name">Logistics &amp; Delivery</span>
+        <span class="partner-desc" data-i18n="part.08.desc">Autonomous ground vehicles for depot operations. Warehouse humanoids for picking, packing, and last-mile delivery workflows.</span>
       </div>
       <div class="partner-item fade-in">
-        <span class="partner-name">Healthcare</span>
-        <span class="partner-desc">Precision manipulation for lab automation and surgical assistance. Autonomous patient monitoring and AI-assisted clinical workflows.</span>
+        <span class="partner-name" data-i18n="part.09.name">Healthcare</span>
+        <span class="partner-desc" data-i18n="part.09.desc">Precision manipulation for lab automation and surgical assistance. Autonomous patient monitoring and AI-assisted clinical workflows.</span>
       </div>
     </div>
   </div>
@@ -1251,36 +1276,36 @@
 <!-- APPROACH -->
 <section id="approach" class="approach">
   <div class="container">
-    <p class="section-label fade-in">How We Work</p>
-    <h2 class="section-title fade-in">Research-grade engineering</h2>
+    <p class="section-label fade-in" data-i18n="app.label">How We Work</p>
+    <h2 class="section-title fade-in" data-i18n="app.title">Research-grade engineering</h2>
     <div class="approach-grid">
       <div class="approach-steps fade-in">
         <div class="step">
           <span class="step-num">01</span>
           <div class="step-content">
-            <h4 class="step-title">Define the MDP</h4>
-            <p class="step-desc">Every deployment starts by formalizing the task as a Markov decision process — states, actions, rewards, constraints.</p>
+            <h4 class="step-title" data-i18n="app.01.title">Define the MDP</h4>
+            <p class="step-desc" data-i18n="app.01.desc">Every deployment starts by formalizing the task as a Markov decision process — states, actions, rewards, constraints.</p>
           </div>
         </div>
         <div class="step">
           <span class="step-num">02</span>
           <div class="step-content">
-            <h4 class="step-title">Simulate, iterate</h4>
-            <p class="step-desc">High-fidelity simulation with domain randomization. Policies are stress-tested before a single actuator moves in the real world.</p>
+            <h4 class="step-title" data-i18n="app.02.title">Simulate, iterate</h4>
+            <p class="step-desc" data-i18n="app.02.desc">High-fidelity simulation with domain randomization. Policies are stress-tested before a single actuator moves in the real world.</p>
           </div>
         </div>
         <div class="step">
           <span class="step-num">03</span>
           <div class="step-content">
-            <h4 class="step-title">Transfer & validate</h4>
-            <p class="step-desc">Structured sim-to-real transfer with a progressive curriculum. Continuous validation against real-world edge cases.</p>
+            <h4 class="step-title" data-i18n="app.03.title">Transfer &amp; validate</h4>
+            <p class="step-desc" data-i18n="app.03.desc">Structured sim-to-real transfer with a progressive curriculum. Continuous validation against real-world edge cases.</p>
           </div>
         </div>
         <div class="step">
           <span class="step-num">04</span>
           <div class="step-content">
-            <h4 class="step-title">Deploy & improve</h4>
-            <p class="step-desc">On-device learning keeps policies sharp in the field. The robot improves on the job, within safety bounds.</p>
+            <h4 class="step-title" data-i18n="app.04.title">Deploy &amp; improve</h4>
+            <p class="step-desc" data-i18n="app.04.desc">On-device learning keeps policies sharp in the field. The robot improves on the job, within safety bounds.</p>
           </div>
         </div>
       </div>
@@ -1317,15 +1342,15 @@
 <!-- CTA -->
 <section id="contact" class="cta-section">
   <div class="container">
-    <p class="section-label fade-in" style="justify-content:center;">Contact</p>
-    <h2 class="section-title fade-in">
+    <p class="section-label fade-in" style="justify-content:center;" data-i18n="cta.label">Contact</p>
+    <h2 class="section-title fade-in" data-i18n="cta.title">
       Ready to initialize?
     </h2>
-    <p class="cta-sub fade-in">We're building the founding team and first partnerships. If you're working on serious robotics, let's talk.</p>
+    <p class="cta-sub fade-in" data-i18n="cta.sub">We're building the founding team and first partnerships. If you're working on serious robotics, let's talk.</p>
     <div class="fade-in">
       <a href="mailto:hello@szero.io" class="btn btn-primary">hello@szero.io</a>
     </div>
-    <p class="cta-email fade-in" style="margin-top: 2rem;">
+    <p class="cta-email fade-in" style="margin-top: 2rem;" data-i18n="cta.note">
       Research partners · Early customers · Talented engineers welcome
     </p>
   </div>
@@ -1335,12 +1360,12 @@
 <footer>
   <span class="footer-logo">S0</span>
   <ul class="footer-links">
-    <li><a href="#">Research</a></li>
-    <li><a href="#">Careers</a></li>
+    <li><a href="#" data-i18n="footer.research">Research</a></li>
+    <li><a href="#" data-i18n="footer.careers">Careers</a></li>
     <li><a href="https://szero.site">szero.site</a></li>
-    <li><a href="mailto:hello@szero.io">Contact</a></li>
+    <li><a href="mailto:hello@szero.io" data-i18n="footer.contact">Contact</a></li>
   </ul>
-  <span class="footer-copy">© 2026 System Zero. All rights reserved.</span>
+  <span class="footer-copy" data-i18n="footer.copy">© 2026 System Zero. All rights reserved.</span>
 </footer>
 
 <script>
@@ -1369,20 +1394,323 @@ window.addEventListener('scroll', () => {
 ['mousemove', 'keydown', 'touchstart'].forEach(e => window.addEventListener(e, resetIdleTimer, { passive: true }));
 idleTimer = setTimeout(showScrollHint, 2500);
 
+// ─── I18N ───────────────────────────────────
+const LANGS = ['en', 'pt-br'];
+const DEFAULT_LANG = 'en';
+const COOKIE_NAME = 'szero_lang';
+
+const translations = {
+  en: {
+    'nav.capabilities': 'Capabilities',
+    'nav.expertise': 'Expertise',
+    'nav.platforms': 'Platforms',
+    'nav.domains': 'Domains',
+    'nav.partners': 'Partners',
+    'nav.contact': 'Contact',
+    'hero.eyebrow': 'Applied AI · Cognitive Robotics · Embodied Intelligence',
+    'hero.sub': 'We build the cognitive layer for systems that work across the physical and digital world — enterprise workflows, factory floors, robot fleets.',
+    'hero.cta.explore': 'Explore',
+    'hero.cta.touch': 'Get in touch',
+    'hero.scroll': 'scroll',
+    'manifesto.label': 'Manifesto',
+    'manifesto.p1': '<em>S0</em> is the initial state — the starting point of every system before its first action, its first observation, its first reward signal. Every capable machine was once nothing. We build the layer that changes that.',
+    'manifesto.p2': "Intelligence has to be designed in from the start. Whether the system runs on a factory floor, a financial institution, or an enterprise workflow — cognition is what makes it work. That's what we build.",
+    'caps.label': 'Core Capabilities',
+    'caps.title': 'What we build',
+    'cap.01.title': 'Cognitive Policies',
+    'cap.01.desc': 'Learned decision-making for any domain. From perception to action — policy networks that generalize across environments, physical or digital.',
+    'cap.02.title': 'Agent Coordination',
+    'cap.02.desc': 'Multi-agent systems working toward shared goals. Decentralized task allocation across robot fleets, enterprise pipelines, and hybrid deployments.',
+    'cap.03.title': 'Transfer & Adaptation',
+    'cap.03.desc': 'Moving capabilities between environments. Simulation-to-hardware for physical systems; domain fine-tuning and RLHF for language models.',
+    'cap.04.title': 'Edge Deployment',
+    'cap.04.desc': 'Neural inference where the compute lives — on-device for robots, on-prem for enterprises. Safety-critical, low-latency, no cloud dependency.',
+    'cap.05.title': 'Data & Perception',
+    'cap.05.desc': 'Building coherent representations from raw inputs — sensors and cameras for robots, documents and data streams for digital systems.',
+    'cap.06.title': 'Continuous Improvement',
+    'cap.06.desc': 'Systems that get better the more they run. RL for physical deployments, RLHF for language models. On-deployment adaptation within safety bounds.',
+    'exp.label': 'Expertise',
+    'exp.title': 'Deep technical roots',
+    'exp.01.title': 'Reinforcement Learning',
+    'exp.01.desc': 'Policy gradient methods — PPO, GRPO, DPO — with curriculum design and RLHF. Built and deployed in production environments across multiple industries.',
+    'exp.02.title': 'Simulation & Digital Twins',
+    'exp.02.desc': 'Physics-accurate environments in Isaac Sim and MuJoCo. Digital twins for validating control policies before hardware deployment.',
+    'exp.03.title': 'Software Architecture',
+    'exp.03.desc': 'Systems design for AI-first products — from data pipelines and model serving to recommendation engines and multi-tenant platforms.',
+    'exp.04.title': 'Model Grounding',
+    'exp.04.desc': 'SFT, RLHF, and DPO applied to language models, vision-language models, and vision-language-action models. Making foundation models reliable in the real world.',
+    'plat.label': 'Platforms',
+    'plat.title': 'Any platform. Any task.',
+    'plat.desc': 'One cognitive architecture across physical and digital operating environments. The deployment surface changes; the intelligence layer stays the same.',
+    'plat.humanoids': 'Humanoids',
+    'plat.humanoids.tag': 'Bipedal',
+    'plat.quadrupeds': 'Quadrupeds',
+    'plat.quadrupeds.tag': 'Legged',
+    'plat.drones': 'Drones',
+    'plat.drones.tag': 'Aerial',
+    'plat.ground': 'Ground Vehicles',
+    'plat.ground.tag': 'Wheeled',
+    'plat.manipulators': 'Manipulators',
+    'plat.manipulators.tag': 'Arm / Gripper',
+    'plat.enterprise': 'Enterprise Agents',
+    'plat.enterprise.tag': 'Workflow',
+    'plat.decision': 'Decision Systems',
+    'plat.decision.tag': 'Finance · Energy',
+    'plat.research': 'Research Infra',
+    'plat.research.tag': 'RL · Benchmarks',
+    'fleet.label': 'Fleet Intelligence',
+    'fleet.title': 'Heterogeneous coordination',
+    'fleet.desc': 'S0 coordinates mixed fleets working toward shared objectives. Each agent type handles what it does best — humanoids for precision tasks, drones for aerial coverage, quadrupeds for rough terrain. The coordination layer keeps them working as one.',
+    'dom.label': 'Domains',
+    'dom.title': 'Where we operate',
+    'dom.01.title': 'Industrial Automation',
+    'dom.01.desc': 'Humanoid teleoperation and sim-to-real transfer for assembly and logistics. Digital twin infrastructure for validating policies before physical deployment.',
+    'dom.02.title': 'Autonomous Agents',
+    'dom.02.desc': 'Agents that build and improve other agents. Enterprise workflow automation with LLM orchestration, self-evolving architectures, and RLHF feedback loops.',
+    'dom.03.title': 'Financial Services',
+    'dom.03.desc': 'Automated document analysis and AI-assisted decision pipelines for credit operations, debt recovery, and portfolio management.',
+    'dom.04.title': 'Energy & Utilities',
+    'dom.04.desc': 'Language models trained on operational and regulatory data. RLHF-aligned assistants for grid operators, maintenance engineers, and technical support.',
+    'dom.05.title': 'Research & Education',
+    'dom.05.desc': 'Benchmark design for RL and embodied agents. AI-powered tools for adaptive learning and academic workflow automation.',
+    'dom.06.title': 'Infrastructure',
+    'dom.06.desc': 'Aerial and ground inspection robots for bridges, power lines, and industrial facilities. Autonomous surveying with structured reporting pipelines.',
+    'part.label': 'Partners',
+    'part.title': "Industries we've built for",
+    'part.01.name': 'Industrial Manufacturing',
+    'part.01.desc': 'Humanoid teleoperation for assembly and logistics. Sim-to-real transfer validated against digital twins before physical deployment.',
+    'part.02.name': 'Autonomous Workflows',
+    'part.02.desc': 'Agents that design and improve other agents. Enterprise workflow automation with LLM orchestration and RLHF-driven refinement.',
+    'part.03.name': 'Financial Institutions',
+    'part.03.desc': 'Document analysis and AI-assisted decision pipelines for credit, debt recovery, and portfolio operations.',
+    'part.04.name': 'Energy & Utilities',
+    'part.04.desc': 'Language models trained on operational and regulatory knowledge. RLHF-aligned assistants for grid operators and maintenance engineers.',
+    'part.05.name': 'Research Institutions',
+    'part.05.desc': 'Benchmark development for RL and embodied agents. AI tooling for adaptive learning and academic workflow automation.',
+    'part.06.name': 'Civil Infrastructure',
+    'part.06.desc': 'Aerial and ground inspection robots for bridges, power lines, and industrial sites. Autonomous surveying with structured output pipelines.',
+    'part.07.name': 'Defense & Security',
+    'part.07.desc': 'Multi-asset coordination with decentralized decision-making. Perception systems for adverse conditions and edge inference without cloud dependency.',
+    'part.08.name': 'Logistics & Delivery',
+    'part.08.desc': 'Autonomous ground vehicles for depot operations. Warehouse humanoids for picking, packing, and last-mile delivery workflows.',
+    'part.09.name': 'Healthcare',
+    'part.09.desc': 'Precision manipulation for lab automation and surgical assistance. Autonomous patient monitoring and AI-assisted clinical workflows.',
+    'app.label': 'How We Work',
+    'app.title': 'Research-grade engineering',
+    'app.01.title': 'Define the MDP',
+    'app.01.desc': 'Every deployment starts by formalizing the task as a Markov decision process — states, actions, rewards, constraints.',
+    'app.02.title': 'Simulate, iterate',
+    'app.02.desc': 'High-fidelity simulation with domain randomization. Policies are stress-tested before a single actuator moves in the real world.',
+    'app.03.title': 'Transfer & validate',
+    'app.03.desc': 'Structured sim-to-real transfer with a progressive curriculum. Continuous validation against real-world edge cases.',
+    'app.04.title': 'Deploy & improve',
+    'app.04.desc': 'On-device learning keeps policies sharp in the field. The robot improves on the job, within safety bounds.',
+    'cta.label': 'Contact',
+    'cta.title': 'Ready to initialize?',
+    'cta.sub': "We're building the founding team and first partnerships. If you're working on serious robotics, let's talk.",
+    'cta.note': 'Research partners · Early customers · Talented engineers welcome',
+    'footer.research': 'Research',
+    'footer.careers': 'Careers',
+    'footer.contact': 'Contact',
+    'footer.copy': '© 2026 System Zero. All rights reserved.',
+  },
+  'pt-br': {
+    'nav.capabilities': 'Capacidades',
+    'nav.expertise': 'Expertise',
+    'nav.platforms': 'Plataformas',
+    'nav.domains': 'Domínios',
+    'nav.partners': 'Parceiros',
+    'nav.contact': 'Contato',
+    'hero.eyebrow': 'IA Aplicada · Robótica Cognitiva · Inteligência Incorporada',
+    'hero.sub': 'Construímos a camada cognitiva para sistemas que operam no mundo físico e digital — workflows corporativos, chão de fábrica, frotas de robôs.',
+    'hero.cta.explore': 'Explorar',
+    'hero.cta.touch': 'Entre em contato',
+    'hero.scroll': 'rolar',
+    'manifesto.label': 'Manifesto',
+    'manifesto.p1': '<em>S0</em> é o estado inicial — o ponto de partida de todo sistema antes de sua primeira ação, sua primeira observação, seu primeiro sinal de recompensa. Toda máquina capaz já foi nada. Construímos a camada que muda isso.',
+    'manifesto.p2': 'Inteligência precisa ser projetada desde o início. Seja o sistema operando em uma fábrica, em uma instituição financeira ou em um workflow corporativo — cognição é o que faz funcionar. Isso é o que construímos.',
+    'caps.label': 'Capacidades Principais',
+    'caps.title': 'O que construímos',
+    'cap.01.title': 'Políticas Cognitivas',
+    'cap.01.desc': 'Tomada de decisão aprendida para qualquer domínio. Da percepção à ação — redes de política que generalizam entre ambientes, físicos ou digitais.',
+    'cap.02.title': 'Coordenação de Agentes',
+    'cap.02.desc': 'Sistemas multiagente trabalhando em direção a objetivos compartilhados. Alocação descentralizada de tarefas em frotas de robôs, pipelines corporativos e implantações híbridas.',
+    'cap.03.title': 'Transferência e Adaptação',
+    'cap.03.desc': 'Movendo capacidades entre ambientes. Simulação-para-hardware para sistemas físicos; ajuste de domínio e RLHF para modelos de linguagem.',
+    'cap.04.title': 'Implantação na Borda',
+    'cap.04.desc': 'Inferência neural onde o processamento acontece — no dispositivo para robôs, on-prem para empresas. Crítico para segurança, baixa latência, sem dependência de nuvem.',
+    'cap.05.title': 'Dados e Percepção',
+    'cap.05.desc': 'Construindo representações coerentes a partir de entradas brutas — sensores e câmeras para robôs, documentos e fluxos de dados para sistemas digitais.',
+    'cap.06.title': 'Melhoria Contínua',
+    'cap.06.desc': 'Sistemas que melhoram quanto mais operam. RL para implantações físicas, RLHF para modelos de linguagem. Adaptação em produção dentro de limites de segurança.',
+    'exp.label': 'Expertise',
+    'exp.title': 'Raízes técnicas profundas',
+    'exp.01.title': 'Aprendizado por Reforço',
+    'exp.01.desc': 'Métodos de gradiente de política — PPO, GRPO, DPO — com design de currículo e RLHF. Desenvolvidos e implantados em ambientes de produção em múltiplas indústrias.',
+    'exp.02.title': 'Simulação e Gêmeos Digitais',
+    'exp.02.desc': 'Ambientes com física precisa em Isaac Sim e MuJoCo. Gêmeos digitais para validar políticas de controle antes da implantação em hardware.',
+    'exp.03.title': 'Arquitetura de Software',
+    'exp.03.desc': 'Design de sistemas para produtos AI-first — desde pipelines de dados e serving de modelos até motores de recomendação e plataformas multi-tenant.',
+    'exp.04.title': 'Fundamentação de Modelos',
+    'exp.04.desc': 'SFT, RLHF e DPO aplicados a modelos de linguagem, visão-linguagem e visão-linguagem-ação. Tornando modelos de fundação confiáveis no mundo real.',
+    'plat.label': 'Plataformas',
+    'plat.title': 'Qualquer plataforma. Qualquer tarefa.',
+    'plat.desc': 'Uma arquitetura cognitiva para ambientes de operação físicos e digitais. A superfície de implantação muda; a camada de inteligência permanece a mesma.',
+    'plat.humanoids': 'Humanoides',
+    'plat.humanoids.tag': 'Bípede',
+    'plat.quadrupeds': 'Quadrúpedes',
+    'plat.quadrupeds.tag': 'Com pernas',
+    'plat.drones': 'Drones',
+    'plat.drones.tag': 'Aéreo',
+    'plat.ground': 'Veículos Terrestres',
+    'plat.ground.tag': 'Com rodas',
+    'plat.manipulators': 'Manipuladores',
+    'plat.manipulators.tag': 'Braço / Garra',
+    'plat.enterprise': 'Agentes Corporativos',
+    'plat.enterprise.tag': 'Workflow',
+    'plat.decision': 'Sistemas de Decisão',
+    'plat.decision.tag': 'Finanças · Energia',
+    'plat.research': 'Infra de Pesquisa',
+    'plat.research.tag': 'RL · Benchmarks',
+    'fleet.label': 'Inteligência de Frota',
+    'fleet.title': 'Coordenação heterogênea',
+    'fleet.desc': 'S0 coordena frotas mistas trabalhando em direção a objetivos compartilhados. Cada tipo de agente faz o que faz de melhor — humanoides para tarefas de precisão, drones para cobertura aérea, quadrúpedes para terrenos difíceis. A camada de coordenação os mantém operando como um só.',
+    'dom.label': 'Domínios',
+    'dom.title': 'Onde operamos',
+    'dom.01.title': 'Automação Industrial',
+    'dom.01.desc': 'Teleoperação de humanoides e transferência sim-para-real para montagem e logística. Infraestrutura de gêmeos digitais para validar políticas antes da implantação física.',
+    'dom.02.title': 'Agentes Autônomos',
+    'dom.02.desc': 'Agentes que constroem e melhoram outros agentes. Automação de workflows corporativos com orquestração de LLMs, arquiteturas auto-evolutivas e loops de feedback RLHF.',
+    'dom.03.title': 'Serviços Financeiros',
+    'dom.03.desc': 'Análise automatizada de documentos e pipelines de decisão assistidos por IA para operações de crédito, recuperação de dívidas e gestão de portfólio.',
+    'dom.04.title': 'Energia e Utilities',
+    'dom.04.desc': 'Modelos de linguagem treinados em dados operacionais e regulatórios. Assistentes alinhados com RLHF para operadores de rede, engenheiros de manutenção e suporte técnico.',
+    'dom.05.title': 'Pesquisa e Educação',
+    'dom.05.desc': 'Design de benchmarks para RL e agentes incorporados. Ferramentas com IA para aprendizado adaptativo e automação de workflows acadêmicos.',
+    'dom.06.title': 'Infraestrutura',
+    'dom.06.desc': 'Robôs de inspeção aérea e terrestre para pontes, linhas de energia e instalações industriais. Levantamento autônomo com pipelines de relatórios estruturados.',
+    'part.label': 'Parceiros',
+    'part.title': 'Indústrias onde construímos',
+    'part.01.name': 'Manufatura Industrial',
+    'part.01.desc': 'Teleoperação de humanoides para montagem e logística. Transferência sim-para-real validada contra gêmeos digitais antes da implantação física.',
+    'part.02.name': 'Workflows Autônomos',
+    'part.02.desc': 'Agentes que projetam e melhoram outros agentes. Automação de workflows corporativos com orquestração de LLMs e refinamento orientado a RLHF.',
+    'part.03.name': 'Instituições Financeiras',
+    'part.03.desc': 'Análise de documentos e pipelines de decisão assistidos por IA para crédito, recuperação de dívidas e operações de portfólio.',
+    'part.04.name': 'Energia e Utilities',
+    'part.04.desc': 'Modelos de linguagem treinados em conhecimento operacional e regulatório. Assistentes alinhados com RLHF para operadores de rede e engenheiros de manutenção.',
+    'part.05.name': 'Instituições de Pesquisa',
+    'part.05.desc': 'Desenvolvimento de benchmarks para RL e agentes incorporados. Ferramentas de IA para aprendizado adaptativo e automação de workflows acadêmicos.',
+    'part.06.name': 'Infraestrutura Civil',
+    'part.06.desc': 'Robôs de inspeção aérea e terrestre para pontes, linhas de energia e instalações industriais. Levantamento autônomo com pipelines de saída estruturada.',
+    'part.07.name': 'Defesa e Segurança',
+    'part.07.desc': 'Coordenação multi-ativo com tomada de decisão descentralizada. Sistemas de percepção para condições adversas e inferência na borda sem dependência de nuvem.',
+    'part.08.name': 'Logística e Entrega',
+    'part.08.desc': 'Veículos terrestres autônomos para operações em depósitos. Humanoides em armazéns para separação, embalagem e workflows de entrega de última milha.',
+    'part.09.name': 'Saúde',
+    'part.09.desc': 'Manipulação de precisão para automação laboratorial e assistência cirúrgica. Monitoramento autônomo de pacientes e workflows clínicos assistidos por IA.',
+    'app.label': 'Como Trabalhamos',
+    'app.title': 'Engenharia de nível acadêmico',
+    'app.01.title': 'Definir o MDP',
+    'app.01.desc': 'Cada implantação começa formalizando a tarefa como um processo de decisão de Markov — estados, ações, recompensas, restrições.',
+    'app.02.title': 'Simular, iterar',
+    'app.02.desc': 'Simulação de alta fidelidade com randomização de domínio. As políticas são testadas sob estresse antes que um único atuador se mova no mundo real.',
+    'app.03.title': 'Transferir e validar',
+    'app.03.desc': 'Transferência sim-para-real estruturada com currículo progressivo. Validação contínua contra casos extremos do mundo real.',
+    'app.04.title': 'Implantar e melhorar',
+    'app.04.desc': 'O aprendizado no dispositivo mantém as políticas afiadas no campo. O robô melhora em serviço, dentro dos limites de segurança.',
+    'cta.label': 'Contato',
+    'cta.title': 'Pronto para inicializar?',
+    'cta.sub': 'Estamos formando o time fundador e as primeiras parcerias. Se você trabalha com robótica séria, vamos conversar.',
+    'cta.note': 'Parceiros de pesquisa · Primeiros clientes · Engenheiros talentosos são bem-vindos',
+    'footer.research': 'Pesquisa',
+    'footer.careers': 'Carreiras',
+    'footer.contact': 'Contato',
+    'footer.copy': '© 2026 System Zero. Todos os direitos reservados.',
+  }
+};
+
+const typewriterLines = {
+  en: [
+    'initializing cognitive stack...',
+    'loading world model...',
+    'fleet online: 4/4 nodes',
+    'policy.forward(obs) \u2192 action',
+    'reward: +1.0 // task complete',
+    'deploy(env="factory", policy=trained)',
+    'deploy(env="finance", model=finetuned)',
+    'deploy(env="fleet", coord=decentralized)',
+    'any domain. same foundation.',
+  ],
+  'pt-br': [
+    'inicializando stack cognitivo...',
+    'carregando world model...',
+    'frota online: 4/4 nós',
+    'policy.forward(obs) \u2192 action',
+    'reward: +1.0 // task complete',
+    'deploy(env="factory", policy=trained)',
+    'deploy(env="finance", model=finetuned)',
+    'deploy(env="fleet", coord=decentralized)',
+    'qualquer domínio. mesma base.',
+  ]
+};
+
+function getCookie(name) {
+  const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return m ? decodeURIComponent(m[1]) : null;
+}
+function setCookie(name, value, days) {
+  const d = new Date(); d.setTime(d.getTime() + days * 864e5);
+  document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+}
+function detectLang() {
+  const saved = getCookie(COOKIE_NAME);
+  if (saved && LANGS.includes(saved)) return saved;
+  const nav = (navigator.language || navigator.userLanguage || '').toLowerCase();
+  if (nav.startsWith('pt')) return 'pt-br';
+  return DEFAULT_LANG;
+}
+
+let currentLang = detectLang();
+
+function applyLang(lang) {
+  document.documentElement.lang = lang === 'pt-br' ? 'pt-BR' : 'en';
+  const t = translations[lang];
+  // text content
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  // innerHTML (for em tags etc)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  // active button state
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  currentLang = lang;
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    setCookie(COOKIE_NAME, lang, 365);
+    applyLang(lang);
+    // restart typewriter with new lines
+    lineIdx = 0; charIdx = 0; deleting = false;
+  });
+});
+
+// init language
+applyLang(currentLang);
+
 // ─── TYPEWRITER ──────────────────────────────
-const lines = [
-  'initializing cognitive stack...',
-  'loading world model...',
-  'fleet online: 4/4 nodes',
-  'policy.forward(obs) → action',
-  'reward: +1.0 // task complete',
-  'deploy(env="factory", policy=trained)',
-  'deploy(env="finance", model=finetuned)',
-  'deploy(env="fleet", coord=decentralized)',
-  'any domain. same foundation.',
-];
-let lineIdx = 0, charIdx = 0, deleting = false, tw = document.getElementById('typewriter');
+let lineIdx = 0, charIdx = 0, deleting = false;
+const tw = document.getElementById('typewriter');
 function type() {
+  const lines = typewriterLines[currentLang];
   const cur = lines[lineIdx];
   if (!deleting) {
     tw.textContent = cur.slice(0, ++charIdx);
@@ -1482,6 +1810,7 @@ function fleetTick() {
   ctx.strokeStyle = 'rgba(255,255,255,0.04)';
   ctx.lineWidth = 1;
   for (let x = 0; x < W; x += 40) {
+
     ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
   }
   for (let y = 0; y < H; y += 40) {
