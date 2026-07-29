@@ -1,251 +1,1218 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ZERO combina LLMs, reinforcement learning e modelos personalizados para transformar dados de negócio em decisões que evoluem." />
-  <meta property="og:title" content="ZERO — Inteligência que aprende. Decisões que evoluem." />
-  <meta property="og:description" content="LLMs como cérebro. RL como camada de decisão. Sistemas moldados ao negócio." />
+  <meta name="description" content="System Zero builds decision systems that help teams, machines, and institutions choose, learn, and act with better judgment at scale." />
+  <meta property="og:title" content="S0 — System Zero" />
+  <meta property="og:description" content="Decision systems for operations that learn from action." />
   <meta property="og:type" content="website" />
-  <title>ZERO — Adaptive Decision Systems</title>
+  <title>S0 — System Zero</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23090909'/%3E%3Cpath d='M44 13C54 21 56 36 47 47C38 58 21 58 12 47' fill='none' stroke='%23F1F1F1' stroke-width='5' stroke-linecap='square'/%3E%3Cpath d='M20 52H10V42' fill='none' stroke='%23F1F1F1' stroke-width='5' stroke-linecap='square'/%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     * { margin: 0; }
     :root {
       --black: #090909;
-      --off: #F1F1F1;
-      --paper: #FAFAF8;
-      --soft: #E8E8E4;
-      --mid: #777772;
-      --line: #DCDCD7;
+      --off: #f1f1ee;
+      --paper: #fafaf8;
+      --soft: #e9e9e4;
+      --line: #dcdcd7;
       --text: #151515;
-      --muted: #55554F;
+      --muted: #55554f;
+      --quiet: #777772;
       --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", monospace;
     }
     html { scroll-behavior: smooth; background: var(--paper); }
     body { background: var(--paper); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
-    a { color: inherit; text-decoration: none; }
-    p { line-height: 1.56; color: var(--muted); font-weight: 400; }
-    .wrap { width: min(1220px, calc(100vw - 40px)); margin-inline: auto; }
-    .label { font-size: 12px; line-height: 1; letter-spacing: .08em; text-transform: uppercase; color: var(--mid); font-weight: 500; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+    section { padding: clamp(5rem, 9vw, 8.5rem) 1.25rem; border-bottom: 1px solid var(--line); }
+    .container { width: min(100%, 1220px); margin-inline: auto; }
 
-    .mark { display: inline-grid; place-items: center; width: 36px; height: 36px; background: var(--black); color: var(--off); }
-    .mark svg { width: 24px; height: 24px; }
-    .icon svg { width: 30px; height: 30px; display: block; }
-    svg { stroke: currentColor; }
-
-    .nav { position: sticky; top: 0; z-index: 20; background: rgba(250,250,248,.92); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); }
-    .nav-inner { min-height: 72px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; }
-    .logo { display: inline-flex; align-items: center; gap: 11px; justify-self: start; }
-    .logo strong { font-size: 17px; font-weight: 500; letter-spacing: -.02em; }
-    .logo span:last-child { display: block; font-size: 11px; color: var(--mid); letter-spacing: .04em; margin-top: 1px; }
-    .nav-links { display: flex; justify-content: center; gap: 30px; list-style: none; padding: 0; }
-    .nav-links a { font-size: 13px; color: #343431; font-weight: 450; }
+    nav { position: fixed; inset: 0 0 auto; z-index: 100; min-height: 72px; padding: 0 max(1.25rem, calc((100vw - 1220px) / 2)); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 2rem; background: rgba(250,250,248,.93); backdrop-filter: blur(18px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+    nav.scrolled { border-color: var(--line); }
+    .nav-logo { justify-self: start; display: flex; align-items: center; gap: .75rem; color: var(--black); text-decoration: none; }
+    .nav-logo .s0 { display: grid; place-items: center; width: 38px; height: 38px; background: var(--black); color: var(--off); font-size: .88rem; font-weight: 600; letter-spacing: -.04em; }
+    .nav-logo .sep { display: none; }
+    .nav-logo .full { font-size: .78rem; font-weight: 500; letter-spacing: .02em; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 1.7rem; list-style: none; padding: 0; }
+    .nav-links a { color: #343431; font-size: .76rem; font-weight: 450; text-decoration: none; }
     .nav-links a:hover { color: var(--black); }
-    .top-cta { justify-self: end; display: inline-flex; align-items: center; gap: 10px; background: var(--black); color: var(--off); min-height: 40px; padding: 0 16px; font-size: 13px; font-weight: 500; }
-    .top-cta::after { content: "↗"; font-size: 14px; }
+    .lang-switcher { justify-self: end; display: flex; align-items: center; padding: 3px; border: 1px solid var(--line); }
+    .lang-btn { width: 34px; height: 30px; border: 0; background: transparent; cursor: pointer; font-size: .95rem; opacity: .42; filter: grayscale(1); }
+    .lang-btn:hover, .lang-btn.active { opacity: 1; filter: none; }
+    .lang-btn.active { background: var(--soft); }
 
-    .hero { min-height: calc(100svh - 72px); display: grid; align-items: center; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
-    .hero::after { content: ""; position: absolute; right: max(24px, calc((100vw - 1220px) / 2)); top: 14%; width: min(34vw, 420px); aspect-ratio: 1; border: 1px solid rgba(9,9,9,.12); border-radius: 50%; opacity: .65; }
-    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: clamp(44px, 8vw, 120px); align-items: center; padding: clamp(76px, 10vw, 126px) 0; }
-    .hero h1 { margin-top: 34px; max-width: 850px; font-size: clamp(58px, 7.5vw, 104px); line-height: .96; letter-spacing: -.055em; font-weight: 450; color: var(--black); }
-    .hero h1 span { display: block; }
-    .hero-copy { max-width: 560px; margin-top: 28px; font-size: clamp(18px, 1.55vw, 23px); line-height: 1.48; color: #3d3d38; }
-    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; border: 1px solid var(--black); padding: 0 18px; font-size: 13px; font-weight: 500; transition: background .18s ease, color .18s ease, transform .18s ease; }
+    .hero { min-height: 100svh; padding-top: calc(72px + clamp(3.5rem, 8vw, 7rem)); display: grid; align-items: center; position: relative; overflow: hidden; }
+    .hero::after { content: ""; position: absolute; width: min(40vw, 520px); aspect-ratio: 1; right: -8%; bottom: -22%; border: 1px solid var(--line); border-radius: 50%; pointer-events: none; }
+    .hero-inner { width: min(100%, 1220px); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(310px, .7fr); grid-template-rows: auto auto auto auto auto; gap: 0 clamp(3rem, 8vw, 7.5rem); align-items: start; position: relative; z-index: 1; text-align: left; }
+    .logo-mark { grid-column: 2; grid-row: 1 / 6; width: 100%; min-height: 430px; height: 100%; padding: clamp(2rem, 4vw, 3.5rem); display: grid; place-items: center; background: var(--black); color: var(--off); overflow: hidden; position: relative; }
+    .logo-mark::before { content: "S0 → S1 → S2"; position: absolute; top: 1.75rem; left: 1.75rem; color: #a8a8a3; font: .68rem/1 var(--mono); letter-spacing: .08em; }
+    .logo-mark::after { content: "SYSTEM / INITIAL STATE"; position: absolute; right: 1.75rem; bottom: 1.75rem; color: #a8a8a3; font: .62rem/1.4 var(--mono); letter-spacing: .08em; }
+    .logo-mark svg { width: min(75%, 240px); height: auto; filter: invert(1); opacity: .92; }
+    .hero-eyebrow { grid-column: 1; font-size: .72rem; line-height: 1.4; letter-spacing: .08em; text-transform: uppercase; color: var(--quiet); margin-bottom: 2rem; }
+    .hero-title { grid-column: 1; font-size: clamp(4.5rem, 9.5vw, 8.5rem); line-height: .84; letter-spacing: -.07em; font-weight: 450; color: var(--black); }
+    .hero-title .s0-big, .hero-title .system-zero { display: block; }
+    .hero-title .system-zero { margin-top: .42em; font-size: clamp(1.6rem, 3.4vw, 3.2rem); line-height: 1; letter-spacing: -.045em; font-weight: 400; }
+    .typing-line { grid-column: 1; height: 1.4rem; margin: 2rem 0 1.4rem; display: flex; align-items: center; gap: .55rem; color: var(--quiet); font: .7rem/1 var(--mono); }
+    .typing-line .prompt { color: var(--black); font-weight: 500; }
+    .cursor { display: inline-block; width: .55em; height: .9em; background: var(--black); animation: blink 1s step-end infinite; }
+    .hero-sub { grid-column: 1; max-width: 650px; color: #3d3d38; font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.5; }
+    .hero-cta { grid-column: 1; display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2.25rem; }
+    .btn { min-height: 46px; padding: 0 1.2rem; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--black); color: var(--black); font-size: .78rem; font-weight: 500; text-decoration: none; transition: transform .18s, background .18s, color .18s; }
     .btn:hover { transform: translateY(-1px); }
-    .btn.primary { background: var(--black); color: var(--off); }
-    .btn.primary:hover { background: transparent; color: var(--black); }
-    .hero-panel { align-self: stretch; min-height: 420px; background: var(--black); color: var(--off); padding: 28px; display: grid; grid-template-rows: auto 1fr auto; position: relative; overflow: hidden; }
-    .hero-panel::before { content: ""; position: absolute; right: -140px; bottom: -130px; width: 360px; aspect-ratio: 1; border: 24px solid rgba(241,241,241,.10); border-left-color: transparent; border-radius: 50%; transform: rotate(-36deg); }
-    .panel-top { display: flex; justify-content: space-between; align-items: start; position: relative; z-index: 1; }
-    .panel-title { align-self: end; position: relative; z-index: 1; font-size: clamp(34px, 3.2vw, 46px); line-height: 1.02; letter-spacing: -.04em; font-weight: 400; max-width: 320px; color: var(--off); }
-    .panel-note { position: relative; z-index: 1; max-width: 300px; color: #CFCFCC; font-size: 14px; }
+    .btn-primary { background: var(--black); color: var(--off); }
+    .btn-primary:hover { background: transparent; color: var(--black); }
+    .btn-ghost:hover { background: var(--black); color: var(--off); }
+    .scroll-hint { display: none; }
+    @keyframes blink { 50% { opacity: 0; } }
 
-    .section { padding: clamp(76px, 9vw, 122px) 0; border-bottom: 1px solid var(--line); }
-    .two-col { display: grid; grid-template-columns: .78fr 1.22fr; gap: clamp(42px, 8vw, 120px); align-items: start; }
-    .section h2 { font-size: clamp(42px, 5.4vw, 76px); line-height: 1.02; letter-spacing: -.045em; font-weight: 430; color: var(--black); }
-    .section-copy { justify-self: end; max-width: 620px; font-size: clamp(22px, 2.3vw, 34px); line-height: 1.32; letter-spacing: -.026em; color: var(--text); }
-    .section-copy small { display: block; margin-top: 24px; font-size: 17px; line-height: 1.7; letter-spacing: 0; color: var(--muted); }
+    .section-label { margin-bottom: 2.4rem; color: var(--quiet); font-size: .72rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+    .section-title { max-width: 850px; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); color: var(--black); font-size: clamp(2.8rem, 5.7vw, 5rem); line-height: 1; letter-spacing: -.05em; font-weight: 430; }
 
-    .process { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); margin-top: 52px; }
-    .step { min-height: 210px; padding: 26px; border-right: 1px solid var(--line); display: grid; align-content: space-between; }
-    .step:last-child { border-right: 0; }
-    .step h3 { font-size: 30px; line-height: 1.05; letter-spacing: -.03em; font-weight: 430; color: var(--black); }
-    .step p { margin-top: 12px; font-size: 15px; max-width: 280px; }
+    .manifesto { background: var(--soft); color: var(--text); }
+    .manifesto .container { display: grid; grid-template-columns: .7fr 1.3fr; gap: 1.5rem clamp(3rem, 8vw, 8rem); }
+    .manifesto .section-label { color: var(--quiet); }
+    .manifesto-text { grid-column: 2; max-width: 850px; color: var(--text); font-size: clamp(1.5rem, 3.2vw, 2.75rem); line-height: 1.25; letter-spacing: -.035em; font-weight: 400; }
+    .manifesto-text em { color: var(--black); font-style: normal; font-weight: 500; }
+    .manifesto .vision-line { margin-top: 1.5rem; color: var(--muted); font-size: clamp(.95rem, 1.4vw, 1.15rem); line-height: 1.55; letter-spacing: -.01em; }
+    .state-viz { grid-column: 2; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid #cecec8; display: grid; grid-template-columns: auto 1fr auto 1fr auto 1fr auto 1fr auto; align-items: center; gap: .75rem; }
+    .state-node { width: 54px; aspect-ratio: 1; display: grid; place-items: center; border: 1px solid #b8b8b2; border-radius: 50%; color: var(--quiet); font: .7rem/1 var(--mono); transition: color .4s, border-color .4s, background .4s; }
+    .state-node.s0, .state-node.active { border-color: var(--black); color: var(--off); background: var(--black); }
+    .state-arrow { color: #b8b8b2; text-align: center; transition: color .4s; }
+    .state-arrow.active { color: var(--black); }
 
-    .capabilities { background: var(--black); color: var(--off); padding: clamp(68px, 8vw, 112px) 0; border-bottom: 1px solid var(--black); }
-    .cap-head { display: flex; justify-content: space-between; align-items: center; gap: 22px; margin-bottom: 22px; }
-    .cap-head .label { color: #A8A8A3; }
-    .controls { display: flex; gap: 8px; align-items: center; color: #CFCFCC; font-size: 12px; }
-    .control { width: 34px; height: 34px; border: 1px solid #4A4A46; border-radius: 50%; display: grid; place-items: center; }
-    .cards { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; border-top: 1px solid #343430; border-bottom: 1px solid #343430; scrollbar-color: #F1F1F1 #1C1C1A; }
-    .card { flex: 0 0 25%; min-width: 270px; min-height: 310px; padding: 26px; border-right: 1px solid #343430; scroll-snap-align: start; display: grid; grid-template-rows: auto auto 1fr; gap: 22px; color: var(--off); }
-    .card.active { background: var(--off); color: var(--black); }
-    .card .label { color: currentColor; opacity: .62; }
-    .card h3 { align-self: end; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.04; letter-spacing: -.035em; font-weight: 420; max-width: 240px; }
-    .card p { align-self: end; color: currentColor; opacity: .72; font-size: 14px; line-height: 1.45; max-width: 260px; }
+    #capabilities { background: var(--black); color: var(--off); }
+    #capabilities .section-label { color: #a8a8a3; }
+    #capabilities .section-title { color: var(--off); }
+    .caps-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #343430; }
+    .cap-item { min-height: 285px; padding: 1.75rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; grid-template-rows: auto auto 1fr; align-content: start; transition: background .18s, color .18s; }
+    .caps-grid .cap-item { border-color: #343430; }
+    .caps-grid .cap-item:nth-child(3n) { border-right: 0; }
+    .caps-grid .cap-item:nth-last-child(-n+3) { border-bottom: 0; }
+    .caps-grid .cap-item:hover { background: var(--off); color: var(--black); }
+    .cap-number { color: currentColor; opacity: .55; font: .68rem/1 var(--mono); }
+    .cap-icon, .domain-icon { width: 32px; height: 32px; margin: 2.5rem 0 1.5rem; display: block; }
+    .cap-icon svg, .domain-icon svg, .platform-tile-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: square; stroke-linejoin: round; }
+    .cap-title { align-self: end; margin-bottom: .75rem; font-size: clamp(1.35rem, 2vw, 1.85rem); line-height: 1.08; letter-spacing: -.035em; font-weight: 430; }
+    .cap-desc { align-self: end; color: currentColor; opacity: .68; font-size: .9rem; line-height: 1.55; }
+    .expertise-grid { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); }
+    .expertise-grid .cap-item:nth-child(2n) { border-right: 0; }
+    .expertise-grid .cap-item:nth-last-child(-n+2) { border-bottom: 0; }
+    .expertise-grid .cap-item:hover, .domain-card:hover { background: var(--soft); }
 
-    .use-cases { background: var(--paper); }
-    .case-list { margin-top: 46px; border-top: 1px solid var(--line); }
-    .case { display: grid; grid-template-columns: 90px 1fr auto; gap: 24px; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--line); }
-    .case h3 { font-size: clamp(25px, 3vw, 42px); line-height: 1.05; letter-spacing: -.035em; font-weight: 420; }
-    .case p { max-width: 420px; font-size: 15px; }
+    .platforms { background: var(--soft); }
+    .platforms-intro { display: grid; grid-template-columns: .7fr 1.3fr; margin-top: -2rem; margin-bottom: 3.5rem; }
+    .platforms-desc { grid-column: 2; max-width: 650px; color: var(--muted); font-size: clamp(1.1rem, 1.8vw, 1.45rem); line-height: 1.5; }
+    .platform-gallery { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid #cecec8; }
+    .platform-tile { min-height: 190px; padding: 1.5rem; display: grid; align-content: space-between; border-right: 1px solid #cecec8; border-bottom: 1px solid #cecec8; transition: background .18s, color .18s; }
+    .platform-tile:nth-child(4n) { border-right: 0; }
+    .platform-tile:nth-last-child(-n+4) { border-bottom: 0; }
+    .platform-tile:hover { background: var(--black); color: var(--off); }
+    .platform-tile-icon { width: 30px; height: 30px; }
+    .platform-name { align-self: end; font-size: 1.1rem; font-weight: 500; letter-spacing: -.025em; }
+    .platform-tag { color: currentColor; opacity: .55; font: .63rem/1.4 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
 
-    .cta { padding: clamp(82px, 10vw, 132px) 0; border-bottom: 1px solid var(--line); }
-    .cta-box { display: grid; grid-template-columns: 1fr auto; gap: 36px; align-items: end; background: var(--soft); border: 1px solid var(--line); padding: clamp(30px, 5vw, 58px); }
-    .cta h2 { max-width: 760px; font-size: clamp(42px, 5.8vw, 82px); line-height: 1; letter-spacing: -.05em; font-weight: 430; }
-    .cta p { margin-top: 20px; max-width: 560px; font-size: 18px; color: #454540; }
+    .fleet-section { background: var(--black); color: var(--off); overflow: hidden; }
+    .fleet-section .section-label { color: #a8a8a3; }
+    .fleet-section .section-title { color: var(--off); }
+    .fleet-canvas-wrapper { height: 340px; border: 1px solid #343430; overflow: hidden; }
+    #fleetCanvas { width: 100%; height: 100%; display: block; }
+    .fleet-desc { max-width: 670px; margin: 2rem 0 0 auto; color: #a8a8a3; font-size: .95rem; line-height: 1.7; }
 
-    .footer { padding: 38px 0; background: var(--paper); }
-    .footer-grid { display: grid; grid-template-columns: 1.4fr .8fr .8fr 1fr; gap: 34px; border-top: 1px solid var(--line); padding-top: 28px; }
-    .footer p, .footer a { font-size: 13px; color: #55554F; line-height: 1.7; }
-    .footer h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--black); font-weight: 500; margin-bottom: 12px; }
-    .footer ul { list-style: none; padding: 0; display: grid; gap: 4px; }
-    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-    .footer-logo strong { font-size: 20px; font-weight: 450; letter-spacing: -.03em; }
-    .legal { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 20px; color: #777772; font-size: 12px; }
+    .domains-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .domain-card { min-height: 270px; padding: 1.75rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; transition: background .18s; }
+    .domain-icon { margin: 0 0 auto; }
+    .domain-title { margin: 2.5rem 0 .7rem; font-size: 1.35rem; line-height: 1.1; letter-spacing: -.03em; font-weight: 450; }
+    .domain-desc { color: var(--muted); font-size: .88rem; line-height: 1.55; }
 
-    [data-reveal] { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+    #partners { background: var(--soft); }
+    .partners-list { border-top: 1px solid #cecec8; }
+    .partner-item { display: grid; grid-template-columns: 70px minmax(190px, .7fr) 1.3fr; gap: 1.5rem; padding: 1.45rem 0; border-bottom: 1px solid #cecec8; align-items: baseline; }
+    .partner-item::before { content: counter(partner, decimal-leading-zero); color: var(--quiet); font: .67rem/1 var(--mono); }
+    .partners-list { counter-reset: partner; }
+    .partner-item { counter-increment: partner; }
+    .partner-name { color: var(--black); font-size: 1.05rem; font-weight: 500; letter-spacing: -.02em; }
+    .partner-desc { max-width: 620px; color: var(--muted); font-size: .88rem; line-height: 1.6; }
+
+    .approach-grid { display: grid; grid-template-columns: 1fr minmax(340px, .8fr); gap: clamp(3rem, 8vw, 8rem); align-items: center; }
+    .approach-steps { border-top: 1px solid var(--line); }
+    .step { padding: 1.5rem 0; display: grid; grid-template-columns: 55px 1fr; gap: 1rem; border-bottom: 1px solid var(--line); }
+    .step-num { padding-top: .25rem; color: var(--quiet); font: .67rem/1 var(--mono); }
+    .step-title { margin-bottom: .45rem; color: var(--black); font-size: 1.2rem; font-weight: 450; letter-spacing: -.025em; }
+    .step-desc { max-width: 540px; color: var(--muted); font-size: .9rem; line-height: 1.6; }
+    .ascii-block { padding: 2rem; background: var(--black); color: #a8a8a3; border: 1px solid var(--black); font: clamp(.52rem, .85vw, .69rem)/1.45 var(--mono); white-space: pre; overflow: hidden; }
+
+    .cta-section { text-align: left; }
+    .cta-section .container { padding: clamp(2rem, 5vw, 4rem); background: var(--soft); border: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto; gap: 1.5rem 3rem; align-items: end; }
+    .cta-section .section-label { grid-column: 1 / -1; margin-bottom: .5rem; }
+    .cta-section .section-title { margin: 0; }
+    .cta-sub { grid-column: 1; max-width: 600px; color: var(--muted); font-size: 1.05rem; line-height: 1.6; }
+    .cta-section .fade-in:has(.btn) { grid-column: 2; grid-row: 2 / 4; align-self: end; }
+    .cta-email { grid-column: 1; color: var(--quiet); font-size: .75rem; line-height: 1.5; }
+
+    footer { padding: 2.5rem max(1.25rem, calc((100vw - 1220px) / 2)); display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: center; }
+    .footer-logo { width: 38px; height: 38px; display: grid; place-items: center; background: var(--black); color: var(--off); font-size: .82rem; font-weight: 600; }
+    .footer-links { display: flex; gap: 1.5rem; padding: 0; list-style: none; }
+    .footer-links a, .footer-copy { color: var(--quiet); font-size: .72rem; text-decoration: none; }
+    .footer-links a:hover { color: var(--black); }
+    .footer-copy { justify-self: end; }
+
+    .fade-in { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
 
     @media (max-width: 980px) {
-      .nav-inner { grid-template-columns: 1fr auto; }
+      nav { grid-template-columns: 1fr auto; }
       .nav-links { display: none; }
-      .hero-grid, .two-col, .cta-box, .footer-grid { grid-template-columns: 1fr; }
-      .hero-panel { min-height: 340px; max-width: 560px; }
-      .section-copy { justify-self: start; }
-      .process { grid-template-columns: 1fr; }
-      .step { border-right: 0; border-bottom: 1px solid var(--line); }
-      .step:last-child { border-bottom: 0; }
-      .card { flex-basis: 42%; }
-      .case { grid-template-columns: 60px 1fr; }
-      .case p { grid-column: 2; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .logo-mark { grid-column: 1; grid-row: 6; min-height: 320px; margin-top: 3rem; }
+      .hero-eyebrow, .hero-title, .typing-line, .hero-sub, .hero-cta { grid-column: 1; }
+      .manifesto .container { grid-template-columns: 1fr; }
+      .manifesto-text, .manifesto .vision-line, .state-viz { grid-column: 1; }
+      .caps-grid, .domains-grid { grid-template-columns: repeat(2, 1fr); }
+      .caps-grid .cap-item:nth-child(3n) { border-right: 1px solid #343430; }
+      .caps-grid .cap-item:nth-child(2n) { border-right: 0; }
+      .caps-grid .cap-item:nth-last-child(-n+3) { border-bottom: 1px solid #343430; }
+      .caps-grid .cap-item:nth-last-child(-n+2) { border-bottom: 0; }
+      .platform-gallery { grid-template-columns: repeat(2, 1fr); }
+      .platform-tile:nth-child(4n) { border-right: 1px solid #cecec8; }
+      .platform-tile:nth-child(2n) { border-right: 0; }
+      .platform-tile:nth-last-child(-n+4) { border-bottom: 1px solid #cecec8; }
+      .platform-tile:nth-last-child(-n+2) { border-bottom: 0; }
+      .approach-grid { grid-template-columns: 1fr; }
+      .ascii-block { width: min(100%, 520px); }
+      .cta-section .container { grid-template-columns: 1fr; }
+      .cta-section .fade-in:has(.btn) { grid-column: 1; grid-row: auto; }
     }
-    @media (max-width: 620px) {
-      .wrap { width: min(100vw - 28px, 1220px); }
-      .nav-inner { min-height: 64px; }
-      .top-cta { display: none; }
-      .hero::after { display: none; }
-      .hero h1 { font-size: clamp(42px, 13vw, 58px); }
-      .hero-copy { font-size: 17px; }
-      .hero-actions .btn { width: 100%; }
-      .section { padding: 64px 0; }
-      .section h2 { font-size: clamp(36px, 11vw, 48px); }
-      .section-copy { font-size: 24px; }
-      .cards { margin-inline: -14px; padding-left: 14px; }
-      .card { flex-basis: 82%; min-height: 280px; }
-      .cap-head { align-items: flex-end; }
-      .controls span:first-child { display: none; }
-      .cta h2 { font-size: clamp(36px, 12vw, 54px); }
-      .legal { flex-direction: column; }
+    @media (max-width: 640px) {
+      nav { min-height: 64px; padding-inline: .9rem; }
+      .nav-logo .full { display: none; }
+      .hero { padding-top: 7rem; }
+      .hero-title { font-size: clamp(4rem, 25vw, 6.5rem); }
+      .logo-mark { min-height: 270px; }
+      section { padding-inline: .9rem; }
+      .caps-grid, .expertise-grid, .domains-grid, .platform-gallery { grid-template-columns: 1fr; }
+      .cap-item, .caps-grid .cap-item:nth-child(3n), .caps-grid .cap-item:nth-child(2n), .expertise-grid .cap-item:nth-child(2n) { border-right: 0; }
+      .caps-grid .cap-item:nth-last-child(-n+2), .expertise-grid .cap-item:nth-last-child(-n+2) { border-bottom: 1px solid #343430; }
+      .caps-grid .cap-item:last-child { border-bottom: 0; }
+      .expertise-grid .cap-item:nth-last-child(-n+2) { border-bottom-color: var(--line); }
+      .expertise-grid .cap-item:last-child { border-bottom: 0; }
+      .platforms-intro { display: block; margin-top: -1rem; }
+      .platform-tile, .platform-tile:nth-child(4n), .platform-tile:nth-child(2n) { border-right: 0; }
+      .platform-tile:nth-last-child(-n+2) { border-bottom: 1px solid #cecec8; }
+      .platform-tile:last-child { border-bottom: 0; }
+      .state-viz { grid-template-columns: auto 1fr auto 1fr auto; row-gap: 1.25rem; }
+      .state-viz #arr3 { display: none; }
+      .state-viz #s3 { grid-column: 1; grid-row: 2; }
+      .state-viz #arr4 { grid-column: 2 / 5; grid-row: 2; }
+      .state-viz #s4 { grid-column: 5; grid-row: 2; }
+      .partner-item { grid-template-columns: 40px 1fr; }
+      .partner-desc { grid-column: 2; }
+      .ascii-block { padding: 1rem; }
+      .hero-cta .btn { flex: 1; }
+      footer { grid-template-columns: 1fr; justify-items: start; padding-inline: .9rem; }
+      .footer-copy { justify-self: start; }
+      .footer-links { flex-wrap: wrap; }
     }
-  </style>
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .fade-in { opacity: 1; transform: none; }
+    }
+
+</style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0a0a'/><text x='16' y='22' font-family='monospace' font-size='14' font-weight='800' fill='white' text-anchor='middle'>S0</text></svg>">
 </head>
 <body>
-  <nav class="nav">
-    <div class="wrap nav-inner">
-      <a class="logo" href="#top" aria-label="ZERO home">
-        <span class="mark" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M44 13C54 21 56 36 47 47C38 58 21 58 12 47" stroke-width="5" stroke-linecap="square"/><path d="M20 52H10V42" stroke-width="5" stroke-linecap="square"/></svg></span>
-        <span><strong>ZERO</strong><span>Adaptive decision systems</span></span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#approach">Abordagem</a></li>
-        <li><a href="#capabilities">Capacidades</a></li>
-        <li><a href="#cases">Aplicações</a></li>
-      </ul>
-      <a class="top-cta" href="mailto:hello@szero.io">Falar com especialista</a>
-    </div>
-  </nav>
 
-  <main id="top">
-    <header class="hero">
-      <div class="wrap hero-grid">
-        <div data-reveal>
-          <p class="label">LLM as brain · RL as decision layer</p>
-          <h1><span>Inteligência que aprende.</span><span>Decisões que evoluem.</span></h1>
-          <p class="hero-copy">Sistemas inteligentes que combinam LLMs, reinforcement learning e modelos personalizados para decidir melhor com dados reais do negócio.</p>
-          <div class="hero-actions">
-            <a class="btn primary" href="#approach">Conheça a abordagem</a>
-            <a class="btn" href="#capabilities">Ver capacidades</a>
+<!-- NAV -->
+<nav id="navbar" aria-label="Primary navigation">
+  <a href="#" class="nav-logo">
+    <span class="s0">S0</span>
+    <span class="sep">/</span>
+    <span class="full">System Zero</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#capabilities" data-i18n="nav.capabilities">Capabilities</a></li>
+    <li><a href="#expertise" data-i18n="nav.expertise">Expertise</a></li>
+    <li><a href="#platforms" data-i18n="nav.platforms">Platforms</a></li>
+    <li><a href="#domains" data-i18n="nav.domains">Domains</a></li>
+    <li><a href="#partners" data-i18n="nav.partners">Partners</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+  </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn active" type="button" data-lang="en" title="English" aria-label="Use English" aria-pressed="true">🇺🇸</button>
+    <button class="lang-btn" type="button" data-lang="pt-br" title="Português" aria-label="Usar português" aria-pressed="false">🇧🇷</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-inner">
+    <!-- Logo mark -->
+    <div class="logo-mark">
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer ring -->
+        <circle cx="60" cy="60" r="56" stroke="#0a0a0a" stroke-width="1.5" stroke-dasharray="4 4">
+          <animateTransform attributeName="transform" type="rotate" from="0 60 60" to="360 60 60" dur="30s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Inner ring -->
+        <circle cx="60" cy="60" r="38" stroke="#0a0a0a" stroke-width="1" stroke-dasharray="2 6">
+          <animateTransform attributeName="transform" type="rotate" from="360 60 60" to="0 60 60" dur="18s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Orbiting triangle: centered at orbit top (60,4), tip pointing RIGHT = tangent for CW rotation -->
+        <!-- As the group rotates CW around (60,60), the tip always faces the direction of travel -->
+        <g>
+          <polygon points="65,4 55,0 55,8" fill="#0a0a0a">
+            <animateTransform attributeName="transform" type="rotate" from="0 60 60" to="360 60 60" dur="8s" repeatCount="indefinite"/>
+          </polygon>
+        </g>
+        <!-- Center S0 -->
+        <text x="60" y="64" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="800" fill="#0a0a0a" text-anchor="middle" letter-spacing="-1">S0</text>
+      </svg>
+    </div>
+
+    <p class="hero-eyebrow" data-i18n="hero.eyebrow">Decision Systems · Applied RL · Cognitive Robotics</p>
+
+    <h1 class="hero-title" id="hero-title">
+      <span class="s0-big">S0</span>
+      <span class="system-zero">System Zero</span>
+    </h1>
+
+    <div class="typing-line">
+      <span class="prompt">$</span>
+      <span id="typewriter"></span><span class="cursor"></span>
+    </div>
+
+    <p class="hero-sub" data-i18n="hero.sub">
+      We build systems for decisions that happen again and again: in markets, networks, operations, machines, and the teams that guide them.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#capabilities" class="btn btn-primary" data-i18n="hero.cta.explore">Explore</a>
+      <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta.touch">Get in touch</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span data-i18n="hero.scroll">scroll</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="container">
+    <p class="section-label" data-i18n="manifesto.label">Manifesto</p>
+    <p class="manifesto-text" data-i18n-html="manifesto.p1">
+      <em>S0</em> is the initial state — the starting point of every system before its first action, its first observation, its first reward signal. Every capable machine was once nothing. We build the layer that changes that.
+    </p>
+    <p class="manifesto-text" style="margin-top:2rem; font-size: clamp(1rem, 2.2vw, 1.45rem);" data-i18n="manifesto.p2">
+      Good decisions become part of the system. A system needs state, action, feedback, constraints, and a way to improve while human judgment stays in the loop.
+    </p>
+    <p class="manifesto-text vision-line" data-i18n="manifesto.vision">
+      Our direction is simple: help humans and machines make better decisions, expand human agency, and turn experience into knowledge the next decision can use.
+    </p>
+
+    <!-- State machine viz -->
+    <div class="state-viz" id="stateMachine">
+      <div class="state-node s0">S0</div>
+      <span class="state-arrow" id="arr1">&#8594;</span>
+      <div class="state-node" id="s1">S1</div>
+      <span class="state-arrow" id="arr2">&#8594;</span>
+      <div class="state-node" id="s2">S2</div>
+      <span class="state-arrow" id="arr3">&#8594;</span>
+      <div class="state-node" id="s3">S3</div>
+      <span class="state-arrow" id="arr4">&#8594;</span>
+      <div class="state-node" id="s4">···</div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="container">
+    <p class="section-label fade-in" data-i18n="caps.label">Core Capabilities</p>
+    <h2 class="section-title fade-in" data-i18n="caps.title">Systems for better decisions</h2>
+    <div class="caps-grid">
+      <div class="cap-item fade-in cap-icon-lg">
+        <p class="cap-number">01</p>
+        <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 8c-1-4-7-4-8 1-4 0-5 6-2 8-2 4 2 8 6 6 1 4 7 3 7-1V10c0-2-1-3-3-2Z"/><path d="M16 8c1-4 7-4 8 1 4 0 5 6 2 8 2 4-2 8-6 6-1 4-7 3-7-1M8 9c1 2 3 3 5 3m-7 5h7m11-8c-1 2-3 3-5 3m7 5h-7"/></svg></span>
+        <h3 class="cap-title" data-i18n="cap.01.title">Decision Policies</h3>
+        <p class="cap-desc" data-i18n="cap.01.desc">Learned policies for recurring choices. The system reads the state, weighs constraints, acts, and improves from the result.</p>
+      </div>
+      <div class="cap-item fade-in cap-icon-lg">
+        <p class="cap-number">02</p>
+        <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="7" r="3"/><circle cx="7" cy="24" r="3"/><circle cx="25" cy="24" r="3"/><path d="M14.5 9.7 8.5 21m9-11.3 6 11.3M10 24h12"/></svg></span>
+        <h3 class="cap-title" data-i18n="cap.02.title">System Coordination</h3>
+        <p class="cap-desc" data-i18n="cap.02.desc">Many parts working toward one objective. We coordinate tasks, resources, and tradeoffs across fleets, pipelines, and human-machine operations.</p>
+      </div>
+      <div class="cap-item fade-in cap-icon-lg">
+        <p class="cap-number">03</p>
+        <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="m16 5 12 6-12 6L4 11l12-6Z"/><path d="m4 16 12 6 12-6M4 21l12 6 12-6"/></svg></span>
+        <h3 class="cap-title" data-i18n="cap.03.title">Transfer &amp; Adaptation</h3>
+        <p class="cap-desc" data-i18n="cap.03.desc">Moving policies from controlled tests to live operations. Simulation, offline data, and human feedback reduce the gap between training and deployment.</p>
+      </div>
+      <div class="cap-item fade-in cap-icon-lg">
+        <p class="cap-number">04</p>
+        <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="8" y="8" width="16" height="16"/><rect x="12" y="12" width="8" height="8"/><path d="M12 3v5m8-5v5m-8 16v5m8-5v5M3 12h5m-5 8h5m16-8h5m-5 8h5"/></svg></span>
+        <h3 class="cap-title" data-i18n="cap.04.title">Edge Deployment</h3>
+        <p class="cap-desc" data-i18n="cap.04.desc">Inference close to the decision. On-device for robots and on-prem for operations that need low latency, clear control, and stable service.</p>
+      </div>
+      <div class="cap-item fade-in cap-icon-lg">
+        <p class="cap-number">05</p>
+        <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 12V5h7m8 0h7v7m0 8v7h-7m-8 0H5v-7M4 16h24"/></svg></span>
+        <h3 class="cap-title" data-i18n="cap.05.title">Data &amp; Perception</h3>
+        <p class="cap-desc" data-i18n="cap.05.desc">Turning raw signals into useful state. Sensors, cameras, documents, and event streams become the context a system needs to choose well.</p>
+      </div>
+      <div class="cap-item fade-in cap-icon-lg">
+        <p class="cap-number">06</p>
+        <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M26 10V4l-3 3a11 11 0 1 0 3 12M26 4h-6"/></svg></span>
+        <h3 class="cap-title" data-i18n="cap.06.title">Continuous Improvement</h3>
+        <p class="cap-desc" data-i18n="cap.06.desc">Systems that learn from use. Feedback from people, machines, and outcomes keeps policies useful within clear safety bounds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="container">
+    <p class="section-label fade-in" data-i18n="exp.label">Expertise</p>
+    <h2 class="section-title fade-in" data-i18n="exp.title">Built from decision science</h2>
+    <div class="expertise-grid">
+      <div class="cap-item fade-in cap-icon-lg">
+        <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 8c-1-4-7-4-8 1-4 0-5 6-2 8-2 4 2 8 6 6 1 4 7 3 7-1V10c0-2-1-3-3-2Z"/><path d="M16 8c1-4 7-4 8 1 4 0 5 6 2 8 2 4-2 8-6 6-1 4-7 3-7-1"/></svg></span>
+        <h3 class="cap-title" data-i18n="exp.01.title">Reinforcement Learning</h3>
+        <p class="cap-desc" data-i18n="exp.01.desc">Policy optimization, curriculum design, and feedback learning. Built for systems that must choose under uncertainty and improve with evidence.</p>
+      </div>
+      <div class="cap-item fade-in cap-icon-lg">
+        <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="m16 4 11 6v12l-11 6-11-6V10l11-6Z"/><path d="m5 10 11 6 11-6M16 16v12"/></svg></span>
+        <h3 class="cap-title" data-i18n="exp.02.title">Simulation &amp; Digital Twins</h3>
+        <p class="cap-desc" data-i18n="exp.02.desc">Physics-accurate environments in Isaac Sim and MuJoCo. Digital twins for validating control policies before hardware deployment.</p>
+      </div>
+      <div class="cap-item fade-in cap-icon-lg">
+        <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="m16 5 12 6-12 6L4 11l12-6Z"/><path d="m4 16 12 6 12-6M4 21l12 6 12-6"/></svg></span>
+        <h3 class="cap-title" data-i18n="exp.03.title">Software Architecture</h3>
+        <p class="cap-desc" data-i18n="exp.03.desc">Systems design for AI-first products — from data pipelines and model serving to recommendation engines and multi-tenant platforms.</p>
+      </div>
+      <div class="cap-item fade-in cap-icon-lg">
+        <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><ellipse cx="16" cy="7" rx="11" ry="4"/><path d="M5 7v9c0 2 5 4 11 4s11-2 11-4V7M5 16v9c0 2 5 4 11 4s11-2 11-4v-9"/></svg></span>
+        <h3 class="cap-title" data-i18n="exp.04.title">Model Grounding</h3>
+        <p class="cap-desc" data-i18n="exp.04.desc">Grounding models in real tasks, data, and feedback. We connect foundation models to the decisions they must support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section id="platforms" class="platforms">
+  <div class="container">
+    <p class="section-label fade-in" data-i18n="plat.label">Platforms</p>
+    <h2 class="section-title fade-in" data-i18n="plat.title">One decision layer. Many surfaces.</h2>
+    <div class="platforms-intro">
+      <p class="platforms-desc fade-in" data-i18n="plat.desc">
+        The surface can be a robot, a workflow, a market, or an operations center. The core problem stays the same: observe, decide, act, learn.
+      </p>
+    </div>
+    <div class="platform-gallery fade-in">
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="7" r="4"/><path d="M10 28v-8H7v-5c0-3 3-5 9-5s9 2 9 5v5h-3v8M13 20v8m6-8v8"/></svg></div>
+        <span class="platform-name" data-i18n="plat.humanoids">Humanoids</span>
+        <span class="platform-tag" data-i18n="plat.humanoids.tag">Bipedal</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap" aria-hidden="true"><svg viewBox="0 0 32 32"><ellipse cx="16" cy="21" rx="7" ry="6"/><circle cx="7" cy="14" r="3"/><circle cx="12" cy="8" r="3"/><circle cx="20" cy="8" r="3"/><circle cx="25" cy="14" r="3"/></svg></div>
+        <span class="platform-name" data-i18n="plat.quadrupeds">Quadrupeds</span>
+        <span class="platform-tag" data-i18n="plat.quadrupeds.tag">Legged</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="m28 5-8 22-5-9-9-5 22-8Z"/><path d="m15 18 5-5"/></svg></div>
+        <span class="platform-name" data-i18n="plat.drones">Drones</span>
+        <span class="platform-tag" data-i18n="plat.drones.tag">Aerial</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 7h15v15H4zM19 12h5l4 5v5h-9z"/><circle cx="9" cy="24" r="3"/><circle cx="24" cy="24" r="3"/></svg></div>
+        <span class="platform-name" data-i18n="plat.ground">Ground Vehicles</span>
+        <span class="platform-tag" data-i18n="plat.ground.tag">Wheeled</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M8 16V8a2 2 0 0 1 4 0v6-8a2 2 0 0 1 4 0v8-7a2 2 0 0 1 4 0v8-5a2 2 0 0 1 4 0v9c0 6-4 10-10 10h-1c-4 0-6-2-8-6l-2-4c-1-3 3-5 5-2l2 3"/></svg></div>
+        <span class="platform-name" data-i18n="plat.manipulators">Manipulators</span>
+        <span class="platform-tag" data-i18n="plat.manipulators.tag">Arm / Gripper</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="5" y="9" width="22" height="17"/><path d="M16 9V4m-5 12h1m8 0h1M10 21h12"/><circle cx="16" cy="4" r="1"/></svg></div>
+        <span class="platform-name" data-i18n="plat.enterprise">Operations Intelligence</span>
+        <span class="platform-tag" data-i18n="plat.enterprise.tag">Decisions</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="m16 4 13 7H3l13-7ZM5 27h22M7 11v13m6-13v13m6-13v13m6-13v13M3 24h26"/></svg></div>
+        <span class="platform-name" data-i18n="plat.decision">Decision Systems</span>
+        <span class="platform-tag" data-i18n="plat.decision.tag">Finance · Energy</span>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile-icon icon-wrap" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M11 4h10M13 4v8L5 25c-1 2 1 4 3 4h16c2 0 4-2 3-4l-8-13V4M9 22h14"/></svg></div>
+        <span class="platform-name" data-i18n="plat.research">Research Infra</span>
+        <span class="platform-tag" data-i18n="plat.research.tag">RL · Benchmarks</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET VISUALIZATION -->
+<section class="fleet-section">
+  <div class="container">
+    <p class="section-label" data-i18n="fleet.label">Fleet Intelligence</p>
+    <h2 class="section-title fade-in" data-i18n="fleet.title">Heterogeneous coordination</h2>
+    <div class="fleet-canvas-wrapper">
+        <canvas id="fleetCanvas" role="img" aria-label="Animated visualization of a coordinated mixed-agent fleet">A coordinated fleet of humanoid, quadruped, aerial, and ground agents moving toward shared objectives.</canvas>
+    </div>
+    <p class="fleet-desc fade-in" data-i18n="fleet.desc">
+      S0 coordinates mixed fleets working toward shared objectives. Each agent type handles what it does best — humanoids for precision tasks, drones for aerial coverage, quadrupeds for rough terrain. The coordination layer keeps them working as one.
+    </p>
+  </div>
+</section>
+
+<!-- DOMAINS -->
+<section id="domains">
+  <div class="container">
+    <p class="section-label fade-in" data-i18n="dom.label">Domains</p>
+    <h2 class="section-title fade-in" data-i18n="dom.title">Where decisions compound</h2>
+    <div class="domains-grid">
+      <div class="domain-card fade-in">
+        <div class="domain-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 28V14l8 4v-7l8 4V8h8v20H4Z"/><path d="M9 23h2m5 0h2m5 0h2"/></svg></div>
+        <h3 class="domain-title" data-i18n="dom.01.title">Industrial Automation</h3>
+        <p class="domain-desc" data-i18n="dom.01.desc">Humanoid teleoperation and sim-to-real transfer for assembly and logistics. Digital twin infrastructure for validating policies before physical deployment.</p>
+      </div>
+      <div class="domain-card fade-in">
+        <div class="domain-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="8" y="8" width="16" height="16"/><rect x="12" y="12" width="8" height="8"/><path d="M12 3v5m8-5v5m-8 16v5m8-5v5M3 12h5m-5 8h5m16-8h5m-5 8h5"/></svg></div>
+        <h3 class="domain-title" data-i18n="dom.02.title">Decision Operations</h3>
+        <p class="domain-desc" data-i18n="dom.02.desc">Systems that make repeated operational choices visible, measurable, and improvable across teams, tools, and machines.</p>
+      </div>
+      <div class="domain-card fade-in">
+        <div class="domain-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="m16 4 13 7H3l13-7ZM5 27h22M7 11v13m6-13v13m6-13v13m6-13v13M3 24h26"/></svg></div>
+        <h3 class="domain-title" data-i18n="dom.03.title">Financial Services</h3>
+        <p class="domain-desc" data-i18n="dom.03.desc">Automated document analysis and AI-assisted decision pipelines for credit operations, debt recovery, and portfolio management.</p>
+      </div>
+      <div class="domain-card fade-in">
+        <div class="domain-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M18 3 6 18h10l-2 11 12-16H16l2-10Z"/></svg></div>
+        <h3 class="domain-title" data-i18n="dom.04.title">Energy &amp; Utilities</h3>
+        <p class="domain-desc" data-i18n="dom.04.desc">Decision support for dispatch, maintenance, demand, and regulatory work. Models use operational context to help teams act with more confidence.</p>
+      </div>
+      <div class="domain-card fade-in">
+        <div class="domain-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="m3 12 13-7 13 7-13 7-13-7Z"/><path d="M8 15v7c5 4 11 4 16 0v-7m5-3v9"/></svg></div>
+        <h3 class="domain-title" data-i18n="dom.05.title">Research &amp; Education</h3>
+        <p class="domain-desc" data-i18n="dom.05.desc">Benchmark design for RL and embodied agents. AI-powered tools for adaptive learning and academic workflow automation.</p>
+      </div>
+      <div class="domain-card fade-in">
+        <div class="domain-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 28V5h15v23m0-16h7v16M3 28h26M10 10h5m-5 5h5m-5 5h5m-5 5h5m10-8h2m-2 5h2"/></svg></div>
+        <h3 class="domain-title" data-i18n="dom.06.title">Infrastructure</h3>
+        <p class="domain-desc" data-i18n="dom.06.desc">Aerial and ground inspection robots for bridges, power lines, and industrial facilities. Autonomous surveying with structured reporting pipelines.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="container">
+    <p class="section-label fade-in" data-i18n="part.label">Partners</p>
+    <h2 class="section-title fade-in" data-i18n="part.title">Industries we've built for</h2>
+    <div class="partners-list">
+      <div class="partner-item fade-in">
+        <span class="partner-name" data-i18n="part.01.name">Industrial Manufacturing</span>
+        <span class="partner-desc" data-i18n="part.01.desc">Humanoid teleoperation for assembly and logistics. Sim-to-real transfer validated against digital twins before physical deployment.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name" data-i18n="part.02.name">Decision Workflows</span>
+        <span class="partner-desc" data-i18n="part.02.desc">Workflows that expose decisions, outcomes, and feedback so teams can improve how complex work gets done.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name" data-i18n="part.03.name">Financial Institutions</span>
+        <span class="partner-desc" data-i18n="part.03.desc">Document analysis and AI-assisted decision pipelines for credit, debt recovery, and portfolio operations.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name" data-i18n="part.04.name">Energy &amp; Utilities</span>
+        <span class="partner-desc" data-i18n="part.04.desc">Decision support for grid operations, maintenance, demand, and regulatory work, grounded in operational context.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name" data-i18n="part.05.name">Research Institutions</span>
+        <span class="partner-desc" data-i18n="part.05.desc">Benchmark development for RL and embodied agents. AI tooling for adaptive learning and academic workflow automation.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name" data-i18n="part.06.name">Civil Infrastructure</span>
+        <span class="partner-desc" data-i18n="part.06.desc">Aerial and ground inspection robots for bridges, power lines, and industrial sites. Autonomous surveying with structured output pipelines.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name" data-i18n="part.07.name">Defense &amp; Security</span>
+        <span class="partner-desc" data-i18n="part.07.desc">Multi-asset coordination with decentralized decision-making. Perception systems for adverse conditions and edge inference without cloud dependency.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name" data-i18n="part.08.name">Logistics &amp; Delivery</span>
+        <span class="partner-desc" data-i18n="part.08.desc">Autonomous ground vehicles for depot operations. Warehouse humanoids for picking, packing, and last-mile delivery workflows.</span>
+      </div>
+      <div class="partner-item fade-in">
+        <span class="partner-name" data-i18n="part.09.name">Healthcare</span>
+        <span class="partner-desc" data-i18n="part.09.desc">Precision manipulation for lab automation and surgical assistance. Autonomous patient monitoring and AI-assisted clinical workflows.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach" class="approach">
+  <div class="container">
+    <p class="section-label fade-in" data-i18n="app.label">How We Work</p>
+    <h2 class="section-title fade-in" data-i18n="app.title">Decision-grade engineering</h2>
+    <div class="approach-grid">
+      <div class="approach-steps fade-in">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div class="step-content">
+            <h4 class="step-title" data-i18n="app.01.title">Define the MDP</h4>
+            <p class="step-desc" data-i18n="app.01.desc">Every deployment starts by defining the decision: state, action, reward, constraint, owner, and feedback.</p>
           </div>
         </div>
-        <aside class="hero-panel" data-reveal>
-          <div class="panel-top"><span class="label">S0 → Sn</span><span class="icon"><svg viewBox="0 0 64 64" fill="none"><path d="M32 8C45 8 56 19 56 32C56 45 45 56 32 56" stroke-width="4" stroke-linecap="square"/><path d="M23 54C14 50 8 42 8 32C8 18 18 8 32 8" stroke-width="4" stroke-linecap="square" opacity=".55"/><path d="M42 48H56V34" stroke-width="4" stroke-linecap="square"/></svg></span></div>
-          <p class="panel-title">Do contexto ao comportamento.</p>
-          <p class="panel-note">LLMs organizam o contexto. Modelos treinados aprendem a decidir.</p>
-        </aside>
-      </div>
-    </header>
-
-    <section class="section" id="approach">
-      <div class="wrap">
-        <div class="two-col">
-          <p class="label">Nossa abordagem</p>
-          <p class="section-copy" data-reveal>Menos automação genérica. Mais decisões moldadas ao negócio.<small>A ZERO começa pela decisão que precisa melhorar, conecta dados e contexto, e treina políticas que evoluem com feedback.</small></p>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div class="step-content">
+            <h4 class="step-title" data-i18n="app.02.title">Simulate, iterate</h4>
+            <p class="step-desc" data-i18n="app.02.desc">We test policies in simulation, historical data, and controlled pilots before they affect live operations.</p>
+          </div>
         </div>
-        <div class="process" data-reveal>
-          <article class="step"><span class="label">01</span><div><h3>Entender</h3><p>Linguagem, regras, histórico e objetivos.</p></div></article>
-          <article class="step"><span class="label">02</span><div><h3>Decidir</h3><p>Recomendação, priorização, ação ou política.</p></div></article>
-          <article class="step"><span class="label">03</span><div><h3>Aprender</h3><p>Feedback, simulação e validação offline.</p></div></article>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div class="step-content">
+            <h4 class="step-title" data-i18n="app.03.title">Transfer &amp; validate</h4>
+            <p class="step-desc" data-i18n="app.03.desc">We move from test to production through a clear curriculum and validate against real edge cases.</p>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section class="capabilities" id="capabilities">
-      <div class="wrap">
-        <div class="cap-head"><p class="label">Capacidades</p><div class="controls"><span>01 / 04</span><span class="control">←</span><span class="control">→</span></div></div>
-      </div>
-      <div class="wrap">
-        <div class="cards" data-reveal>
-          <article class="card"><span class="label">01</span><span class="icon"><svg viewBox="0 0 64 64" fill="none"><path d="M46 14H26C18 14 14 18 14 24C14 30 19 33 28 33H36C45 33 50 37 50 44C50 51 44 56 34 56H16" stroke-width="4" stroke-linecap="square"/></svg></span><h3>Modelos de personalidade</h3><p>Perfis e preferências únicos para experiências mais relevantes.</p></article>
-          <article class="card active"><span class="label">02</span><span class="icon"><svg viewBox="0 0 64 64" fill="none"><path d="M18 46L46 18M28 18H46V36" stroke-width="4" stroke-linecap="square"/></svg></span><h3>Decisão adaptativa</h3><p>Agentes que ajustam estratégias em tempo real.</p></article>
-          <article class="card"><span class="label">03</span><span class="icon"><svg viewBox="0 0 64 64" fill="none"><path d="M32 10L50 18V31C50 43 42 52 32 56C22 52 14 43 14 31V18L32 10Z" stroke-width="4" stroke-linejoin="round"/></svg></span><h3>Aprendizado offline seguro</h3><p>RL com dados históricos para testar antes de produzir.</p></article>
-          <article class="card"><span class="label">04</span><span class="icon"><svg viewBox="0 0 64 64" fill="none"><path d="M16 16H20M30 16H34M44 16H48M16 30H20M30 30H34M44 30H48M16 44H20M30 44H34M44 44H48" stroke-width="5" stroke-linecap="square"/></svg></span><h3>Sistemas autônomos</h3><p>Soluções ponta a ponta que raciocinam e agem.</p></article>
+        <div class="step">
+          <span class="step-num">04</span>
+          <div class="step-content">
+            <h4 class="step-title" data-i18n="app.04.title">Deploy &amp; improve</h4>
+            <p class="step-desc" data-i18n="app.04.desc">Feedback keeps policies useful in production. The system improves while teams keep control of the bounds.</p>
+          </div>
         </div>
       </div>
-    </section>
-
-    <section class="section use-cases" id="cases">
-      <div class="wrap">
-        <div class="two-col">
-          <p class="label">Aplicações</p>
-          <h2 data-reveal>Onde decisão vira vantagem.</h2>
-        </div>
-        <div class="case-list" data-reveal>
-          <article class="case"><span class="label">01</span><h3>Atendimento inteligente</h3><p>Respostas, triagem e personalização guiadas por contexto.</p></article>
-          <article class="case"><span class="label">02</span><h3>Otimização de processos</h3><p>Prioridades e políticas ajustadas por feedback operacional.</p></article>
-          <article class="case"><span class="label">03</span><h3>Experiência do cliente</h3><p>Modelos que aprendem preferências e comportamento.</p></article>
-        </div>
+      <div class="ascii-block fade-in" id="asciiRobot">
+        ┌─────────────────────────┐
+        │  S0 :: POLICY ENGINE    │
+        ├─────────────────────────┤
+        │  state:  [obs]          │
+        │  action: [π(s)]         │
+        │  reward: r_t            │
+        │  t:      ████████░░  82%│
+        ├─────────────────────────┤
+        │  fleet: 4 nodes online  │
+        │  HMN ●  QDR ●           │
+        │  UAV ●  GND ●           │
+        ├─────────────────────────┤
+        │                         │
+        │    ___/\_               │
+        │   /  ●●  \  S0-HMN-01  │
+        │  |  ════  |             │
+        │   \      /              │
+        │   /|    |\              │
+        │  /_|    |_\             │
+        │                         │
+        │  status: ACTIVE         │
+        │  task:   INSPECT-7      │
+        │  pos:    [12.4, 8.1, 0] │
+        └─────────────────────────┘
       </div>
-    </section>
-
-    <section class="cta">
-      <div class="wrap cta-box" data-reveal>
-        <div><p class="label">Próximo passo</p><h2>Vamos transformar o seu negócio?</h2><p>Mapeamos uma decisão crítica e desenhamos a primeira camada adaptativa.</p></div>
-        <a class="btn primary" href="mailto:hello@szero.io">Falar com especialista</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div><div class="footer-logo"><span class="mark"><svg viewBox="0 0 64 64" fill="none"><path d="M44 13C54 21 56 36 47 47C38 58 21 58 12 47" stroke-width="5" stroke-linecap="square"/><path d="M20 52H10V42" stroke-width="5" stroke-linecap="square"/></svg></span><strong>ZERO</strong></div><p>Sistemas inteligentes que combinam LLMs, RL e modelos personalizados em decisões competitivas.</p></div>
-        <div><h4>Soluções</h4><ul><li><a href="#capabilities">Decisão adaptativa</a></li><li><a href="#capabilities">Aprendizado offline</a></li><li><a href="#cases">Operação inteligente</a></li></ul></div>
-        <div><h4>Plataforma</h4><ul><li><a href="#approach">Visão geral</a></li><li><a href="#approach">Como funciona</a></li><li><a href="#cases">Integrações</a></li></ul></div>
-        <div><h4>Contato</h4><ul><li><a href="mailto:hello@szero.io">hello@szero.io</a></li><li><a href="#top">Voltar ao topo</a></li></ul></div>
-      </div>
-      <div class="legal"><span>© 2026 ZERO / SZERO. Todos os direitos reservados.</span><span>Política de Privacidade · Termos de Uso</span></div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    // Keep content visible by default; no scroll-triggered opacity on a legibility-first site.
-  </script>
+<!-- CTA -->
+<section id="contact" class="cta-section">
+  <div class="container">
+    <p class="section-label fade-in" style="justify-content:center;" data-i18n="cta.label">Contact</p>
+    <h2 class="section-title fade-in" data-i18n="cta.title">
+      Improve the next decision.
+    </h2>
+    <p class="cta-sub fade-in" data-i18n="cta.sub">We work with teams that run complex systems and need better decisions at scale.</p>
+    <div class="fade-in">
+      <a href="mailto:hello@szero.io" class="btn btn-primary">hello@szero.io</a>
+    </div>
+    <p class="cta-email fade-in" style="margin-top: 2rem;" data-i18n="cta.note">
+      Research partners · Operators · Builders welcome
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">S0</span>
+  <ul class="footer-links">
+    <li><a href="#" data-i18n="footer.research">Research</a></li>
+    <li><a href="#" data-i18n="footer.careers">Careers</a></li>
+    <li><a href="https://szero.site">szero.site</a></li>
+    <li><a href="mailto:hello@szero.io" data-i18n="footer.contact">Contact</a></li>
+  </ul>
+  <span class="footer-copy" data-i18n="footer.copy">© 2026 System Zero. All rights reserved.</span>
+</footer>
+
+<script>
+// ─── NAV SCROLL ─────────────────────────────
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ─── SCROLL HINT (idle, bottom-right) ────────
+const scrollHint = document.querySelector('.scroll-hint');
+let idleTimer;
+function showScrollHint() {
+  if (window.scrollY < 80) scrollHint.classList.add('visible');
+}
+function resetIdleTimer() {
+  scrollHint.classList.remove('visible');
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(showScrollHint, 2500);
+}
+window.addEventListener('scroll', () => {
+  scrollHint.classList.remove('visible');
+  clearTimeout(idleTimer);
+  if (window.scrollY > 80) scrollHint.classList.remove('visible');
+});
+['mousemove', 'keydown', 'touchstart'].forEach(e => window.addEventListener(e, resetIdleTimer, { passive: true }));
+idleTimer = setTimeout(showScrollHint, 2500);
+
+// ─── I18N ───────────────────────────────────
+const LANGS = ['en', 'pt-br'];
+const DEFAULT_LANG = 'en';
+const COOKIE_NAME = 'szero_lang';
+
+const translations = {
+  en: {
+    'meta.description': 'System Zero builds cognitive systems that help humans and machines make better decisions, expanding human agency and accelerating the production of knowledge.',
+    'nav.capabilities': 'Capabilities',
+    'nav.expertise': 'Expertise',
+    'nav.platforms': 'Platforms',
+    'nav.domains': 'Domains',
+    'nav.partners': 'Partners',
+    'nav.contact': 'Contact',
+    'hero.eyebrow': 'Decision Systems · Applied RL · Cognitive Robotics',
+    'hero.sub': 'We build systems for decisions that happen again and again: in markets, networks, operations, machines, and the teams that guide them.',
+    'hero.cta.explore': 'Explore',
+    'hero.cta.touch': 'Get in touch',
+    'hero.scroll': 'scroll',
+    'manifesto.label': 'Manifesto',
+    'manifesto.p1': '<em>S0</em> is the initial state — the starting point of every system before its first action, its first observation, its first reward signal. Every capable machine was once nothing. We build the layer that changes that.',
+    'manifesto.p2': "Good decisions become part of the system. A system needs state, action, feedback, constraints, and a way to improve while human judgment stays in the loop.",
+    'manifesto.vision': 'Our direction is simple: help humans and machines make better decisions, expand human agency, and turn experience into knowledge the next decision can use.',
+    'caps.label': 'Core Capabilities',
+    'caps.title': 'Systems for better decisions',
+    'cap.01.title': 'Decision Policies',
+    'cap.01.desc': 'Learned policies for recurring choices. The system reads the state, weighs constraints, acts, and improves from the result.',
+    'cap.02.title': 'System Coordination',
+    'cap.02.desc': 'Many parts working toward one objective. We coordinate tasks, resources, and tradeoffs across fleets, pipelines, and human-machine operations.',
+    'cap.03.title': 'Transfer & Adaptation',
+    'cap.03.desc': 'Moving policies from controlled tests to live operations. Simulation, offline data, and human feedback reduce the gap between training and deployment.',
+    'cap.04.title': 'Edge Deployment',
+    'cap.04.desc': 'Inference close to the decision. On-device for robots and on-prem for operations that need low latency, clear control, and stable service.',
+    'cap.05.title': 'Data & Perception',
+    'cap.05.desc': 'Turning raw signals into useful state. Sensors, cameras, documents, and event streams become the context a system needs to choose well.',
+    'cap.06.title': 'Continuous Improvement',
+    'cap.06.desc': 'Systems that learn from use. Feedback from people, machines, and outcomes keeps policies useful within clear safety bounds.',
+    'exp.label': 'Expertise',
+    'exp.title': 'Built from decision science',
+    'exp.01.title': 'Reinforcement Learning',
+    'exp.01.desc': 'Policy optimization, curriculum design, and feedback learning. Built for systems that must choose under uncertainty and improve with evidence.',
+    'exp.02.title': 'Simulation & Digital Twins',
+    'exp.02.desc': 'Physics-accurate environments in Isaac Sim and MuJoCo. Digital twins for validating control policies before hardware deployment.',
+    'exp.03.title': 'Software Architecture',
+    'exp.03.desc': 'Systems design for AI-first products — from data pipelines and model serving to recommendation engines and multi-tenant platforms.',
+    'exp.04.title': 'Model Grounding',
+    'exp.04.desc': 'Grounding models in real tasks, data, and feedback. We connect foundation models to the decisions they must support.',
+    'plat.label': 'Platforms',
+    'plat.title': 'One decision layer. Many surfaces.',
+    'plat.desc': 'The surface can be a robot, a workflow, a market, or an operations center. The core problem stays the same: observe, decide, act, learn.',
+    'plat.humanoids': 'Humanoids',
+    'plat.humanoids.tag': 'Bipedal',
+    'plat.quadrupeds': 'Quadrupeds',
+    'plat.quadrupeds.tag': 'Legged',
+    'plat.drones': 'Drones',
+    'plat.drones.tag': 'Aerial',
+    'plat.ground': 'Ground Vehicles',
+    'plat.ground.tag': 'Wheeled',
+    'plat.manipulators': 'Manipulators',
+    'plat.manipulators.tag': 'Arm / Gripper',
+    'plat.enterprise': 'Operations Intelligence',
+    'plat.enterprise.tag': 'Decisions',
+    'plat.decision': 'Decision Systems',
+    'plat.decision.tag': 'Finance · Energy',
+    'plat.research': 'Research Infra',
+    'plat.research.tag': 'RL · Benchmarks',
+    'fleet.label': 'Fleet Intelligence',
+    'fleet.title': 'Heterogeneous coordination',
+    'fleet.desc': 'S0 coordinates mixed fleets working toward shared objectives. Each agent type handles what it does best — humanoids for precision tasks, drones for aerial coverage, quadrupeds for rough terrain. The coordination layer keeps them working as one.',
+    'dom.label': 'Domains',
+    'dom.title': 'Where decisions compound',
+    'dom.01.title': 'Industrial Automation',
+    'dom.01.desc': 'Humanoid teleoperation and sim-to-real transfer for assembly and logistics. Digital twin infrastructure for validating policies before physical deployment.',
+    'dom.02.title': 'Decision Operations',
+    'dom.02.desc': 'Systems that make repeated operational choices visible, measurable, and improvable across teams, tools, and machines.',
+    'dom.03.title': 'Financial Services',
+    'dom.03.desc': 'Automated document analysis and AI-assisted decision pipelines for credit operations, debt recovery, and portfolio management.',
+    'dom.04.title': 'Energy & Utilities',
+    'dom.04.desc': 'Decision support for dispatch, maintenance, demand, and regulatory work. Models use operational context to help teams act with more confidence.',
+    'dom.05.title': 'Research & Education',
+    'dom.05.desc': 'Benchmark design for RL and embodied agents. AI-powered tools for adaptive learning and academic workflow automation.',
+    'dom.06.title': 'Infrastructure',
+    'dom.06.desc': 'Aerial and ground inspection robots for bridges, power lines, and industrial facilities. Autonomous surveying with structured reporting pipelines.',
+    'part.label': 'Partners',
+    'part.title': "Industries we've built for",
+    'part.01.name': 'Industrial Manufacturing',
+    'part.01.desc': 'Humanoid teleoperation for assembly and logistics. Sim-to-real transfer validated against digital twins before physical deployment.',
+    'part.02.name': 'Decision Workflows',
+    'part.02.desc': 'Workflows that expose decisions, outcomes, and feedback so teams can improve how complex work gets done.',
+    'part.03.name': 'Financial Institutions',
+    'part.03.desc': 'Document analysis and AI-assisted decision pipelines for credit, debt recovery, and portfolio operations.',
+    'part.04.name': 'Energy & Utilities',
+    'part.04.desc': 'Decision support for grid operations, maintenance, demand, and regulatory work, grounded in operational context.',
+    'part.05.name': 'Research Institutions',
+    'part.05.desc': 'Benchmark development for RL and embodied agents. AI tooling for adaptive learning and academic workflow automation.',
+    'part.06.name': 'Civil Infrastructure',
+    'part.06.desc': 'Aerial and ground inspection robots for bridges, power lines, and industrial sites. Autonomous surveying with structured output pipelines.',
+    'part.07.name': 'Defense & Security',
+    'part.07.desc': 'Multi-asset coordination with decentralized decision-making. Perception systems for adverse conditions and edge inference without cloud dependency.',
+    'part.08.name': 'Logistics & Delivery',
+    'part.08.desc': 'Autonomous ground vehicles for depot operations. Warehouse humanoids for picking, packing, and last-mile delivery workflows.',
+    'part.09.name': 'Healthcare',
+    'part.09.desc': 'Precision manipulation for lab automation and surgical assistance. Autonomous patient monitoring and AI-assisted clinical workflows.',
+    'app.label': 'How We Work',
+    'app.title': 'Decision-grade engineering',
+    'app.01.title': 'Define the MDP',
+    'app.01.desc': 'Every deployment starts by defining the decision: state, action, reward, constraint, owner, and feedback.',
+    'app.02.title': 'Simulate, iterate',
+    'app.02.desc': 'We test policies in simulation, historical data, and controlled pilots before they affect live operations.',
+    'app.03.title': 'Transfer & validate',
+    'app.03.desc': 'We move from test to production through a clear curriculum and validate against real edge cases.',
+    'app.04.title': 'Deploy & improve',
+    'app.04.desc': 'Feedback keeps policies useful in production. The system improves while teams keep control of the bounds.',
+    'cta.label': 'Contact',
+    'cta.title': 'Improve the next decision.',
+    'cta.sub': "We work with teams that run complex systems and need better decisions at scale.",
+    'cta.note': 'Research partners · Operators · Builders welcome',
+    'footer.research': 'Research',
+    'footer.careers': 'Careers',
+    'footer.contact': 'Contact',
+    'footer.copy': '© 2026 System Zero. All rights reserved.',
+  },
+  'pt-br': {
+    'meta.description': 'A System Zero cria sistemas de decisão para ajudar equipes, máquinas e instituições a escolher, aprender e agir melhor em escala.',
+    'nav.capabilities': 'Capacidades',
+    'nav.expertise': 'Expertise',
+    'nav.platforms': 'Plataformas',
+    'nav.domains': 'Domínios',
+    'nav.partners': 'Parceiros',
+    'nav.contact': 'Contato',
+    'hero.eyebrow': 'Sistemas de Decisão · RL Aplicado · Robótica Cognitiva',
+    'hero.sub': 'Construímos sistemas para decisões que se repetem: em mercados, redes, operações, máquinas e nas equipes que as guiam.',
+    'hero.cta.explore': 'Explorar',
+    'hero.cta.touch': 'Entre em contato',
+    'hero.scroll': 'rolar',
+    'manifesto.label': 'Manifesto',
+    'manifesto.p1': '<em>S0</em> é o estado inicial — o ponto de partida de todo sistema antes de sua primeira ação, sua primeira observação, seu primeiro sinal de recompensa. Toda máquina capaz já foi nada. Construímos a camada que muda isso.',
+    'manifesto.p2': 'Boas decisões viram parte do sistema. Um sistema precisa de estado, ação, feedback, restrições e um modo de melhorar enquanto o julgamento humano segue no processo.',
+    'manifesto.vision': 'Nossa direção é simples: ajudar humanos e máquinas a tomar decisões melhores, ampliar a agência humana e transformar experiência em conhecimento para a próxima decisão.',
+    'caps.label': 'Capacidades principais',
+    'caps.title': 'Sistemas para decisões melhores',
+    'cap.01.title': 'Políticas de Decisão',
+    'cap.01.desc': 'Políticas aprendidas para escolhas recorrentes. O sistema lê o estado, pesa restrições, age e melhora a partir do resultado.',
+    'cap.02.title': 'Coordenação de Sistemas',
+    'cap.02.desc': 'Muitas partes trabalhando por um objetivo. Coordenamos tarefas, recursos e tradeoffs em frotas, pipelines e operações humano-máquina.',
+    'cap.03.title': 'Transferência e Adaptação',
+    'cap.03.desc': 'Levamos políticas de testes controlados para operações reais. Simulação, dados offline e feedback humano reduzem a distância entre treino e implantação.',
+    'cap.04.title': 'Implantação na Borda',
+    'cap.04.desc': 'Inferência perto da decisão: no dispositivo para robôs e on-prem para operações que precisam de baixa latência, controle claro e serviço estável.',
+    'cap.05.title': 'Dados e Percepção',
+    'cap.05.desc': 'Transformamos sinais brutos em estado útil. Sensores, câmeras, documentos e eventos viram o contexto que o sistema precisa para escolher bem.',
+    'cap.06.title': 'Melhoria Contínua',
+    'cap.06.desc': 'Sistemas que aprendem com o uso. Feedback de pessoas, máquinas e resultados mantém as políticas úteis dentro de limites claros de segurança.',
+    'exp.label': 'Expertise',
+    'exp.title': 'Base técnica em decisão',
+    'exp.01.title': 'Aprendizado por Reforço',
+    'exp.01.desc': 'Otimização de políticas, desenho de currículo e aprendizado com feedback. Construímos sistemas que escolhem sob incerteza e melhoram com evidência.',
+    'exp.02.title': 'Simulação e Gêmeos Digitais',
+    'exp.02.desc': 'Ambientes com física precisa em Isaac Sim e MuJoCo. Gêmeos digitais para validar políticas de controle antes da implantação em hardware.',
+    'exp.03.title': 'Arquitetura de Software',
+    'exp.03.desc': 'Design de sistemas para produtos com IA: pipelines de dados, serving de modelos, motores de recomendação e plataformas multi-tenant.',
+    'exp.04.title': 'Fundamentação de Modelos',
+    'exp.04.desc': 'Fundamentamos modelos em tarefas, dados e feedback reais. Conectamos modelos de fundação às decisões que eles precisam apoiar.',
+    'plat.label': 'Plataformas',
+    'plat.title': 'Uma camada de decisão. Muitas superfícies.',
+    'plat.desc': 'A superfície pode ser um robô, um workflow, um mercado ou um centro de operações. O problema central permanece: observar, decidir, agir, aprender.',
+    'plat.humanoids': 'Humanoides',
+    'plat.humanoids.tag': 'Bípede',
+    'plat.quadrupeds': 'Quadrúpedes',
+    'plat.quadrupeds.tag': 'Com pernas',
+    'plat.drones': 'Drones',
+    'plat.drones.tag': 'Aéreo',
+    'plat.ground': 'Veículos Terrestres',
+    'plat.ground.tag': 'Com rodas',
+    'plat.manipulators': 'Manipuladores',
+    'plat.manipulators.tag': 'Braço / Garra',
+    'plat.enterprise': 'Inteligência Operacional',
+    'plat.enterprise.tag': 'Decisions',
+    'plat.decision': 'Sistemas de Decisão',
+    'plat.decision.tag': 'Finanças · Energia',
+    'plat.research': 'Infra de Pesquisa',
+    'plat.research.tag': 'RL · Benchmarks',
+    'fleet.label': 'Inteligência de Frota',
+    'fleet.title': 'Coordenação heterogênea',
+    'fleet.desc': 'S0 coordena frotas mistas trabalhando em direção a objetivos compartilhados. Cada tipo de agente faz o que faz de melhor — humanoides para tarefas de precisão, drones para cobertura aérea, quadrúpedes para terrenos difíceis. A camada de coordenação os mantém operando como um só.',
+    'dom.label': 'Domínios',
+    'dom.title': 'Onde decisões se acumulam',
+    'dom.01.title': 'Automação Industrial',
+    'dom.01.desc': 'Teleoperação de humanoides e transferência sim-para-real para montagem e logística. Infraestrutura de gêmeos digitais para validar políticas antes da implantação física.',
+    'dom.02.title': 'Operações de Decisão',
+    'dom.02.desc': 'Sistemas que tornam escolhas operacionais visíveis, mensuráveis e melhores ao longo do tempo entre equipes, ferramentas e máquinas.',
+    'dom.03.title': 'Serviços Financeiros',
+    'dom.03.desc': 'Análise automatizada de documentos e pipelines de decisão assistidos por IA para operações de crédito, recuperação de dívidas e gestão de portfólio.',
+    'dom.04.title': 'Energia e Utilities',
+    'dom.04.desc': 'Apoio à decisão para despacho, manutenção, demanda e trabalho regulatório. Modelos usam contexto operacional para ajudar equipes a agir com mais confiança.',
+    'dom.05.title': 'Pesquisa e Educação',
+    'dom.05.desc': 'Design de benchmarks para RL e agentes incorporados. Ferramentas com IA para aprendizado adaptativo e automação de workflows acadêmicos.',
+    'dom.06.title': 'Infraestrutura',
+    'dom.06.desc': 'Robôs de inspeção aérea e terrestre para pontes, linhas de energia e instalações industriais. Levantamento autônomo com pipelines de relatórios estruturados.',
+    'part.label': 'Parceiros',
+    'part.title': 'Indústrias onde construímos',
+    'part.01.name': 'Manufatura Industrial',
+    'part.01.desc': 'Teleoperação de humanoides para montagem e logística. Transferência sim-para-real validada contra gêmeos digitais antes da implantação física.',
+    'part.02.name': 'Decisionss Autônomos',
+    'part.02.desc': 'Workflows que expõem decisões, resultados e feedback para que equipes melhorem a execução de trabalho complexo.',
+    'part.03.name': 'Instituições Financeiras',
+    'part.03.desc': 'Análise de documentos e pipelines de decisão assistidos por IA para crédito, recuperação de dívidas e operações de portfólio.',
+    'part.04.name': 'Energia e Utilities',
+    'part.04.desc': 'Apoio à decisão para operação de rede, manutenção, demanda e trabalho regulatório, com base em contexto operacional.',
+    'part.05.name': 'Instituições de Pesquisa',
+    'part.05.desc': 'Desenvolvimento de benchmarks para RL e agentes incorporados. Ferramentas de IA para aprendizado adaptativo e automação de workflows acadêmicos.',
+    'part.06.name': 'Infraestrutura Civil',
+    'part.06.desc': 'Robôs de inspeção aérea e terrestre para pontes, linhas de energia e instalações industriais. Levantamento autônomo com pipelines de saída estruturada.',
+    'part.07.name': 'Defesa e Segurança',
+    'part.07.desc': 'Coordenação multi-ativo com tomada de decisão descentralizada. Sistemas de percepção para condições adversas e inferência na borda sem dependência de nuvem.',
+    'part.08.name': 'Logística e Entrega',
+    'part.08.desc': 'Veículos terrestres autônomos para operações em depósitos. Humanoides em armazéns para separação, embalagem e workflows de entrega de última milha.',
+    'part.09.name': 'Saúde',
+    'part.09.desc': 'Manipulação de precisão para automação laboratorial e assistência cirúrgica. Monitoramento autônomo de pacientes e workflows clínicos assistidos por IA.',
+    'app.label': 'Como Trabalhamos',
+    'app.title': 'Engenharia para decisões',
+    'app.01.title': 'Definir o MDP',
+    'app.01.desc': 'Cada implantação começa pela definição da decisão: estado, ação, recompensa, restrição, responsável e feedback.',
+    'app.02.title': 'Simular, iterar',
+    'app.02.desc': 'Testamos políticas em simulação, dados históricos e pilotos controlados antes de afetar operações reais.',
+    'app.03.title': 'Transferir e validar',
+    'app.03.desc': 'Passamos de teste para produção com currículo claro e validação contra casos extremos reais.',
+    'app.04.title': 'Implantar e melhorar',
+    'app.04.desc': 'Feedback mantém políticas úteis em produção. O sistema melhora enquanto as equipes controlam os limites.',
+    'cta.label': 'Contato',
+    'cta.title': 'Melhore a próxima decisão.',
+    'cta.sub': 'Trabalhamos com equipes que operam sistemas complexos e precisam tomar decisões melhores em escala.',
+    'cta.note': 'Parceiros de pesquisa · Operadores · Builders são bem-vindos',
+    'footer.research': 'Pesquisa',
+    'footer.careers': 'Carreiras',
+    'footer.contact': 'Contato',
+    'footer.copy': '© 2026 System Zero. Todos os direitos reservados.',
+  }
+};
+
+const typewriterLines = {
+  en: [
+    'initializing cognitive stack...',
+    'loading world model...',
+    'fleet online: 4/4 nodes',
+    'policy(state) \u2192 action',
+    'feedback: outcome observed',
+    'deploy(env="operations", policy=trained)',
+    'optimize(objective, constraints)',
+    'coordinate(fleet, network, team)',
+    'better decisions. same foundation.',
+  ],
+  'pt-br': [
+    'inicializando stack cognitivo...',
+    'carregando world model...',
+    'sistema online: 4/4 nós',
+    'policy(state) \u2192 action',
+    'feedback: outcome observed',
+    'deploy(env="operations", policy=trained)',
+    'optimize(objective, constraints)',
+    'coordinate(fleet, network, team)',
+    'decisões melhores. mesma base.',
+  ]
+};
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (reduceMotion) document.querySelectorAll('animateTransform').forEach(el => el.remove());
+
+function getCookie(name) {
+  const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return m ? decodeURIComponent(m[1]) : null;
+}
+function setCookie(name, value, days) {
+  const d = new Date(); d.setTime(d.getTime() + days * 864e5);
+  document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+}
+function detectLang() {
+  const saved = getCookie(COOKIE_NAME);
+  if (saved && LANGS.includes(saved)) return saved;
+  const nav = (navigator.language || navigator.userLanguage || '').toLowerCase();
+  if (nav.startsWith('pt')) return 'pt-br';
+  return DEFAULT_LANG;
+}
+
+let currentLang = detectLang();
+
+function applyLang(lang) {
+  document.documentElement.lang = lang === 'pt-br' ? 'pt-BR' : 'en';
+  const t = translations[lang];
+  document.querySelector('meta[name="description"]').content = t['meta.description'];
+  // text content
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  // innerHTML (for em tags etc)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  // active button state
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    const isActive = btn.dataset.lang === lang;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', String(isActive));
+  });
+  currentLang = lang;
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    setCookie(COOKIE_NAME, lang, 365);
+    applyLang(lang);
+    // restart typewriter with new lines
+    lineIdx = 0; charIdx = 0; deleting = false;
+    if (reduceMotion) tw.textContent = typewriterLines[lang].at(-1);
+  });
+});
+
+// init language
+applyLang(currentLang);
+
+// ─── TYPEWRITER ──────────────────────────────
+let lineIdx = 0, charIdx = 0, deleting = false;
+const tw = document.getElementById('typewriter');
+function type() {
+  const lines = typewriterLines[currentLang];
+  if (reduceMotion) {
+    tw.textContent = lines.at(-1);
+    return;
+  }
+  const cur = lines[lineIdx];
+  if (!deleting) {
+    tw.textContent = cur.slice(0, ++charIdx);
+    if (charIdx === cur.length) {
+      deleting = true;
+      setTimeout(type, 2200);
+      return;
+    }
+  } else {
+    tw.textContent = cur.slice(0, --charIdx);
+    if (charIdx === 0) {
+      deleting = false;
+      lineIdx = (lineIdx + 1) % lines.length;
+    }
+  }
+  setTimeout(type, deleting ? 35 : 55);
+}
+type();
+
+// ─── FADE-IN OBSERVER ────────────────────────
+const faders = document.querySelectorAll('.fade-in');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), 80);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+faders.forEach(el => obs.observe(el));
+
+// ─── STATE MACHINE ANIMATION ─────────────────
+let activeState = 0;
+const states = ['s1','s2','s3','s4'];
+const arrows = ['arr1','arr2','arr3','arr4'];
+if (!reduceMotion) setInterval(() => {
+  states.forEach(id => document.getElementById(id).classList.remove('active'));
+  arrows.forEach(id => document.getElementById(id).classList.remove('active'));
+  if (activeState < states.length) {
+    for (let i = 0; i <= activeState; i++) {
+      document.getElementById(states[i]).classList.add('active');
+      document.getElementById(arrows[i]).classList.add('active');
+    }
+  }
+  activeState = (activeState + 1) % (states.length + 2);
+}, 800);
+
+// ─── FLEET CANVAS ────────────────────────────
+const canvas = document.getElementById('fleetCanvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const AGENTS = [
+  { label: 'HMN-01', emoji: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M12 6v4"/><path d="M9 12l6 8"/><path d="M9 12h4"/></svg>', speed: 0.6, color: '#ffffff' },
+  { label: 'HMN-02', emoji: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M12 6v4"/><path d="M9 12l6 8"/><path d="M9 12h4"/></svg>', speed: 0.5, color: '#ffffff' },
+  { label: 'QDR-01', emoji: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13v3a3 3 0 003 3h6"/><path d="M3 9c1-2 3-3 5-3s4 1 5 3"/><path d="M19 7l1-2 1 0"/></svg>', speed: 0.9, color: '#aaaaaa' },
+  { label: 'QDR-02', emoji: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13v3a3 3 0 003 3h6"/><path d="M3 9c1-2 3-3 5-3s4 1 5 3"/><path d="M19 7l1-2 1 0"/></svg>', speed: 1.0, color: '#aaaaaa' },
+  { label: 'UAV-01', emoji: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12"/><path d="M12 2v6"/><rect x="7" y="8" width="10" height="6" rx="1"/><path d="M4 18h16"/></svg>', speed: 1.4, color: '#666666' },
+  { label: 'UAV-02', emoji: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12"/><path d="M12 2v6"/><rect x="7" y="8" width="10" height="6" rx="1"/><path d="M4 18h16"/></svg>', speed: 1.6, color: '#666666' },
+  { label: 'GND-01', emoji: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="12" width="14" height="6" rx="1"/><circle cx="19" cy="18" r="2"/><path d="M6 12V8h6"/></svg>', speed: 0.4, color: '#888888' },
+];
+
+// Initialize positions
+const agents = AGENTS.map((a, i) => ({
+  ...a,
+  x: 80 + (i / AGENTS.length) * (canvas.width - 160),
+  y: 80 + Math.random() * (canvas.height - 160),
+  vx: (Math.random() - 0.5) * a.speed,
+  vy: (Math.random() - 0.5) * a.speed,
+  target: null,
+  connectTo: [],
+}));
+
+// Shared target (objective)
+const objectives = [
+  { x: 0.3, y: 0.5 },
+  { x: 0.7, y: 0.3 },
+  { x: 0.5, y: 0.7 },
+];
+let objIdx = 0, objTimer = 0;
+
+function fleetTick() {
+  if (!canvas.width) return;
+  const W = canvas.width, H = canvas.height;
+  const obj = objectives[objIdx];
+  const tx = obj.x * W, ty = obj.y * H;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Background grid
+  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W; x += 40) {
+
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+  for (let y = 0; y < H; y += 40) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+
+  // Objective marker
+  ctx.beginPath();
+  ctx.arc(tx, ty, 8, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(tx, ty, 18, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+  ctx.stroke();
+  ctx.fillStyle = 'rgba(255,255,255,0.1)';
+  ctx.fill();
+
+  // Move agents toward objective with flocking
+  agents.forEach((a, i) => {
+    const dx = tx - a.x, dy = ty - a.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    // Attraction to objective
+    if (dist > 30) {
+      a.vx += (dx / dist) * 0.04 * a.speed;
+      a.vy += (dy / dist) * 0.04 * a.speed;
+    }
+    // Separation from other agents
+    agents.forEach((b, j) => {
+      if (i === j) return;
+      const sx = a.x - b.x, sy = a.y - b.y;
+      const sd = Math.sqrt(sx*sx + sy*sy);
+      if (sd < 60) {
+        a.vx += (sx / sd) * 0.08;
+        a.vy += (sy / sd) * 0.08;
+      }
+    });
+    // Clamp speed
+    const spd = Math.sqrt(a.vx*a.vx + a.vy*a.vy);
+    const maxSpd = a.speed * 1.2;
+    if (spd > maxSpd) { a.vx = (a.vx/spd)*maxSpd; a.vy = (a.vy/spd)*maxSpd; }
+    // Bounce
+    a.x += a.vx; a.y += a.vy;
+    if (a.x < 20) { a.x = 20; a.vx *= -1; }
+    if (a.x > W-20) { a.x = W-20; a.vx *= -1; }
+    if (a.y < 20) { a.y = 20; a.vy *= -1; }
+    if (a.y > H-20) { a.y = H-20; a.vy *= -1; }
+  });
+
+  // Draw comm lines
+  agents.forEach((a, i) => {
+    agents.forEach((b, j) => {
+      if (j <= i) return;
+      const d = Math.sqrt((a.x-b.x)**2 + (a.y-b.y)**2);
+      if (d < 160) {
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `rgba(255,255,255,${0.12 * (1 - d/160)})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+    });
+  });
+
+  // Draw agents
+  agents.forEach(a => {
+    // Glow
+    const grad = ctx.createRadialGradient(a.x, a.y, 0, a.x, a.y, 18);
+    grad.addColorStop(0, 'rgba(255,255,255,0.12)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.beginPath();
+    ctx.arc(a.x, a.y, 18, 0, Math.PI*2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // Dot
+    ctx.beginPath();
+    ctx.arc(a.x, a.y, 4, 0, Math.PI*2);
+    ctx.fillStyle = a.color;
+    ctx.fill();
+
+    // Label
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    ctx.font = '9px JetBrains Mono, monospace';
+    ctx.fillText(a.label, a.x + 8, a.y - 8);
+  });
+
+  // Rotate objectives
+  objTimer++;
+  if (objTimer > 180) { objTimer = 0; objIdx = (objIdx + 1) % objectives.length; }
+
+  if (!reduceMotion) requestAnimationFrame(fleetTick);
+}
+fleetTick();
+</script>
 </body>
 </html>
