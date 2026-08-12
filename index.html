@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Szero builds practical intelligence systems for better decisions, more capable operations, and faster technical discovery.">
+  <meta name="description" data-i18n="meta.description" data-i18n-attr="content" content="Szero builds intelligence systems for consequential decisions, capable operations, and technical discovery. Products, pilots, and applied AI consulting.">
   <meta name="theme-color" content="#11110f">
-  <meta property="og:title" content="Szero — Intelligence systems for decisions, operations, and discovery">
-  <meta property="og:description" content="Products, pilots, and applied AI consulting built around real objectives, constraints, and measurable outcomes.">
+  <meta property="og:title" data-i18n="meta.ogtitle" data-i18n-attr="content" content="Szero — Better decisions. More agency. Faster knowledge.">
+  <meta property="og:description" data-i18n="meta.ogdescription" data-i18n-attr="content" content="Intelligence systems for decisions, operations, and discovery, engineered around your objectives, constraints, and evidence.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://szero.io/">
-  <title>Szero — Intelligence systems for decisions, operations, and discovery</title>
+  <title data-i18n="meta.title">Szero — Intelligence systems for decisions, operations, and discovery</title>
   <link rel="icon" href="assets/szero-mark.svg" type="image/svg+xml">
   <style>
     :root {
@@ -32,85 +32,98 @@
     body { margin: 0; overflow-x: hidden; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.5; }
     img { display: block; max-width: 100%; }
     a { color: inherit; }
-    a:focus-visible { outline: 3px solid var(--lime); outline-offset: 4px; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--lime); outline-offset: 4px; }
     p, h1, h2, h3, ul, ol, blockquote { margin-top: 0; }
     section { scroll-margin-top: 5rem; }
     .shell { width: min(100%, var(--max)); margin-inline: auto; padding-inline: var(--pad); }
     .skip-link { position: fixed; top: .75rem; left: .75rem; z-index: 100; padding: .65rem 1rem; translate: 0 -200%; background: var(--lime); color: var(--ink); font-weight: 700; }
     .skip-link:focus { translate: 0; }
 
-    .site-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: rgba(243, 241, 235, .96); }
-    .nav { min-height: 76px; display: grid; grid-template-columns: 170px 1fr auto; align-items: center; gap: 2rem; }
-    .brand { width: 154px; }
+    .site-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: var(--paper); }
+    .nav { min-height: 76px; display: grid; grid-template-columns: 160px 1fr auto auto; align-items: center; gap: clamp(.75rem, 2vw, 2rem); }
+    .brand { width: 150px; }
     .brand img { width: 100%; height: auto; }
-    .nav-list { display: flex; justify-content: center; gap: clamp(1rem, 2.5vw, 2.5rem); margin: 0; padding: 0; list-style: none; }
+    .nav-list { display: flex; justify-content: center; gap: clamp(.9rem, 2vw, 2.2rem); margin: 0; padding: 0; list-style: none; }
     .nav-list a { text-decoration: none; font: 700 .72rem/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
     .nav-list a:hover, .text-link:hover { text-decoration: underline; text-underline-offset: .3em; }
     .nav-cta, .button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; padding: .7rem 1rem; border: 1px solid var(--ink); background: var(--ink); color: var(--white); font: 700 .72rem/1.3 var(--mono); letter-spacing: .04em; text-align: center; text-decoration: none; text-transform: uppercase; }
     .nav-cta:hover, .button:hover { background: var(--lime); color: var(--ink); }
     .button-light { background: transparent; color: var(--ink); }
 
+    /* Language selector: hidden until the script enables it, so it is never a dead control. */
+    .lang { display: none; gap: .3rem; }
+    .lang-btn { min-width: 44px; min-height: 44px; padding: .4rem .55rem; border: 1px solid var(--line); background: transparent; color: var(--muted); font: 700 .7rem/1 var(--mono); letter-spacing: .06em; cursor: pointer; }
+    .lang-btn[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--white); }
+    .lang-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .lang-btn[aria-pressed="true"]:hover { color: var(--white); }
+
     .eyebrow, .kicker, .number, .label { font: 700 .7rem/1.35 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
     .kicker, .label { color: var(--muted); }
     .hero { min-height: calc(100svh - 76px); display: grid; border-bottom: 1px solid var(--line); }
     .hero-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(260px, .55fr); }
-    .hero-copy { min-width: 0; min-height: 680px; padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 6vw, 6rem) clamp(3rem, 6vw, 5rem) 0; display: flex; flex-direction: column; }
-    .eyebrow { margin-bottom: clamp(3rem, 7vw, 6rem); }
-    h1 { max-width: 980px; margin-bottom: 2rem; font-family: var(--serif); font-size: clamp(3.35rem, 7.6vw, 7.5rem); font-weight: 400; letter-spacing: -.06em; line-height: .9; }
-    .hero-intro { max-width: 720px; margin-bottom: 1.5rem; font-size: clamp(1.05rem, 1.6vw, 1.35rem); line-height: 1.5; }
+    .hero-copy { min-width: 0; min-height: 600px; padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 6vw, 6rem) clamp(3rem, 6vw, 5rem) 0; display: flex; flex-direction: column; }
+    .eyebrow { margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+    h1 { max-width: 980px; margin-bottom: 1.75rem; font-family: var(--serif); font-size: clamp(2.9rem, 6.4vw, 6rem); font-weight: 400; letter-spacing: -.055em; line-height: .92; text-wrap: balance; }
+    .hero-intro { max-width: 720px; margin-bottom: 1.25rem; font-size: clamp(1.05rem, 1.6vw, 1.35rem); line-height: 1.5; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
     .hero-proof { margin: auto 0 0; padding-top: 3rem; color: var(--muted); font: .76rem/1.4 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
-    .hero-mark { min-width: 0; min-height: 680px; display: grid; align-content: space-between; padding: clamp(1.5rem, 4vw, 3.5rem); background: var(--ink); color: var(--white); }
+    .hero-mark { min-width: 0; min-height: 600px; display: grid; align-content: space-between; padding: clamp(1.5rem, 4vw, 3.5rem); background: var(--ink); color: var(--white); }
     .hero-mark img { width: min(100%, 390px); margin: auto; filter: invert(1); }
     .state-line { display: flex; justify-content: space-between; gap: 1rem; color: #aaa89f; font: .7rem/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
 
     .section { padding-block: clamp(5rem, 10vw, 9rem); border-bottom: 1px solid var(--line); }
     .section-head { display: grid; grid-template-columns: minmax(150px, .35fr) minmax(0, 1.65fr); gap: 2rem; margin-bottom: clamp(3rem, 7vw, 6rem); }
-    h2 { max-width: 950px; margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.6rem, 6vw, 6rem); font-weight: 400; letter-spacing: -.05em; line-height: .96; }
+    h2 { max-width: 950px; margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.5rem, 5.6vw, 5.6rem); font-weight: 400; letter-spacing: -.05em; line-height: .96; text-wrap: balance; }
     h3 { margin-bottom: .75rem; font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 600; letter-spacing: -.025em; line-height: 1.1; }
-    .lead { max-width: 800px; font-size: clamp(1.3rem, 2.5vw, 2rem); letter-spacing: -.025em; line-height: 1.35; }
+    .lead { max-width: 800px; font-size: clamp(1.25rem, 2.3vw, 1.9rem); letter-spacing: -.025em; line-height: 1.35; }
+    .section-head .lead { margin: 1.75rem 0 0; }
+
+    .progression { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .7rem; margin: 2.5rem 0 0; font: 700 clamp(1.1rem, 3.4vw, 2.1rem)/1 var(--mono); letter-spacing: .05em; }
+    .progression .arrow { color: var(--muted); }
+
+    .architecture { background: var(--ink); color: var(--white); }
+    .architecture .kicker { color: #aaa89f; }
+    .architecture .lead { max-width: 880px; color: var(--white); }
+    .architecture .progression .arrow { color: var(--lime); }
+    .layers { border-top: 1px solid var(--dark-line); }
+    .layer { display: grid; grid-template-columns: 90px minmax(180px, .55fr) minmax(0, 1.45fr); gap: clamp(1rem, 4vw, 4rem); padding-block: 2.5rem; border-bottom: 1px solid var(--dark-line); }
+    .layer .number { color: var(--lime); }
+    .layer p { max-width: 720px; margin-bottom: 1rem; color: #c7c5bd; }
+    .layer .tags { margin-bottom: 0; color: var(--white); font: .68rem/1.6 var(--mono); letter-spacing: .03em; text-transform: uppercase; }
 
     .offers { background: var(--white); }
     .offer-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-    .offer-card { min-height: 330px; display: flex; flex-direction: column; padding: clamp(1.5rem, 3vw, 2.5rem); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .offer-card { min-height: 340px; display: flex; flex-direction: column; padding: clamp(1.5rem, 3vw, 2.5rem); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .offer-card .number { margin-bottom: auto; color: var(--muted); }
     .offer-card p { max-width: 570px; color: var(--muted); }
-    .offer-card .examples { margin-bottom: 0; color: var(--ink); font: .68rem/1.5 var(--mono); letter-spacing: .03em; text-transform: uppercase; }
+    .offer-card .examples { margin-bottom: 0; color: var(--ink); font: .68rem/1.6 var(--mono); letter-spacing: .03em; text-transform: uppercase; }
 
-    .method { background: var(--ink); color: var(--white); }
-    .method .kicker, .method .label { color: #aaa89f; }
-    .method-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(3rem, 8vw, 8rem); }
+    .method-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(3rem, 8vw, 8rem); }
     .method-copy h2 { margin: 1.5rem 0 2rem; }
-    .method-copy p { max-width: 650px; color: #c7c5bd; }
-    .method-copy .lead { color: var(--white); }
-    .method-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--dark-line); }
-    .method-list li { display: grid; grid-template-columns: 60px 1fr; gap: 1rem; padding: 1.35rem 0; border-bottom: 1px solid var(--dark-line); }
-    .method-list .number { color: var(--lime); }
+    .method-copy p { max-width: 650px; color: var(--muted); }
+    .method-copy .lead { margin-bottom: 2rem; color: var(--ink); }
+    .method-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .method-list li { display: grid; grid-template-columns: 60px 1fr; gap: 1rem; padding: 1.35rem 0; border-bottom: 1px solid var(--line); }
     .method-list strong { display: block; margin-bottom: .25rem; }
-    .method-list span:last-child { color: #aaa89f; font-size: .9rem; }
+    .method-list span:last-child { color: var(--muted); font-size: .95rem; }
 
-    .engagement-grid { display: grid; grid-template-columns: .65fr 1.35fr; gap: clamp(3rem, 8vw, 8rem); }
-    .steps { counter-reset: step; border-top: 1px solid var(--line); }
-    .step { counter-increment: step; display: grid; grid-template-columns: 70px minmax(170px, .5fr) minmax(0, 1fr); gap: clamp(1rem, 3vw, 3rem); padding-block: 2rem; border-bottom: 1px solid var(--line); }
-    .step::before { content: "0" counter(step); font: .72rem/1.4 var(--mono); }
-    .step p { max-width: 620px; margin-bottom: 0; color: var(--muted); }
-    .engagement-note { margin-top: 2.5rem; padding-left: 1.25rem; border-left: 5px solid var(--lime); font-family: var(--serif); font-size: clamp(1.4rem, 2.8vw, 2.5rem); line-height: 1.15; }
-
-    .proof { background: #d9d6cc; }
-    .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #aaa79e; }
-    .proof-card { min-height: 280px; padding: 1.5rem 1.25rem; border-right: 1px solid #aaa79e; }
-    .proof-card:last-child { border-right: 0; }
-    .proof-card .number { display: block; margin-bottom: 4rem; }
-    .proof-card p { margin-bottom: 0; color: #55534d; font-size: .9rem; }
+    .principles { background: #d9d6cc; }
+    .principle-grid { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid #aaa79e; }
+    .principle { min-height: 300px; padding: 1.5rem 1.25rem; border-right: 1px solid #aaa79e; }
+    .principle:last-child { border-right: 0; }
+    .principle .number { display: block; margin-bottom: 4rem; }
+    .principle p { margin-bottom: 0; color: #55534d; font-size: .9rem; }
+    .principle-line { margin: clamp(3rem, 6vw, 5rem) 0 0; padding: 1.25rem 0; border-block: 1px solid #aaa79e; font: 700 clamp(.9rem, 2vw, 1.2rem)/1.4 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
 
     .company { background: var(--white); }
-    .company-grid { display: grid; grid-template-columns: .55fr 1.45fr; gap: clamp(3rem, 8vw, 8rem); }
+    .company-grid { display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(3rem, 8vw, 8rem); }
+    .company-grid h2 { font-size: clamp(2.2rem, 4.2vw, 4rem); }
     .company-copy { max-width: 880px; }
-    .company-copy > p:first-child { font-size: 1.15rem; }
-    .principle { margin: 2.5rem 0 0; padding: 1.25rem 0; border-block: 1px solid var(--line); font: 700 clamp(.9rem, 2vw, 1.2rem)/1.4 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
-    .cause-statement { margin-top: clamp(5rem, 10vw, 9rem); padding-top: clamp(3rem, 6vw, 6rem); border-top: 1px solid var(--line); }
-    .cause-statement blockquote { max-width: 1050px; margin: 1.5rem 0 2rem; font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 5rem); letter-spacing: -.05em; line-height: 1; }
-    .cause-original { max-width: 800px; margin-bottom: 0; color: var(--muted); font-size: .9rem; }
+    .company-copy > p:first-of-type { font-size: 1.15rem; }
+    .manifesto { margin-top: clamp(5rem, 10vw, 9rem); padding-top: clamp(3rem, 6vw, 6rem); border-top: 1px solid var(--line); }
+    .manifesto .lead { margin-bottom: 0; }
+    .manifesto-lines { margin: 2.5rem 0 0; font-family: var(--serif); font-size: clamp(2rem, 5vw, 4.6rem); letter-spacing: -.05em; line-height: 1; }
+    .manifesto-close { max-width: 760px; margin: 2.5rem 0 0; color: var(--muted); }
 
     .contact { background: var(--lime); }
     .contact-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(3rem, 8vw, 8rem); align-items: end; }
@@ -130,38 +143,48 @@
     .footer-end { text-align: right; }
     .footer-end p { margin: 0; color: #aaa89f; font: .65rem/1.5 var(--mono); text-transform: uppercase; }
 
+    @media (max-width: 1100px) {
+      .principle-grid { grid-template-columns: repeat(3, 1fr); }
+      .principle { border-bottom: 1px solid #aaa79e; }
+      .principle:nth-child(3n) { border-right: 0; }
+    }
+
     @media (max-width: 900px) {
-      .nav { grid-template-columns: 150px 1fr auto; gap: 1rem; }
-      .brand { width: 140px; }
+      .nav { grid-template-columns: 140px 1fr auto auto; gap: .75rem; }
+      .brand { width: 132px; }
       .nav-list li:nth-child(2), .nav-list li:nth-child(4) { display: none; }
       .hero-grid, .contact-grid { grid-template-columns: 1fr; }
       .hero-copy { min-height: auto; padding-right: 0; }
       .hero-mark { min-height: 390px; }
       .hero-proof { margin-top: 3rem; }
-      .proof-grid { grid-template-columns: repeat(2, 1fr); }
-      .proof-card { border-bottom: 1px solid #aaa79e; }
+      .principle-grid { grid-template-columns: repeat(2, 1fr); }
+      .principle:nth-child(3n) { border-right: 1px solid #aaa79e; }
+      .principle:nth-child(2n) { border-right: 0; }
       .footer-grid { grid-template-columns: 1fr auto; }
       .footer-nav { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; }
     }
 
     @media (max-width: 620px) {
       .site-header { position: static; }
-      .nav { min-height: 66px; grid-template-columns: 1fr auto; }
+      .nav { min-height: 66px; grid-template-columns: 1fr auto auto; }
       .nav-list { display: none; }
-      .nav-cta { min-height: 40px; padding-inline: .65rem; font-size: .65rem; }
+      .nav-cta { min-height: 40px; padding-inline: .6rem; font-size: .62rem; }
       .hero { min-height: 0; }
       .hero-copy { padding-block: 3.5rem; }
       .eyebrow { margin-bottom: 3rem; }
-      h1 { max-width: 100%; font-size: clamp(2.9rem, 14vw, 4.5rem); overflow-wrap: break-word; }
+      h1 { max-width: 100%; font-size: clamp(2.7rem, 13vw, 4.5rem); overflow-wrap: break-word; }
       .hero-actions .button { width: 100%; min-width: 0; white-space: normal; }
       .hero-mark { min-height: 320px; }
-      .section-head, .method-grid, .engagement-grid, .company-grid { grid-template-columns: 1fr; }
+      .section-head, .method-grid, .company-grid { grid-template-columns: 1fr; }
       .section-head { gap: 1.25rem; }
-      .offer-grid, .proof-grid { grid-template-columns: 1fr; }
+      .offer-grid { grid-template-columns: 1fr; }
       .offer-card { min-height: 280px; }
-      .proof-card { min-height: 220px; border-right: 0; }
-      .step { grid-template-columns: 48px 1fr; }
-      .step > p { grid-column: 2; }
+      .layer { grid-template-columns: 48px 1fr; }
+      .layer > div { grid-column: 2; }
+      .principle-grid { grid-template-columns: 1fr; }
+      .principle { min-height: 0; border-right: 0; }
+      .principle:nth-child(3n) { border-right: 0; }
+      .principle .number { margin-bottom: 2rem; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-nav { grid-column: auto; grid-row: auto; }
       .footer-end { text-align: left; }
@@ -173,17 +196,22 @@
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
   <header class="site-header">
-    <nav class="nav shell" aria-label="Primary navigation">
-      <a class="brand" href="./" aria-label="Szero home"><img src="assets/szero-wordmark.svg" alt="Szero"></a>
+    <nav class="nav shell" data-i18n="nav.aria" data-i18n-attr="aria-label" aria-label="Primary navigation">
+      <a class="brand" href="./" data-i18n="nav.home" data-i18n-attr="aria-label" aria-label="Szero home"><img src="assets/szero-wordmark.svg" alt="Szero"></a>
       <ul class="nav-list">
-        <li><a href="#offers">What we build</a></li>
-        <li><a href="#method">Why Szero</a></li>
-        <li><a href="#start">How we work</a></li>
-        <li><a href="#company">Company</a></li>
+        <li><a href="#architecture" data-i18n="nav.architecture">How we work</a></li>
+        <li><a href="#offers" data-i18n="nav.offers">What we build</a></li>
+        <li><a href="#why" data-i18n="nav.why">Why Szero</a></li>
+        <li><a href="#principles" data-i18n="nav.principles">Principles</a></li>
+        <li><a href="#company" data-i18n="nav.company">Company</a></li>
       </ul>
-      <a class="nav-cta" href="mailto:hello@szero.io?subject=Discuss%20a%20product%2C%20pilot%2C%20or%20consulting%20engagement">Work with us</a>
+      <div class="lang" role="group" data-i18n="lang.group" data-i18n-attr="aria-label" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="true" aria-label="EN — English">EN</button>
+        <button type="button" class="lang-btn" data-lang="pt-BR" aria-pressed="false" aria-label="PT — Português">PT</button>
+      </div>
+      <a class="nav-cta mail-cta" href="mailto:hello@szero.io?subject=Discuss%20a%20product%2C%20system%2C%20pilot%2C%20or%20consulting%20engagement" data-i18n="nav.cta" data-i18n-href="mail.href">Work with us</a>
     </nav>
   </header>
 
@@ -191,20 +219,75 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-grid shell">
         <div class="hero-copy">
-          <p class="eyebrow">S0 / Practical Intelligence Systems</p>
-          <h1 id="hero-title">Better decisions. More capable operations.</h1>
-          <p class="hero-intro">Szero builds intelligence systems for difficult decisions, complex workflows, and technical discovery.</p>
-          <p class="hero-intro">We turn real objectives, constraints, and evidence into products that decide, operate, verify, and improve.</p>
+          <p class="eyebrow" data-i18n="hero.eyebrow">S0 / Intelligence systems</p>
+          <h1 id="hero-title" data-i18n="hero.title">Better decisions. More agency. Faster knowledge.</h1>
+          <p class="hero-intro" data-i18n="hero.p1">Szero builds intelligence systems that help people and machines decide better — expanding what a team can direct, and how quickly its work becomes knowledge.</p>
+          <p class="hero-intro" data-i18n="hero.p2">Consequential decisions. Capable operations. Technical discovery. We build products, pilots, and applied AI systems around your objectives, constraints, and evidence.</p>
           <div class="hero-actions">
-            <a class="button" href="mailto:hello@szero.io?subject=Discuss%20a%20product%2C%20pilot%2C%20or%20consulting%20engagement">Discuss your problem</a>
-            <a class="button button-light" href="#offers">See what we build</a>
+            <a class="button mail-cta" href="mailto:hello@szero.io?subject=Discuss%20a%20product%2C%20system%2C%20pilot%2C%20or%20consulting%20engagement" data-i18n="hero.cta1" data-i18n-href="mail.href">Discuss your problem</a>
+            <a class="button button-light" href="#architecture" data-i18n="hero.cta2">See how we work</a>
           </div>
-          <p class="hero-proof">Products / Systems / Pilots / Consulting</p>
+          <p class="hero-proof" data-i18n="hero.proof">Products / Systems / Pilots / Consulting</p>
         </div>
         <div class="hero-mark" aria-hidden="true">
-          <div class="state-line"><span>State / 00</span><span>Define the objective</span></div>
+          <div class="state-line"><span data-i18n="hero.state1">S0 / Initial state</span><span data-i18n="hero.state2">A problem worth solving</span></div>
           <img src="assets/szero-mark.svg" alt="">
-          <div class="state-line"><span>Decision</span><span>Outcome</span></div>
+          <div class="state-line"><span data-i18n="hero.state3">S… / Evaluated system</span><span data-i18n="hero.state4">Decisions that hold up</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section architecture" id="architecture" aria-labelledby="architecture-title">
+      <div class="shell">
+        <div class="section-head">
+          <p class="kicker" data-i18n="arch.kicker">How we work</p>
+          <div>
+            <h2 id="architecture-title" data-i18n="arch.title">Every system starts at S0.</h2>
+            <p class="lead" data-i18n="arch.lead">S0 is the initial state: a real problem, a real environment, and nothing built for it yet. Each state after it adds capability that has already been tested against reality.</p>
+            <p class="progression"><span>S0</span><span class="arrow">&#8594;</span><span>S1</span><span class="arrow">&#8594;</span><span>S2</span><span class="arrow">&#8594;</span><span>S3</span><span class="arrow">&#8594;</span><span>&#8230;</span></p>
+          </div>
+        </div>
+        <div class="layers">
+          <article class="layer">
+            <span class="number">S0</span>
+            <h3 data-i18n="arch.s0.title">Frame the problem</h3>
+            <div>
+              <p data-i18n="arch.s0.p">The decision or workflow, who it serves, the environment it runs in, the constraints that bind it, the evidence already available, and the measure that will say it worked.</p>
+              <p class="tags" data-i18n="arch.s0.tags">Objective / constraints / data / success measure</p>
+            </div>
+          </article>
+          <article class="layer">
+            <span class="number">S1</span>
+            <h3 data-i18n="arch.s1.title">Choose the method</h3>
+            <div>
+              <p data-i18n="arch.s1.p">The problem selects the representation and the technique: solvers and control for constrained operations, learned policies where feedback is measurable, simulation where scenarios must be tested before they matter, specialized and foundation models where the signal is language, images, or unstructured evidence.</p>
+              <p class="tags" data-i18n="arch.s1.tags">Optimization / control / reinforcement learning / simulation / foundation models</p>
+            </div>
+          </article>
+          <article class="layer">
+            <span class="number">S2</span>
+            <h3 data-i18n="arch.s2.title">Connect it to real systems</h3>
+            <div>
+              <p data-i18n="arch.s2.p">An execution harness defines what the system may observe and do: tools and data, permissions, approvals where consequence demands them, verification of each step, recovery when a step fails, and durable state across long-running work.</p>
+              <p class="tags" data-i18n="arch.s2.tags">APIs and tools / permissions / approvals / verification / recovery</p>
+            </div>
+          </article>
+          <article class="layer">
+            <span class="number">S3</span>
+            <h3 data-i18n="arch.s3.title">Evaluate against reality</h3>
+            <div>
+              <p data-i18n="arch.s3.p">Historical replay, counterfactual comparison, simulation, adversarial and failure-mode tests, and an honest baseline: the way the work is done today. Evaluation is part of the architecture, and it decides how much the system is trusted to do.</p>
+              <p class="tags" data-i18n="arch.s3.tags">Replay / baselines / simulation / failure modes / staged rollout</p>
+            </div>
+          </article>
+          <article class="layer">
+            <span class="number">S&#8230;</span>
+            <h3 data-i18n="arch.sn.title">Learn from outcomes</h3>
+            <div>
+              <p data-i18n="arch.sn.p">Decisions, actions, results, interventions, and failures are kept as evidence. That record improves policies, evaluations, and interfaces — and becomes knowledge your team can reuse long after the first deployment.</p>
+              <p class="tags" data-i18n="arch.sn.tags">Traces / outcomes / retraining / knowledge record</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -212,90 +295,118 @@
     <section class="section offers" id="offers" aria-labelledby="offers-title">
       <div class="shell">
         <div class="section-head">
-          <p class="kicker">What we build</p>
-          <h2 id="offers-title">Intelligence applied to work that matters.</h2>
+          <p class="kicker" data-i18n="offers.kicker">What we build</p>
+          <h2 id="offers-title" data-i18n="offers.title">Intelligence applied to work that matters.</h2>
         </div>
         <div class="offer-grid">
           <article class="offer-card">
-            <span class="number">01 / DECIDE</span>
-            <div><h3>Decision and optimization systems</h3><p>Products and systems that improve recurring decisions under real constraints, with outcomes that can be measured and compared.</p><p class="examples">Pricing / allocation / scheduling / logistics / energy / prioritization / planning / operational control</p></div>
+            <span class="number" data-i18n="offers.o1.label">01 / Decide</span>
+            <div>
+              <h3 data-i18n="offers.o1.title">Decision and optimization systems</h3>
+              <p data-i18n="offers.o1.p">Products and systems that improve a recurring decision under real constraints, with results you can measure against the way that decision is made today.</p>
+              <p class="examples" data-i18n="offers.o1.examples">Pricing / allocation / scheduling / logistics / energy / planning / operational control</p>
+            </div>
           </article>
           <article class="offer-card">
-            <span class="number">02 / OPERATE</span>
-            <div><h3>AI and autonomous operations systems</h3><p>Systems that coordinate tools, workflows, data, and approvals over long-running work. They verify progress, recover from failure, and keep people in control where it matters.</p><p class="examples">Tool use / workflow coordination / verification / recovery / human approval</p></div>
+            <span class="number" data-i18n="offers.o2.label">02 / Operate</span>
+            <div>
+              <h3 data-i18n="offers.o2.title">AI and autonomous operations systems</h3>
+              <p data-i18n="offers.o2.p">Systems that coordinate tools, workflows, data, and approvals across long-running work. They verify progress, recover from failure, and keep people in command of what matters.</p>
+              <p class="examples" data-i18n="offers.o2.examples">Tool use / workflow coordination / approvals / verification / recovery / long-horizon execution</p>
+            </div>
           </article>
           <article class="offer-card">
-            <span class="number">03 / DISCOVER</span>
-            <div><h3>Engineering and discovery systems</h3><p>Systems that help technical teams evaluate, simulate, experiment, investigate software, and orchestrate research with a clear record of evidence.</p><p class="examples">Evaluation / simulation / experimentation / software investigation / research orchestration</p></div>
+            <span class="number" data-i18n="offers.o3.label">03 / Discover</span>
+            <div>
+              <h3 data-i18n="offers.o3.title">Engineering and discovery systems</h3>
+              <p data-i18n="offers.o3.p">Systems that help technical teams evaluate, simulate, run experiments, investigate software, and orchestrate research with a clear record of what was tried and what it showed.</p>
+              <p class="examples" data-i18n="offers.o3.examples">Evaluation / simulation / experimentation / software investigation / research orchestration</p>
+            </div>
           </article>
           <article class="offer-card">
-            <span class="number">04 / ADVISE</span>
-            <div><h3>Applied AI consulting</h3><p>A focused way to select opportunities, frame the problem, choose an architecture, design evaluations, build a production pilot, and improve it from real outcomes.</p><p class="examples">Opportunity selection / architecture / technology and model selection / evaluation design / production pilots</p></div>
+            <span class="number" data-i18n="offers.o4.label">04 / Advise</span>
+            <div>
+              <h3 data-i18n="offers.o4.title">Applied AI consulting</h3>
+              <p data-i18n="offers.o4.p">A focused engagement to select the opportunity, frame the problem, design the architecture, choose the technology and models, define the evaluation, build a production pilot, and improve it from real outcomes.</p>
+              <p class="examples" data-i18n="offers.o4.examples">Opportunity selection / problem framing / architecture / model selection / evaluation design / production pilots</p>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section method" id="method" aria-labelledby="method-title">
+    <section class="section" id="why" aria-labelledby="why-title">
       <div class="shell method-grid">
         <div class="method-copy">
-          <p class="kicker">Why Szero</p>
-          <h2 id="method-title">The problem selects the technology.</h2>
-          <p class="lead">We start with the decision, environment, and required outcome, not a preferred model.</p>
-          <p>Foundation models and agents can be powerful components. They are not the company identity or the right answer to every problem. Szero combines the methods and software the work actually requires.</p>
+          <p class="kicker" data-i18n="why.kicker">Why Szero</p>
+          <h2 id="why-title" data-i18n="why.title">Engineered around your objective.</h2>
+          <p class="lead" data-i18n="why.lead">We start from the decision, the environment it lives in, the constraints that bind it, and the outcome worth improving. That analysis chooses the methods — usually several, working together.</p>
+          <p data-i18n="why.p">We are engineers and applied researchers, and we build the whole system: the method that decides, the software that acts, the evaluation that earns trust. We stay accountable to the outcome it produces.</p>
         </div>
         <ol class="method-list">
-          <li><span class="number">01</span><span><strong>Optimization and control</strong>For constrained decisions, planning, allocation, and operational performance.</span></li>
-          <li><span class="number">02</span><span><strong>Reinforcement learning</strong>When actions create measurable feedback and policies can improve through experience.</span></li>
-          <li><span class="number">03</span><span><strong>Simulation and specialized models</strong>For testing scenarios, representing domain structure, and evaluating choices before they matter.</span></li>
-          <li><span class="number">04</span><span><strong>Foundation models and conventional software</strong>For language, reasoning, tools, workflows, interfaces, integrations, and dependable execution.</span></li>
+          <li><span class="number">01</span><span><strong data-i18n="why.m1.title">Optimization and control</strong><span data-i18n="why.m1.p">Constrained decisions, planning, allocation, scheduling, and real-time operational performance.</span></span></li>
+          <li><span class="number">02</span><span><strong data-i18n="why.m2.title">Reinforcement learning and adaptive policies</strong><span data-i18n="why.m2.p">Where actions produce measurable feedback and a policy can improve through experience.</span></span></li>
+          <li><span class="number">03</span><span><strong data-i18n="why.m3.title">Simulation and specialized models</strong><span data-i18n="why.m3.p">Digital twins, scenario testing, and models that carry the structure of a specific domain.</span></span></li>
+          <li><span class="number">04</span><span><strong data-i18n="why.m4.title">Foundation models, agents, and software engineering</strong><span data-i18n="why.m4.p">Language and multimodal reasoning, tool use, workflows, integrations, interfaces, and dependable execution.</span></span></li>
         </ol>
       </div>
     </section>
 
-    <section class="section" id="start" aria-labelledby="start-title">
-      <div class="shell engagement-grid">
-        <div><p class="kicker">How work starts</p><h2 id="start-title">From a hard problem to a working system.</h2></div>
-        <div>
-          <div class="steps">
-            <article class="step"><h3>Frame the opportunity</h3><p>Define the decision or workflow, who it serves, the constraints, available evidence, and the outcome worth improving.</p></article>
-            <article class="step"><h3>Design the system</h3><p>Select the right methods, architecture, integrations, evaluation plan, and level of human involvement.</p></article>
-            <article class="step"><h3>Build and prove</h3><p>Deliver a focused pilot, test it against realistic conditions, and use results to decide what should become a production system or product.</p></article>
-          </div>
-          <p class="engagement-note">Start with consulting, a pilot, or a defined product opportunity. The first step should reduce uncertainty and produce something useful.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section proof" aria-labelledby="proof-title">
+    <section class="section principles" id="principles" aria-labelledby="principles-title">
       <div class="shell">
         <div class="section-head">
-          <p class="kicker">Built for real operation</p>
-          <h2 id="proof-title">Useful intelligence needs more than a capable model.</h2>
+          <p class="kicker" data-i18n="principles.kicker">Principles</p>
+          <h2 id="principles-title" data-i18n="principles.title">How we build, every time.</h2>
         </div>
-        <div class="proof-grid">
-          <article class="proof-card"><span class="number">01</span><h3>Evidence first</h3><p>We test realistic tasks, failure modes, constraints, and baselines before relying on a system.</p></article>
-          <article class="proof-card"><span class="number">02</span><h3>Clear boundaries</h3><p>Permissions, limits, approvals, and escalation reflect the consequences of the work.</p></article>
-          <article class="proof-card"><span class="number">03</span><h3>Human authority</h3><p>People set objectives and retain control over consequential, unfamiliar, or higher-risk actions.</p></article>
-          <article class="proof-card"><span class="number">04</span><h3>Learning from outcomes</h3><p>Results, interventions, and failures become evidence for improving later decisions.</p></article>
+        <div class="principle-grid">
+          <article class="principle">
+            <span class="number">01</span>
+            <h3 data-i18n="principles.p1.title">Human agency</h3>
+            <p data-i18n="principles.p1.p">People set the objective and stay in command of the system. Autonomy exists to carry their intent further than they could reach by hand.</p>
+          </article>
+          <article class="principle">
+            <span class="number">02</span>
+            <h3 data-i18n="principles.p2.title">Evidence first</h3>
+            <p data-i18n="principles.p2.p">Realistic tasks, failure modes, and an honest baseline come before anyone depends on a system.</p>
+          </article>
+          <article class="principle">
+            <span class="number">03</span>
+            <h3 data-i18n="principles.p3.title">Evaluation is architecture</h3>
+            <p data-i18n="principles.p3.p">Evaluation is designed with the system, runs continuously, and decides how much authority the system holds.</p>
+          </article>
+          <article class="principle">
+            <span class="number">04</span>
+            <h3 data-i18n="principles.p4.title">Clear boundaries</h3>
+            <p data-i18n="principles.p4.p">Permissions, limits, approvals, and escalation match the consequence of the action being taken.</p>
+          </article>
+          <article class="principle">
+            <span class="number">05</span>
+            <h3 data-i18n="principles.p5.title">Learning from outcomes</h3>
+            <p data-i18n="principles.p5.p">What happens after the system acts is the signal we trust most, and the one we design to capture.</p>
+          </article>
         </div>
+        <p class="principle-line" data-i18n="principles.line">Delegate decisions. Never delegate intent.</p>
       </div>
     </section>
 
     <section class="section company" id="company" aria-labelledby="company-title">
       <div class="shell">
         <div class="company-grid">
-          <div><p class="kicker">Company / Szero</p><h2 id="company-title">Engineering intelligence around the objective.</h2></div>
+          <div>
+            <p class="kicker" data-i18n="company.kicker">Company / Szero</p>
+            <h2 id="company-title" data-i18n="company.title">Intelligence begins at S0.</h2>
+          </div>
           <div class="company-copy">
-            <p>Szero is an applied intelligence company. We build complete systems around consequential decisions and complex work, from the reasoning method to the software that operates it.</p>
-            <p>Our systems are designed to extend what people can decide, manage, and discover without giving up control of the purpose they serve.</p>
-            <p class="principle">Delegate decisions. Never delegate intent.</p>
+            <p data-i18n="company.p1">Szero is an applied intelligence company. We build the complete system around a decision: how it is framed, the method that decides, the software that acts, the evaluation that earns trust, and the loop that makes the next decision better.</p>
+            <p data-i18n="company.p2">Our work exists to widen what a person or a team can direct — more decisions handled well, more ground understood, and more of what is learned kept for the next time.</p>
           </div>
         </div>
-        <div class="cause-statement">
-          <p class="kicker">Our Just Cause</p>
-          <blockquote>Help humans and machines make better decisions by expanding human agency and accelerating the production of knowledge.</blockquote>
-          <p class="cause-original" lang="pt">Ajudar humanos e máquinas a tomar decisões melhores, ampliando a agência humana e acelerando a produção de conhecimento.</p>
+        <div class="manifesto">
+          <p class="kicker" data-i18n="manifesto.kicker">Manifesto / From S0</p>
+          <p class="lead" data-i18n="manifesto.lead">Every capable system was once a blank state. S0 is a problem worth solving with nothing built for it yet. Everything after S0 is earned: a method chosen, a system connected, an evaluation passed, an outcome learned from.</p>
+          <p class="manifesto-lines" data-i18n="manifesto.lines">Frame.<br>Decide.<br>Act.<br>Verify.<br>Learn.</p>
+          <p class="progression"><span>S0</span><span class="arrow">&#8594;</span><span>S1</span><span class="arrow">&#8594;</span><span>S2</span><span class="arrow">&#8594;</span><span>S3</span><span class="arrow">&#8594;</span><span>&#8230;</span></p>
+          <p class="manifesto-close" data-i18n="manifesto.close">Human intent sets the direction. The system carries it further than one person could reach alone, and gives back what it learned as knowledge the whole team can use.</p>
         </div>
       </div>
     </section>
@@ -303,18 +414,18 @@
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="shell contact-grid">
         <div>
-          <p class="kicker">Work with Szero</p>
-          <h2 id="contact-title">Bring us the difficult problem.</h2>
-          <p class="lead">Discuss a product, pilot, or consulting engagement for a decision, operation, or technical challenge.</p>
-          <a class="button" href="mailto:hello@szero.io?subject=Discuss%20a%20product%2C%20pilot%2C%20or%20consulting%20engagement">Contact Szero / hello@szero.io</a>
+          <p class="kicker" data-i18n="contact.kicker">Work with Szero</p>
+          <h2 id="contact-title" data-i18n="contact.title">Bring us the difficult problem.</h2>
+          <p class="lead" data-i18n="contact.lead">Tell us about a decision, an operation, or a technical challenge worth improving. We will tell you what we would build, how we would evaluate it, and where to start.</p>
+          <a class="button mail-cta" href="mailto:hello@szero.io?subject=Discuss%20a%20product%2C%20system%2C%20pilot%2C%20or%20consulting%20engagement" data-i18n="contact.cta" data-i18n-href="mail.href">Contact Szero / hello@szero.io</a>
         </div>
         <div class="contact-note">
-          <p>A useful first message tells us:</p>
+          <p data-i18n="contact.note">A useful first message tells us:</p>
           <ul>
-            <li>Which decision or workflow is difficult today</li>
-            <li>What outcome would make the work valuable</li>
-            <li>Which constraints, systems, and people are involved</li>
-            <li>What evidence or data is available</li>
+            <li data-i18n="contact.li1">Which decision or workflow is difficult today</li>
+            <li data-i18n="contact.li2">What outcome would make the work valuable</li>
+            <li data-i18n="contact.li3">Which constraints, systems, and people are involved</li>
+            <li data-i18n="contact.li4">What evidence or data is available</li>
           </ul>
         </div>
       </div>
@@ -323,10 +434,189 @@
 
   <footer>
     <div class="footer-grid shell">
-      <div class="footer-brand"><img src="assets/szero-wordmark.svg" alt="Szero"><p>Practical Intelligence Systems</p></div>
-      <ul class="footer-nav"><li><a href="#offers">What we build</a></li><li><a href="#method">Why Szero</a></li><li><a href="#start">How we work</a></li><li><a href="#company">Company</a></li><li><a href="#contact">Contact</a></li><li><a href="mailto:hello@szero.io">hello@szero.io</a></li></ul>
-      <div class="footer-end"><p>Decisions / Operations<br>Discovery / Consulting</p><p>© 2026 Szero</p></div>
+      <div class="footer-brand">
+        <img src="assets/szero-wordmark.svg" alt="Szero">
+        <p data-i18n="footer.tagline">Intelligence systems for decisions, operations, and discovery</p>
+      </div>
+      <ul class="footer-nav">
+        <li><a href="#architecture" data-i18n="nav.architecture">How we work</a></li>
+        <li><a href="#offers" data-i18n="nav.offers">What we build</a></li>
+        <li><a href="#why" data-i18n="nav.why">Why Szero</a></li>
+        <li><a href="#principles" data-i18n="nav.principles">Principles</a></li>
+        <li><a href="#company" data-i18n="nav.company">Company</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        <li><a href="mailto:hello@szero.io">hello@szero.io</a></li>
+      </ul>
+      <div class="footer-end">
+        <p data-i18n="footer.end">Decisions / Operations<br>Discovery / Consulting</p>
+        <p>&#169; 2026 Szero</p>
+      </div>
     </div>
   </footer>
+
+  <script>
+  (function () {
+    "use strict";
+
+    var PT = {
+      "meta.title": "Szero — Sistemas de inteligência para decisões, operações e descoberta",
+      "meta.description": "A Szero constrói sistemas de inteligência para decisões de peso, operações mais capazes e descoberta técnica. Produtos, pilotos e consultoria em IA aplicada.",
+      "meta.ogtitle": "Szero — Decisões melhores. Mais agência humana. Conhecimento mais rápido.",
+      "meta.ogdescription": "Sistemas de inteligência para decisões, operações e descoberta, construídos em torno dos seus objetivos, restrições e evidências.",
+      "nav.skip": "Pular para o conteúdo",
+      "nav.aria": "Navegação principal",
+      "nav.home": "Szero, página inicial",
+      "nav.architecture": "Como trabalhamos",
+      "nav.offers": "O que construímos",
+      "nav.why": "Por que a Szero",
+      "nav.principles": "Princípios",
+      "nav.company": "Empresa",
+      "nav.contact": "Contato",
+      "nav.cta": "Trabalhe conosco",
+      "lang.group": "Idioma",
+      "mail.href": "mailto:hello@szero.io?subject=Conversar%20sobre%20um%20produto%2C%20sistema%2C%20piloto%20ou%20consultoria",
+      "hero.eyebrow": "S0 / Sistemas de inteligência",
+      "hero.title": "Decisões melhores. Mais agência humana. Conhecimento mais rápido.",
+      "hero.p1": "A Szero constrói sistemas de inteligência que ajudam pessoas e máquinas a decidir melhor — ampliando o que uma equipe consegue conduzir e a velocidade com que o trabalho vira conhecimento.",
+      "hero.p2": "Decisões de peso. Operações mais capazes. Descoberta técnica. Construímos produtos, pilotos e sistemas de IA aplicada em torno dos seus objetivos, restrições e evidências.",
+      "hero.cta1": "Converse sobre seu problema",
+      "hero.cta2": "Veja como trabalhamos",
+      "hero.proof": "Produtos / Sistemas / Pilotos / Consultoria",
+      "hero.state1": "S0 / Estado inicial",
+      "hero.state2": "Um problema que vale resolver",
+      "hero.state3": "S… / Sistema avaliado",
+      "hero.state4": "Decisões que se sustentam",
+      "arch.kicker": "Como trabalhamos",
+      "arch.title": "Todo sistema começa em S0.",
+      "arch.lead": "S0 é o estado inicial: um problema real, um ambiente real e nada construído ainda para ele. Cada estado seguinte acrescenta capacidade já testada contra a realidade.",
+      "arch.s0.title": "Enquadrar o problema",
+      "arch.s0.p": "A decisão ou o fluxo de trabalho, quem ele atende, o ambiente em que roda, as restrições que o limitam, as evidências já disponíveis e a medida que vai dizer que deu certo.",
+      "arch.s0.tags": "Objetivo / restrições / dados / medida de sucesso",
+      "arch.s1.title": "Escolher o método",
+      "arch.s1.p": "O problema seleciona a representação e a técnica: solvers e controle para operações com restrições, políticas aprendidas quando o retorno é mensurável, simulação quando cenários precisam ser testados antes de valer, modelos especializados e de fundação quando o sinal é linguagem, imagem ou evidência não estruturada.",
+      "arch.s1.tags": "Otimização / controle / aprendizado por reforço / simulação / modelos de fundação",
+      "arch.s2.title": "Conectar aos sistemas reais",
+      "arch.s2.p": "Uma camada de execução define o que o sistema pode observar e fazer: ferramentas e dados, permissões, aprovações onde a consequência exige, verificação de cada passo, recuperação quando um passo falha e estado durável ao longo de trabalhos de longa duração.",
+      "arch.s2.tags": "APIs e ferramentas / permissões / aprovações / verificação / recuperação",
+      "arch.s3.title": "Avaliar contra a realidade",
+      "arch.s3.p": "Replay histórico, comparação contrafactual, simulação, testes adversariais e de modos de falha, e um baseline honesto: o jeito como o trabalho é feito hoje. A avaliação faz parte da arquitetura e define quanto o sistema pode assumir.",
+      "arch.s3.tags": "Replay / baselines / simulação / modos de falha / implantação em estágios",
+      "arch.sn.title": "Aprender com os resultados",
+      "arch.sn.p": "Decisões, ações, resultados, intervenções e falhas ficam registrados como evidência. Esse registro melhora políticas, avaliações e interfaces — e vira conhecimento que sua equipe reutiliza muito depois da primeira implantação.",
+      "arch.sn.tags": "Traces / resultados / retreinamento / registro de conhecimento",
+      "offers.kicker": "O que construímos",
+      "offers.title": "Inteligência aplicada ao trabalho que importa.",
+      "offers.o1.label": "01 / Decidir",
+      "offers.o1.title": "Sistemas de decisão e otimização",
+      "offers.o1.p": "Produtos e sistemas que melhoram uma decisão recorrente sob restrições reais, com resultados mensuráveis frente à forma como essa decisão é tomada hoje.",
+      "offers.o1.examples": "Precificação / alocação / programação / logística / energia / planejamento / controle operacional",
+      "offers.o2.label": "02 / Operar",
+      "offers.o2.title": "Sistemas de IA e operações autônomas",
+      "offers.o2.p": "Sistemas que coordenam ferramentas, fluxos de trabalho, dados e aprovações em trabalhos de longa duração. Verificam o progresso, se recuperam de falhas e mantêm as pessoas no comando do que importa.",
+      "offers.o2.examples": "Uso de ferramentas / coordenação de fluxos / aprovações / verificação / recuperação / execução de longo prazo",
+      "offers.o3.label": "03 / Descobrir",
+      "offers.o3.title": "Sistemas de engenharia e descoberta",
+      "offers.o3.p": "Sistemas que ajudam times técnicos a avaliar, simular, rodar experimentos, investigar software e orquestrar pesquisa com registro claro do que foi tentado e do que aquilo mostrou.",
+      "offers.o3.examples": "Avaliação / simulação / experimentação / investigação de software / orquestração de pesquisa",
+      "offers.o4.label": "04 / Aconselhar",
+      "offers.o4.title": "Consultoria em IA aplicada",
+      "offers.o4.p": "Um trabalho focado para selecionar a oportunidade, enquadrar o problema, desenhar a arquitetura, escolher tecnologia e modelos, definir a avaliação, construir um piloto em produção e melhorá-lo a partir de resultados reais.",
+      "offers.o4.examples": "Seleção de oportunidade / enquadramento do problema / arquitetura / seleção de modelos / desenho da avaliação / pilotos em produção",
+      "why.kicker": "Por que a Szero",
+      "why.title": "Engenharia em torno do seu objetivo.",
+      "why.lead": "Partimos da decisão, do ambiente em que ela vive, das restrições que a limitam e do resultado que vale a pena melhorar. Essa análise escolhe os métodos — em geral vários, trabalhando juntos.",
+      "why.p": "Somos engenheiros e pesquisadores aplicados, e construímos o sistema inteiro: o método que decide, o software que age, a avaliação que conquista confiança. Respondemos pelo resultado que ele produz.",
+      "why.m1.title": "Otimização e controle",
+      "why.m1.p": "Decisões com restrições, planejamento, alocação, programação e desempenho operacional em tempo real.",
+      "why.m2.title": "Aprendizado por reforço e políticas adaptativas",
+      "why.m2.p": "Quando as ações produzem retorno mensurável e uma política pode melhorar com a experiência.",
+      "why.m3.title": "Simulação e modelos especializados",
+      "why.m3.p": "Gêmeos digitais, teste de cenários e modelos que carregam a estrutura de um domínio específico.",
+      "why.m4.title": "Modelos de fundação, agentes e engenharia de software",
+      "why.m4.p": "Raciocínio com linguagem e multimodal, uso de ferramentas, fluxos de trabalho, integrações, interfaces e execução confiável.",
+      "principles.kicker": "Princípios",
+      "principles.title": "Como construímos, sempre.",
+      "principles.p1.title": "Agência humana",
+      "principles.p1.p": "As pessoas definem o objetivo e permanecem no comando do sistema. A autonomia existe para levar a intenção delas mais longe do que o trabalho manual alcança.",
+      "principles.p2.title": "Evidência primeiro",
+      "principles.p2.p": "Tarefas realistas, modos de falha e um baseline honesto vêm antes de alguém depender do sistema.",
+      "principles.p3.title": "Avaliação é arquitetura",
+      "principles.p3.p": "A avaliação é projetada junto com o sistema, roda continuamente e define quanta autoridade ele tem.",
+      "principles.p4.title": "Limites claros",
+      "principles.p4.p": "Permissões, limites, aprovações e escalonamento acompanham a consequência da ação tomada.",
+      "principles.p5.title": "Aprender com os resultados",
+      "principles.p5.p": "O que acontece depois que o sistema age é o sinal em que mais confiamos — e o que projetamos para capturar.",
+      "principles.line": "Delegue decisões. Nunca delegue a intenção.",
+      "company.kicker": "Empresa / Szero",
+      "company.title": "A inteligência começa em S0.",
+      "company.p1": "A Szero é uma empresa de inteligência aplicada. Construímos o sistema completo em torno de uma decisão: como ela é enquadrada, o método que decide, o software que age, a avaliação que conquista confiança e o ciclo que torna a próxima decisão melhor.",
+      "company.p2": "Nosso trabalho existe para ampliar o que uma pessoa ou uma equipe consegue conduzir — mais decisões bem tomadas, mais terreno compreendido e mais do que se aprende guardado para a próxima vez.",
+      "manifesto.kicker": "Manifesto / A partir de S0",
+      "manifesto.lead": "Todo sistema capaz já foi um estado em branco. S0 é um problema que vale a pena resolver, sem nada construído ainda para ele. Tudo depois de S0 é conquistado: um método escolhido, um sistema conectado, uma avaliação vencida, um resultado que ensinou algo.",
+      "manifesto.lines": "Enquadrar.<br>Decidir.<br>Agir.<br>Verificar.<br>Aprender.",
+      "manifesto.close": "A intenção humana define a direção. O sistema a leva além do alcance de uma pessoa sozinha e devolve o que aprendeu como conhecimento que a equipe inteira pode usar.",
+      "contact.kicker": "Trabalhe com a Szero",
+      "contact.title": "Traga o problema difícil.",
+      "contact.lead": "Conte sobre uma decisão, uma operação ou um desafio técnico que vale melhorar. Dizemos o que construiríamos, como avaliaríamos e por onde começar.",
+      "contact.cta": "Fale com a Szero / hello@szero.io",
+      "contact.note": "Uma boa primeira mensagem conta:",
+      "contact.li1": "Qual decisão ou fluxo de trabalho é difícil hoje",
+      "contact.li2": "Qual resultado tornaria o trabalho valioso",
+      "contact.li3": "Quais restrições, sistemas e pessoas estão envolvidos",
+      "contact.li4": "Quais evidências ou dados existem",
+      "footer.tagline": "Sistemas de inteligência para decisões, operações e descoberta",
+      "footer.end": "Decisões / Operações<br>Descoberta / Consultoria"
+    };
+
+    var nodes = document.querySelectorAll("[data-i18n], [data-i18n-href]");
+    var buttons = document.querySelectorAll(".lang-btn");
+    var EN = {};
+
+    function bind(el, fn) {
+      var key = el.getAttribute("data-i18n");
+      if (key) fn(key, el.getAttribute("data-i18n-attr"));
+      var href = el.getAttribute("data-i18n-href");
+      if (href) fn(href, "href");
+    }
+
+    // English lives in the markup, so it is also the no-script version.
+    Array.prototype.forEach.call(nodes, function (el) {
+      bind(el, function (key, attr) {
+        EN[key] = attr ? el.getAttribute(attr) : el.innerHTML;
+      });
+    });
+
+    function apply(lang) {
+      var dict = lang === "pt-BR" ? PT : EN;
+      Array.prototype.forEach.call(nodes, function (el) {
+        bind(el, function (key, attr) {
+          var value = dict[key];
+          if (value == null) return;
+          if (attr) el.setAttribute(attr, value);
+          else el.innerHTML = value;
+        });
+      });
+      document.documentElement.lang = lang;
+      Array.prototype.forEach.call(buttons, function (btn) {
+        btn.setAttribute("aria-pressed", String(btn.getAttribute("data-lang") === lang));
+      });
+    }
+
+    function stored() {
+      try { return localStorage.getItem("szero-lang"); } catch (e) { return null; }
+    }
+
+    Array.prototype.forEach.call(buttons, function (btn) {
+      btn.addEventListener("click", function () {
+        var lang = btn.getAttribute("data-lang");
+        apply(lang);
+        try { localStorage.setItem("szero-lang", lang); } catch (e) { /* private mode: session only */ }
+      });
+    });
+
+    document.querySelector(".lang").style.display = "flex";
+    apply(stored() === "pt-BR" ? "pt-BR" : "en");
+  })();
+  </script>
 </body>
 </html>
