@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Szero builds evaluated autonomy systems that translate authorized human intent into decisions and actions at scales people cannot manage directly.">
-  <meta name="theme-color" content="#0d0e0c">
-  <meta property="og:title" content="Szero — Autonomy that scales human agency">
-  <meta property="og:description" content="Humans define intent and authority. Evaluated systems execute decisions within an autonomy envelope.">
+  <meta name="description" content="Szero builds practical intelligence systems for better decisions, more capable operations, and faster technical discovery.">
+  <meta name="theme-color" content="#11110f">
+  <meta property="og:title" content="Szero — Intelligence systems for decisions, operations, and discovery">
+  <meta property="og:description" content="Products, pilots, and applied AI consulting built around real objectives, constraints, and measurable outcomes.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://szero.io/">
-  <title>Szero — Autonomy that scales human agency</title>
+  <title>Szero — Intelligence systems for decisions, operations, and discovery</title>
   <link rel="icon" href="assets/szero-mark.svg" type="image/svg+xml">
   <style>
     :root {
-      --ink: #0d0e0c;
-      --paper: #efeee8;
-      --white: #faf9f4;
-      --muted: #65655e;
-      --line: #c7c6bd;
-      --dark-line: #383a34;
-      --signal: #d9ff43;
-      --max: 1320px;
-      --pad: clamp(1rem, 3vw, 2.75rem);
+      --ink: #11110f;
+      --paper: #f3f1eb;
+      --white: #fbfaf6;
+      --muted: #66645d;
+      --line: #cbc8be;
+      --dark-line: #3e3e39;
+      --lime: #d9ff43;
+      --max: 1280px;
+      --pad: clamp(1rem, 3vw, 2.5rem);
       --sans: Arial, Helvetica, sans-serif;
       --serif: Georgia, "Times New Roman", serif;
       --mono: "Courier New", Courier, monospace;
@@ -32,121 +32,87 @@
     body { margin: 0; overflow-x: hidden; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.5; }
     img { display: block; max-width: 100%; }
     a { color: inherit; }
-    a:focus-visible { outline: 3px solid var(--signal); outline-offset: 4px; }
-    p, h1, h2, h3, ol, ul, blockquote { margin-top: 0; }
+    a:focus-visible { outline: 3px solid var(--lime); outline-offset: 4px; }
+    p, h1, h2, h3, ul, ol, blockquote { margin-top: 0; }
     section { scroll-margin-top: 5rem; }
     .shell { width: min(100%, var(--max)); margin-inline: auto; padding-inline: var(--pad); }
-    .skip-link { position: fixed; top: .75rem; left: .75rem; z-index: 100; padding: .65rem 1rem; translate: 0 -200%; background: var(--signal); color: var(--ink); font-weight: 700; }
+    .skip-link { position: fixed; top: .75rem; left: .75rem; z-index: 100; padding: .65rem 1rem; translate: 0 -200%; background: var(--lime); color: var(--ink); font-weight: 700; }
     .skip-link:focus { translate: 0; }
 
-    .site-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: rgba(239, 238, 232, .96); }
+    .site-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: rgba(243, 241, 235, .96); }
     .nav { min-height: 76px; display: grid; grid-template-columns: 170px 1fr auto; align-items: center; gap: 2rem; }
     .brand { width: 154px; }
+    .brand img { width: 100%; height: auto; }
     .nav-list { display: flex; justify-content: center; gap: clamp(1rem, 2.5vw, 2.5rem); margin: 0; padding: 0; list-style: none; }
     .nav-list a { text-decoration: none; font: 700 .72rem/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
     .nav-list a:hover, .text-link:hover { text-decoration: underline; text-underline-offset: .3em; }
     .nav-cta, .button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; padding: .7rem 1rem; border: 1px solid var(--ink); background: var(--ink); color: var(--white); font: 700 .72rem/1.3 var(--mono); letter-spacing: .04em; text-align: center; text-decoration: none; text-transform: uppercase; }
-    .nav-cta:hover, .button:hover { background: var(--signal); color: var(--ink); }
+    .nav-cta:hover, .button:hover { background: var(--lime); color: var(--ink); }
     .button-light { background: transparent; color: var(--ink); }
 
     .eyebrow, .kicker, .number, .label { font: 700 .7rem/1.35 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
     .kicker, .label { color: var(--muted); }
-    .hero { min-height: calc(100svh - 76px); border-bottom: 1px solid var(--line); }
-    .hero-grid { min-height: calc(100svh - 76px); display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .55fr); }
-    .hero-copy { min-width: 0; padding: clamp(4rem, 8vw, 7.5rem) clamp(2rem, 6vw, 6rem) clamp(3rem, 5vw, 4.5rem) 0; display: flex; flex-direction: column; }
-    .eyebrow { margin-bottom: clamp(3.5rem, 8vw, 7.5rem); }
-    h1 { max-width: 980px; margin-bottom: 2rem; font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 8rem); font-weight: 400; letter-spacing: -.065em; line-height: .88; }
-    .hero-intro { max-width: 760px; margin-bottom: 1.75rem; font-size: clamp(1.15rem, 1.8vw, 1.5rem); line-height: 1.45; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
-    .hero-rule { margin: auto 0 0; padding-top: 4rem; font: 700 clamp(.9rem, 1.5vw, 1.2rem)/1.4 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
-    .hero-side { min-width: 0; padding: clamp(1.5rem, 2.5vw, 2.5rem); display: grid; grid-template-rows: auto 1fr auto; background: var(--ink); color: var(--white); }
-    .state-line { display: flex; justify-content: space-between; gap: 1rem; color: #aaa99f; font: .68rem/1.4 var(--mono); letter-spacing: .07em; text-transform: uppercase; }
-    .scale-graphic { display: grid; align-content: center; gap: .65rem; padding-block: 3rem; }
-    .scale-row { min-height: 3.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem 1rem; border: 1px solid var(--dark-line); font: .68rem/1.3 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
-    .scale-row:nth-child(2) { width: 78%; }
-    .scale-row:nth-child(3) { width: 55%; }
-    .scale-row:nth-child(4) { width: 62%; background: var(--signal); color: var(--ink); }
-    .scale-row span:last-child { color: #aaa99f; }
-    .scale-row:last-child span:last-child { color: var(--ink); }
+    .hero { min-height: calc(100svh - 76px); display: grid; border-bottom: 1px solid var(--line); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(260px, .55fr); }
+    .hero-copy { min-width: 0; min-height: 680px; padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 6vw, 6rem) clamp(3rem, 6vw, 5rem) 0; display: flex; flex-direction: column; }
+    .eyebrow { margin-bottom: clamp(3rem, 7vw, 6rem); }
+    h1 { max-width: 980px; margin-bottom: 2rem; font-family: var(--serif); font-size: clamp(3.35rem, 7.6vw, 7.5rem); font-weight: 400; letter-spacing: -.06em; line-height: .9; }
+    .hero-intro { max-width: 720px; margin-bottom: 1.5rem; font-size: clamp(1.05rem, 1.6vw, 1.35rem); line-height: 1.5; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+    .hero-proof { margin: auto 0 0; padding-top: 3rem; color: var(--muted); font: .76rem/1.4 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+    .hero-mark { min-width: 0; min-height: 680px; display: grid; align-content: space-between; padding: clamp(1.5rem, 4vw, 3.5rem); background: var(--ink); color: var(--white); }
+    .hero-mark img { width: min(100%, 390px); margin: auto; filter: invert(1); }
+    .state-line { display: flex; justify-content: space-between; gap: 1rem; color: #aaa89f; font: .7rem/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
 
     .section { padding-block: clamp(5rem, 10vw, 9rem); border-bottom: 1px solid var(--line); }
     .section-head { display: grid; grid-template-columns: minmax(150px, .35fr) minmax(0, 1.65fr); gap: 2rem; margin-bottom: clamp(3rem, 7vw, 6rem); }
-    h2 { max-width: 980px; margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.75rem, 6vw, 6.2rem); font-weight: 400; letter-spacing: -.055em; line-height: .95; }
-    h3 { margin-bottom: .75rem; font-size: clamp(1.15rem, 1.8vw, 1.55rem); font-weight: 600; letter-spacing: -.025em; line-height: 1.15; }
-    .lead { max-width: 850px; font-size: clamp(1.3rem, 2.5vw, 2.05rem); letter-spacing: -.025em; line-height: 1.35; }
+    h2 { max-width: 950px; margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.6rem, 6vw, 6rem); font-weight: 400; letter-spacing: -.05em; line-height: .96; }
+    h3 { margin-bottom: .75rem; font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 600; letter-spacing: -.025em; line-height: 1.1; }
+    .lead { max-width: 800px; font-size: clamp(1.3rem, 2.5vw, 2rem); letter-spacing: -.025em; line-height: 1.35; }
 
-    .cause { background: var(--white); }
-    .cause-grid { display: grid; grid-template-columns: .45fr 1.55fr; gap: clamp(2rem, 8vw, 8rem); }
-    .cause blockquote { max-width: 1000px; margin-bottom: 2rem; font-family: var(--serif); font-size: clamp(2.2rem, 5.2vw, 5.3rem); letter-spacing: -.05em; line-height: 1; }
-    .cause-original { max-width: 780px; margin-bottom: 0; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+    .offers { background: var(--white); }
+    .offer-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .offer-card { min-height: 330px; display: flex; flex-direction: column; padding: clamp(1.5rem, 3vw, 2.5rem); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .offer-card .number { margin-bottom: auto; color: var(--muted); }
+    .offer-card p { max-width: 570px; color: var(--muted); }
+    .offer-card .examples { margin-bottom: 0; color: var(--ink); font: .68rem/1.5 var(--mono); letter-spacing: .03em; text-transform: uppercase; }
 
-    .command-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(3rem, 9vw, 9rem); }
-    .command-copy p { max-width: 650px; }
-    .command-copy .lead { color: var(--ink); }
-    .control-stack { border-top: 1px solid var(--line); }
-    .control { display: grid; grid-template-columns: 60px 1fr; gap: 1rem; padding-block: 1.5rem; border-bottom: 1px solid var(--line); }
-    .control .number { color: var(--muted); }
-    .control p { margin-bottom: 0; color: var(--muted); }
-    .intent-note { margin-top: 2.5rem; padding: 1.5rem; border-left: 5px solid var(--signal); background: var(--white); }
-    .intent-note strong { display: block; margin-bottom: .5rem; }
-    .intent-note p { margin-bottom: 0; }
-
-    .envelope { background: var(--ink); color: var(--white); }
-    .envelope .kicker, .envelope .label { color: #aaa99f; }
-    .envelope-layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
-    .envelope-copy h2 { margin: 1.5rem 0 2rem; }
-    .envelope-copy .lead { color: #d1d0c8; }
-    .boundary { padding: clamp(1.25rem, 3vw, 2.5rem); border: 1px solid #55574f; }
-    .boundary-head { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 2.5rem; }
-    .boundary ul { margin: 0; padding: 0; list-style: none; }
-    .boundary li { padding: .8rem 0; border-top: 1px solid var(--dark-line); color: #cbc9c1; font-size: .9rem; }
-    .boundary-state { display: grid; grid-template-columns: 1fr 1fr; margin-top: 2rem; }
-    .boundary-state div { padding: 1rem; border: 1px solid var(--dark-line); }
-    .boundary-state div:last-child { border-left: 0; }
-    .boundary-state strong { display: block; color: var(--signal); font: .72rem/1.3 var(--mono); text-transform: uppercase; }
-    .boundary-state span { color: #aaa99f; font-size: .78rem; }
-
-    .evidence-intro { display: grid; grid-template-columns: .6fr 1.4fr; gap: clamp(3rem, 8vw, 8rem); margin-bottom: clamp(4rem, 8vw, 7rem); }
-    .evidence-intro p:last-child { max-width: 780px; }
-    .assurance-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-    .assurance-card { min-height: 290px; display: flex; flex-direction: column; padding: 1.5rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .assurance-card .number { margin-bottom: auto; color: var(--muted); }
-    .assurance-card p { margin-bottom: 0; color: var(--muted); font-size: .9rem; }
-    .deployment { margin-top: clamp(4rem, 8vw, 7rem); }
-    .deployment-head { display: flex; justify-content: space-between; gap: 2rem; align-items: end; margin-bottom: 1.5rem; }
-    .deployment-head h3 { max-width: 620px; margin-bottom: 0; font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.8rem); font-weight: 400; }
-    .ladder { counter-reset: stage; display: grid; grid-template-columns: repeat(7, 1fr); border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); }
-    .stage { counter-increment: stage; min-height: 220px; display: flex; flex-direction: column; padding: 1rem; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
-    .stage::before { content: "0" counter(stage); margin-bottom: auto; color: var(--muted); font: .68rem/1.3 var(--mono); }
-    .stage strong { font-size: .88rem; line-height: 1.25; }
-    .stage span { margin-top: .5rem; color: var(--muted); font-size: .72rem; }
-    .stage:nth-last-child(-n+2) { background: var(--signal); }
-    .stage:nth-last-child(-n+2)::before, .stage:nth-last-child(-n+2) span { color: #4a4b43; }
-    .reentry { max-width: 850px; margin: 2.5rem 0 0 auto; padding-left: 1.25rem; border-left: 5px solid var(--signal); font-family: var(--serif); font-size: clamp(1.35rem, 2.4vw, 2.2rem); line-height: 1.2; }
-
-    .portfolio { background: #d9d8d0; }
-    .portfolio-track { border-top: 1px solid #aaa9a0; }
-    .portfolio-item { display: grid; grid-template-columns: 80px minmax(200px, .55fr) minmax(0, 1fr); gap: clamp(1rem, 4vw, 4rem); padding-block: clamp(2rem, 4vw, 3.5rem); border-bottom: 1px solid #aaa9a0; }
-    .portfolio-item .number { color: var(--muted); }
-    .portfolio-item p { max-width: 720px; margin-bottom: .75rem; color: #55564f; }
-    .portfolio-item .examples { margin-bottom: 0; font: .68rem/1.5 var(--mono); letter-spacing: .03em; text-transform: uppercase; }
-    .portfolio-note { margin: 3rem 0 0 auto; max-width: 760px; font-size: 1rem; }
-
-    .method-grid { display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(3rem, 8vw, 8rem); }
+    .method { background: var(--ink); color: var(--white); }
+    .method .kicker, .method .label { color: #aaa89f; }
+    .method-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(3rem, 8vw, 8rem); }
     .method-copy h2 { margin: 1.5rem 0 2rem; }
-    .method-copy p { max-width: 650px; }
-    .kernel { border: 1px solid var(--line); background: var(--white); }
-    .kernel-head { padding: 1.5rem; border-bottom: 1px solid var(--line); }
-    .kernel-head p { margin: .5rem 0 0; color: var(--muted); font-size: .88rem; }
-    .kernel-list { display: grid; grid-template-columns: 1fr 1fr; margin: 0; padding: 0; list-style: none; }
-    .kernel-list li { min-height: 100px; padding: 1rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: .85rem; }
-    .kernel-list li:nth-child(even) { border-right: 0; }
-    .kernel-list li:nth-last-child(-n+2) { border-bottom: 0; }
-    .components { margin-top: 2rem; }
-    .component-list { display: flex; flex-wrap: wrap; gap: .45rem; margin: 1rem 0 0; padding: 0; list-style: none; }
-    .component-list li { padding: .45rem .6rem; border: 1px solid var(--line); font: .67rem/1.3 var(--mono); text-transform: uppercase; }
+    .method-copy p { max-width: 650px; color: #c7c5bd; }
+    .method-copy .lead { color: var(--white); }
+    .method-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--dark-line); }
+    .method-list li { display: grid; grid-template-columns: 60px 1fr; gap: 1rem; padding: 1.35rem 0; border-bottom: 1px solid var(--dark-line); }
+    .method-list .number { color: var(--lime); }
+    .method-list strong { display: block; margin-bottom: .25rem; }
+    .method-list span:last-child { color: #aaa89f; font-size: .9rem; }
 
-    .contact { background: var(--signal); }
+    .engagement-grid { display: grid; grid-template-columns: .65fr 1.35fr; gap: clamp(3rem, 8vw, 8rem); }
+    .steps { counter-reset: step; border-top: 1px solid var(--line); }
+    .step { counter-increment: step; display: grid; grid-template-columns: 70px minmax(170px, .5fr) minmax(0, 1fr); gap: clamp(1rem, 3vw, 3rem); padding-block: 2rem; border-bottom: 1px solid var(--line); }
+    .step::before { content: "0" counter(step); font: .72rem/1.4 var(--mono); }
+    .step p { max-width: 620px; margin-bottom: 0; color: var(--muted); }
+    .engagement-note { margin-top: 2.5rem; padding-left: 1.25rem; border-left: 5px solid var(--lime); font-family: var(--serif); font-size: clamp(1.4rem, 2.8vw, 2.5rem); line-height: 1.15; }
+
+    .proof { background: #d9d6cc; }
+    .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #aaa79e; }
+    .proof-card { min-height: 280px; padding: 1.5rem 1.25rem; border-right: 1px solid #aaa79e; }
+    .proof-card:last-child { border-right: 0; }
+    .proof-card .number { display: block; margin-bottom: 4rem; }
+    .proof-card p { margin-bottom: 0; color: #55534d; font-size: .9rem; }
+
+    .company { background: var(--white); }
+    .company-grid { display: grid; grid-template-columns: .55fr 1.45fr; gap: clamp(3rem, 8vw, 8rem); }
+    .company-copy { max-width: 880px; }
+    .company-copy > p:first-child { font-size: 1.15rem; }
+    .principle { margin: 2.5rem 0 0; padding: 1.25rem 0; border-block: 1px solid var(--line); font: 700 clamp(.9rem, 2vw, 1.2rem)/1.4 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+    .cause-statement { margin-top: clamp(5rem, 10vw, 9rem); padding-top: clamp(3rem, 6vw, 6rem); border-top: 1px solid var(--line); }
+    .cause-statement blockquote { max-width: 1050px; margin: 1.5rem 0 2rem; font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 5rem); letter-spacing: -.05em; line-height: 1; }
+    .cause-original { max-width: 800px; margin-bottom: 0; color: var(--muted); font-size: .9rem; }
+
+    .contact { background: var(--lime); }
     .contact-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(3rem, 8vw, 8rem); align-items: end; }
     .contact h2 { margin: 1rem 0 2rem; }
     .contact .button { background: var(--ink); }
@@ -157,26 +123,23 @@
     footer { padding-block: 2.5rem; background: var(--ink); color: var(--white); }
     .footer-grid { display: grid; grid-template-columns: 200px 1fr auto; gap: 2rem; align-items: end; }
     .footer-brand img { width: 165px; filter: invert(1); }
-    .footer-brand p { margin: 1rem 0 0; color: #aaa99f; font-size: .75rem; }
+    .footer-brand p { margin: 1rem 0 0; color: #aaa89f; font-size: .75rem; }
     .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
-    .footer-nav a { color: #c7c6be; font-size: .75rem; text-decoration: none; }
-    .footer-nav a:hover { color: var(--signal); text-decoration: underline; }
+    .footer-nav a { color: #c7c5bd; font-size: .75rem; text-decoration: none; }
+    .footer-nav a:hover { color: var(--lime); text-decoration: underline; }
     .footer-end { text-align: right; }
-    .footer-end p { margin: 0; color: #aaa99f; font: .65rem/1.5 var(--mono); text-transform: uppercase; }
-
-    @media (max-width: 1040px) {
-      .assurance-grid { grid-template-columns: repeat(2, 1fr); }
-      .ladder { grid-template-columns: repeat(4, 1fr); }
-      .stage:last-child { grid-column: span 2; }
-    }
+    .footer-end p { margin: 0; color: #aaa89f; font: .65rem/1.5 var(--mono); text-transform: uppercase; }
 
     @media (max-width: 900px) {
       .nav { grid-template-columns: 150px 1fr auto; gap: 1rem; }
       .brand { width: 140px; }
       .nav-list li:nth-child(2), .nav-list li:nth-child(4) { display: none; }
-      .hero-grid, .envelope-layout, .contact-grid { grid-template-columns: 1fr; }
-      .hero-copy { min-height: 680px; padding-right: 0; }
-      .hero-side { min-height: 500px; }
+      .hero-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-copy { min-height: auto; padding-right: 0; }
+      .hero-mark { min-height: 390px; }
+      .hero-proof { margin-top: 3rem; }
+      .proof-grid { grid-template-columns: repeat(2, 1fr); }
+      .proof-card { border-bottom: 1px solid #aaa79e; }
       .footer-grid { grid-template-columns: 1fr auto; }
       .footer-nav { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; }
     }
@@ -186,28 +149,19 @@
       .nav { min-height: 66px; grid-template-columns: 1fr auto; }
       .nav-list { display: none; }
       .nav-cta { min-height: 40px; padding-inline: .65rem; font-size: .65rem; }
-      .hero-grid { min-height: 0; }
-      .hero-copy { min-height: 620px; padding-block: 3.5rem; }
-      h1 { max-width: 100%; font-size: clamp(2.75rem, 11vw, 4rem); overflow-wrap: break-word; }
-      .hero-intro { max-width: 100%; font-size: 1rem; }
-      .hero-rule { font-size: .78rem; }
-      .hero-side .state-line { display: grid; gap: .35rem; }
-      .hero-actions .button { width: 100%; }
-      .hero-side { min-height: 420px; }
-      .section-head, .cause-grid, .command-grid, .evidence-intro, .method-grid { grid-template-columns: 1fr; }
+      .hero { min-height: 0; }
+      .hero-copy { padding-block: 3.5rem; }
+      .eyebrow { margin-bottom: 3rem; }
+      h1 { max-width: 100%; font-size: clamp(2.9rem, 14vw, 4.5rem); overflow-wrap: break-word; }
+      .hero-actions .button { width: 100%; min-width: 0; white-space: normal; }
+      .hero-mark { min-height: 320px; }
+      .section-head, .method-grid, .engagement-grid, .company-grid { grid-template-columns: 1fr; }
       .section-head { gap: 1.25rem; }
-      .cause blockquote { margin-bottom: 1.5rem; }
-      .assurance-grid { grid-template-columns: 1fr; }
-      .assurance-card { min-height: 220px; }
-      .deployment-head { display: block; }
-      .deployment-head .label { display: block; margin-bottom: 1rem; }
-      .ladder { grid-template-columns: 1fr; }
-      .stage, .stage:last-child { min-height: 130px; grid-column: auto; }
-      .portfolio-item { grid-template-columns: 48px 1fr; }
-      .portfolio-item > div { grid-column: 2; }
-      .kernel-list { grid-template-columns: 1fr; }
-      .kernel-list li, .kernel-list li:nth-child(even), .kernel-list li:nth-last-child(-n+2) { border-right: 0; border-bottom: 1px solid var(--line); }
-      .kernel-list li:last-child { border-bottom: 0; }
+      .offer-grid, .proof-grid { grid-template-columns: 1fr; }
+      .offer-card { min-height: 280px; }
+      .proof-card { min-height: 220px; border-right: 0; }
+      .step { grid-template-columns: 48px 1fr; }
+      .step > p { grid-column: 2; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-nav { grid-column: auto; grid-row: auto; }
       .footer-end { text-align: left; }
@@ -224,12 +178,12 @@
     <nav class="nav shell" aria-label="Primary navigation">
       <a class="brand" href="./" aria-label="Szero home"><img src="assets/szero-wordmark.svg" alt="Szero"></a>
       <ul class="nav-list">
-        <li><a href="#command">Human command</a></li>
-        <li><a href="#evidence">Evidence</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#method">Method</a></li>
+        <li><a href="#offers">What we build</a></li>
+        <li><a href="#method">Why Szero</a></li>
+        <li><a href="#start">How we work</a></li>
+        <li><a href="#company">Company</a></li>
       </ul>
-      <a class="nav-cta" href="#contact">Decision loop</a>
+      <a class="nav-cta" href="mailto:hello@szero.io?subject=Discuss%20a%20product%2C%20pilot%2C%20or%20consulting%20engagement">Work with us</a>
     </nav>
   </header>
 
@@ -237,173 +191,111 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-grid shell">
         <div class="hero-copy">
-          <p class="eyebrow">S0 / Intent-scaled autonomy</p>
-          <h1 id="hero-title">Human decisions, at machine scale.</h1>
-          <p class="hero-intro">Szero builds adaptive intelligence systems that translate authorized human intent into evaluated decisions and actions at scales people cannot manage directly.</p>
+          <p class="eyebrow">S0 / Practical Intelligence Systems</p>
+          <h1 id="hero-title">Better decisions. More capable operations.</h1>
+          <p class="hero-intro">Szero builds intelligence systems for difficult decisions, complex workflows, and technical discovery.</p>
+          <p class="hero-intro">We turn real objectives, constraints, and evidence into products that decide, operate, verify, and improve.</p>
           <div class="hero-actions">
-            <a class="button" href="#command">See how humans remain in command</a>
-            <a class="button button-light" href="#contact">Bring a decision loop</a>
+            <a class="button" href="mailto:hello@szero.io?subject=Discuss%20a%20product%2C%20pilot%2C%20or%20consulting%20engagement">Discuss your problem</a>
+            <a class="button button-light" href="#offers">See what we build</a>
           </div>
-          <p class="hero-rule">Delegate decisions. Never delegate intent.</p>
+          <p class="hero-proof">Products / Systems / Pilots / Consulting</p>
         </div>
-        <div class="hero-side" aria-label="Decision scale diagram">
-          <div class="state-line"><span>Intent / Human</span><span>Execution / System</span></div>
-          <div class="scale-graphic">
-            <div class="scale-row"><span>Decision surface</span><span>High volume</span></div>
-            <div class="scale-row"><span>Evaluated envelope</span><span>Bounded</span></div>
-            <div class="scale-row"><span>Authority</span><span>Explicit</span></div>
-            <div class="scale-row"><span>Intent</span><span>Human</span></div>
-          </div>
-          <div class="state-line"><span>Command remains human</span><span>S0 →</span></div>
+        <div class="hero-mark" aria-hidden="true">
+          <div class="state-line"><span>State / 00</span><span>Define the objective</span></div>
+          <img src="assets/szero-mark.svg" alt="">
+          <div class="state-line"><span>Decision</span><span>Outcome</span></div>
         </div>
       </div>
     </section>
 
-    <section class="section cause" aria-labelledby="cause-title">
-      <div class="shell cause-grid">
-        <div>
-          <p class="kicker">Just Cause</p>
-          <h2 id="cause-title">Why we build.</h2>
-        </div>
-        <div>
-          <blockquote>Help humans and machines make better decisions by expanding human agency and accelerating the production of knowledge.</blockquote>
-          <p class="cause-original" lang="pt">Ajudar humanos e máquinas a tomar decisões melhores, ampliando a agência humana e acelerando a produção de conhecimento.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="command" aria-labelledby="command-title">
-      <div class="shell command-grid">
-        <div class="command-copy">
-          <p class="kicker">Control model / Human in command</p>
-          <h2 id="command-title">Autonomy can expand human agency.</h2>
-          <p class="lead">People cannot inspect every price, allocation, control action, experiment, or operational choice when decisions occur at high volume, speed, or complexity.</p>
-          <p>Human control moves to the system level. People set the purpose, boundaries, and evidence required. The system executes individual decisions only within that authority.</p>
-          <aside class="intent-note">
-            <strong>Intent is authorized, not unilateral.</strong>
-            <p>Human intent means authorized intent under explicit stakeholder, legal, safety, and ethical constraints. It is not blind obedience to one operator.</p>
-          </aside>
-        </div>
-        <div class="control-stack" aria-label="Three modes of control">
-          <article class="control">
-            <span class="number">01</span>
-            <div><h3>Humans define intent</h3><p>Authorized people define constraints, authority, acceptable outcomes, escalation rules, and promotion criteria.</p></div>
-          </article>
-          <article class="control">
-            <span class="number">02</span>
-            <div><h3>Oversight follows risk</h3><p>Direct approval or supervision depends on the action, environment, risk, and system maturity.</p></div>
-          </article>
-          <article class="control">
-            <span class="number">03</span>
-            <div><h3>The system executes</h3><p>The system makes individual decisions within an evaluated autonomy envelope. Unfamiliar or higher-impact actions can still require human approval.</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section envelope" aria-labelledby="envelope-title">
-      <div class="shell envelope-layout">
-        <div class="envelope-copy">
-          <p class="kicker">Autonomy envelope / Authorization in practice</p>
-          <h2 id="envelope-title">Authority is a boundary, not a switch.</h2>
-          <p class="lead">The autonomy envelope defines where the system may operate, what it may decide, and when it must reduce authority or return control.</p>
-          <p>Evidence can expand the envelope. Drift, uncertainty, violations, or failures can reduce it.</p>
-        </div>
-        <div class="boundary">
-          <div class="boundary-head"><span class="label">Evaluated boundary</span><span class="number">S0 / AUTH</span></div>
-          <ul>
-            <li>Permitted decisions and actions</li>
-            <li>Operating environments and affected populations</li>
-            <li>Budgets, uncertainty limits, and duration</li>
-            <li>Escalation, reversibility, and recovery controls</li>
-          </ul>
-          <div class="boundary-state">
-            <div><strong>Expand</strong><span>With promotion evidence</span></div>
-            <div><strong>Contract</strong><span>With risk signals</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="evidence" aria-labelledby="evidence-title">
-      <div class="shell">
-        <div class="evidence-intro">
-          <div><p class="kicker">Evidence / Authority earned</p><h2 id="evidence-title">Evaluate before execution. Assure during operation.</h2></div>
-          <div><p class="lead">Autonomy grows through connected layers of evidence, deployment, assurance, and learning.</p><p>Evaluation measures performance and alignment. Runtime controls watch the live boundary. Outcomes become knowledge for the next decision, without allowing learned behavior to bypass review.</p></div>
-        </div>
-        <div class="assurance-grid">
-          <article class="assurance-card"><span class="number">01 / EVALUATE</span><div><h3>Layered evaluation</h3><p>Replay, simulation, counterfactuals, adversarial tests, domain review, constraints, and baseline comparisons test both decision quality and alignment.</p></div></article>
-          <article class="assurance-card"><span class="number">02 / DEPLOY</span><div><h3>Staged deployment</h3><p>Authority increases only through explicit stages and promotion evidence appropriate to the domain and risk.</p></div></article>
-          <article class="assurance-card"><span class="number">03 / ASSURE</span><div><h3>Runtime assurance</h3><p>Monitor authority limits, drift, uncertainty, affected populations, interventions, failures, recovery, and outcome quality.</p></div></article>
-          <article class="assurance-card"><span class="number">04 / LEARN</span><div><h3>Learning from outcomes</h3><p>Retain state, evidence, decisions, actions, interventions, failures, and outcomes so operation produces inspectable, reusable knowledge.</p></div></article>
-        </div>
-        <div class="deployment">
-          <div class="deployment-head"><span class="label">Deployment ladder / 07 stages</span><h3>Increase authority only when evidence supports it.</h3></div>
-          <div class="ladder" aria-label="Seven stages of deployment">
-            <div class="stage"><strong>Offline evaluation</strong><span>No live operation</span></div>
-            <div class="stage"><strong>Sandbox or simulation</strong><span>Controlled environment</span></div>
-            <div class="stage"><strong>Shadow mode</strong><span>Observe without influence</span></div>
-            <div class="stage"><strong>Recommendation only</strong><span>No system-initiated execution</span></div>
-            <div class="stage"><strong>Human approval</strong><span>System executes a prepared action only after human approval</span></div>
-            <div class="stage"><strong>Bounded autonomy</strong><span>Execute within tested limits</span></div>
-            <div class="stage"><strong>Expanded autonomy</strong><span>Broader evidenced authority</span></div>
-          </div>
-          <p class="reentry">Learned changes to a model, policy, or reasoning method re-enter evaluation and staged deployment before production use.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section portfolio" id="portfolio" aria-labelledby="portfolio-title">
+    <section class="section offers" id="offers" aria-labelledby="offers-title">
       <div class="shell">
         <div class="section-head">
-          <p class="kicker">Portfolio / A spectrum of decision scale</p>
-          <h2 id="portfolio-title">From narrow policies to discovery systems.</h2>
+          <p class="kicker">What we build</p>
+          <h2 id="offers-title">Intelligence applied to work that matters.</h2>
         </div>
-        <div class="portfolio-track">
-          <article class="portfolio-item">
-            <span class="number">01</span>
-            <h3>Narrow commercial policies</h3>
-            <div><p>High-volume, measurable recurring decisions with accessible feedback and credible offline evaluation.</p><p class="examples">Pricing / allocation / scheduling / energy / logistics / industrial optimization</p></div>
+        <div class="offer-grid">
+          <article class="offer-card">
+            <span class="number">01 / DECIDE</span>
+            <div><h3>Decision and optimization systems</h3><p>Products and systems that improve recurring decisions under real constraints, with outcomes that can be measured and compared.</p><p class="examples">Pricing / allocation / scheduling / logistics / energy / prioritization / planning / operational control</p></div>
           </article>
-          <article class="portfolio-item">
-            <span class="number">02</span>
-            <h3>Autonomous operations</h3>
-            <div><p>Broader systems that coordinate multiple decisions, tools, and time horizons. They expand after narrower workflows establish evaluation, runtime controls, and value.</p><p class="examples">State / tools / coordination / recovery / long horizons</p></div>
+          <article class="offer-card">
+            <span class="number">02 / OPERATE</span>
+            <div><h3>AI and autonomous operations systems</h3><p>Systems that coordinate tools, workflows, data, and approvals over long-running work. They verify progress, recover from failure, and keep people in control where it matters.</p><p class="examples">Tool use / workflow coordination / verification / recovery / human approval</p></div>
           </article>
-          <article class="portfolio-item">
-            <span class="number">03</span>
-            <h3>Generalist discovery and science agents</h3>
-            <div><p>Systems that propose, run, evaluate, and learn across experiments, engineering, and scientific work. They earn authority through the same controls.</p><p class="examples">Experiments / evaluations / traces / simulation / knowledge production</p></div>
+          <article class="offer-card">
+            <span class="number">03 / DISCOVER</span>
+            <div><h3>Engineering and discovery systems</h3><p>Systems that help technical teams evaluate, simulate, experiment, investigate software, and orchestrate research with a clear record of evidence.</p><p class="examples">Evaluation / simulation / experimentation / software investigation / research orchestration</p></div>
+          </article>
+          <article class="offer-card">
+            <span class="number">04 / ADVISE</span>
+            <div><h3>Applied AI consulting</h3><p>A focused way to select opportunities, frame the problem, choose an architecture, design evaluations, build a production pilot, and improve it from real outcomes.</p><p class="examples">Opportunity selection / architecture / technology and model selection / evaluation design / production pilots</p></div>
           </article>
         </div>
-        <p class="portfolio-note"><strong>The first commercial wedge is not predetermined.</strong> Customer evidence must select a recurring decision loop with measurable value, workable feedback, and a safe path to staged deployment.</p>
       </div>
     </section>
 
-    <section class="section" id="method" aria-labelledby="method-title">
+    <section class="section method" id="method" aria-labelledby="method-title">
       <div class="shell method-grid">
         <div class="method-copy">
-          <p class="kicker">Method / Adaptive intelligence</p>
-          <h2 id="method-title">The decision problem selects the system.</h2>
-          <p class="lead">No single model defines the company or solves every decision surface.</p>
-          <p>We compose the methods that fit the objective, environment, feedback, constraints, and required reliability. The complete evaluated system is the unit of work.</p>
-          <div class="components">
-            <span class="label">Possible components</span>
-            <ul class="component-list"><li>Foundation models</li><li>Reinforcement learning</li><li>Control</li><li>Optimization</li><li>Simulation</li><li>Specialized models</li></ul>
+          <p class="kicker">Why Szero</p>
+          <h2 id="method-title">The problem selects the technology.</h2>
+          <p class="lead">We start with the decision, environment, and required outcome, not a preferred model.</p>
+          <p>Foundation models and agents can be powerful components. They are not the company identity or the right answer to every problem. Szero combines the methods and software the work actually requires.</p>
+        </div>
+        <ol class="method-list">
+          <li><span class="number">01</span><span><strong>Optimization and control</strong>For constrained decisions, planning, allocation, and operational performance.</span></li>
+          <li><span class="number">02</span><span><strong>Reinforcement learning</strong>When actions create measurable feedback and policies can improve through experience.</span></li>
+          <li><span class="number">03</span><span><strong>Simulation and specialized models</strong>For testing scenarios, representing domain structure, and evaluating choices before they matter.</span></li>
+          <li><span class="number">04</span><span><strong>Foundation models and conventional software</strong>For language, reasoning, tools, workflows, interfaces, integrations, and dependable execution.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="start" aria-labelledby="start-title">
+      <div class="shell engagement-grid">
+        <div><p class="kicker">How work starts</p><h2 id="start-title">From a hard problem to a working system.</h2></div>
+        <div>
+          <div class="steps">
+            <article class="step"><h3>Frame the opportunity</h3><p>Define the decision or workflow, who it serves, the constraints, available evidence, and the outcome worth improving.</p></article>
+            <article class="step"><h3>Design the system</h3><p>Select the right methods, architecture, integrations, evaluation plan, and level of human involvement.</p></article>
+            <article class="step"><h3>Build and prove</h3><p>Deliver a focused pilot, test it against realistic conditions, and use results to decide what should become a production system or product.</p></article>
+          </div>
+          <p class="engagement-note">Start with consulting, a pilot, or a defined product opportunity. The first step should reduce uncertainty and produce something useful.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section proof" aria-labelledby="proof-title">
+      <div class="shell">
+        <div class="section-head">
+          <p class="kicker">Built for real operation</p>
+          <h2 id="proof-title">Useful intelligence needs more than a capable model.</h2>
+        </div>
+        <div class="proof-grid">
+          <article class="proof-card"><span class="number">01</span><h3>Evidence first</h3><p>We test realistic tasks, failure modes, constraints, and baselines before relying on a system.</p></article>
+          <article class="proof-card"><span class="number">02</span><h3>Clear boundaries</h3><p>Permissions, limits, approvals, and escalation reflect the consequences of the work.</p></article>
+          <article class="proof-card"><span class="number">03</span><h3>Human authority</h3><p>People set objectives and retain control over consequential, unfamiliar, or higher-risk actions.</p></article>
+          <article class="proof-card"><span class="number">04</span><h3>Learning from outcomes</h3><p>Results, interventions, and failures become evidence for improving later decisions.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section company" id="company" aria-labelledby="company-title">
+      <div class="shell">
+        <div class="company-grid">
+          <div><p class="kicker">Company / Szero</p><h2 id="company-title">Engineering intelligence around the objective.</h2></div>
+          <div class="company-copy">
+            <p>Szero is an applied intelligence company. We build complete systems around consequential decisions and complex work, from the reasoning method to the software that operates it.</p>
+            <p>Our systems are designed to extend what people can decide, manage, and discover without giving up control of the purpose they serve.</p>
+            <p class="principle">Delegate decisions. Never delegate intent.</p>
           </div>
         </div>
-        <div class="kernel">
-          <div class="kernel-head"><span class="label">Shared adaptive intelligence kernel</span><h3>One internal method across the portfolio.</h3><p>The kernel is reused internally. It is not presented as a market-ready platform product.</p></div>
-          <ul class="kernel-list">
-            <li>Intent and authorization</li>
-            <li>Context and state</li>
-            <li>Policy or reasoning selection</li>
-            <li>Simulation and evaluation</li>
-            <li>Execution controls and staged deployment</li>
-            <li>Observability and runtime assurance</li>
-            <li>Learning, governance, and audit</li>
-            <li>Outcome knowledge for people and systems</li>
-          </ul>
+        <div class="cause-statement">
+          <p class="kicker">Our Just Cause</p>
+          <blockquote>Help humans and machines make better decisions by expanding human agency and accelerating the production of knowledge.</blockquote>
+          <p class="cause-original" lang="pt">Ajudar humanos e máquinas a tomar decisões melhores, ampliando a agência humana e acelerando a produção de conhecimento.</p>
         </div>
       </div>
     </section>
@@ -411,18 +303,18 @@
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="shell contact-grid">
         <div>
-          <p class="kicker">Start with the decision</p>
-          <h2 id="contact-title">Bring us a recurring decision loop.</h2>
-          <p class="lead">We will examine whether its intent can be made explicit, its outcomes measured, and its authority expanded safely through evidence.</p>
-          <a class="button" href="mailto:hello@szero.io?subject=Evaluate%20a%20recurring%20decision%20loop">Discuss the loop / hello@szero.io</a>
+          <p class="kicker">Work with Szero</p>
+          <h2 id="contact-title">Bring us the difficult problem.</h2>
+          <p class="lead">Discuss a product, pilot, or consulting engagement for a decision, operation, or technical challenge.</p>
+          <a class="button" href="mailto:hello@szero.io?subject=Discuss%20a%20product%2C%20pilot%2C%20or%20consulting%20engagement">Contact Szero / hello@szero.io</a>
         </div>
         <div class="contact-note">
-          <p>Useful starting questions:</p>
+          <p>A useful first message tells us:</p>
           <ul>
-            <li>What human intent should this decision scale?</li>
-            <li>Why can people not manage it directly?</li>
-            <li>Which outcomes and constraints can be measured?</li>
-            <li>What is the safe initial autonomy envelope?</li>
+            <li>Which decision or workflow is difficult today</li>
+            <li>What outcome would make the work valuable</li>
+            <li>Which constraints, systems, and people are involved</li>
+            <li>What evidence or data is available</li>
           </ul>
         </div>
       </div>
@@ -431,9 +323,9 @@
 
   <footer>
     <div class="footer-grid shell">
-      <div class="footer-brand"><img src="assets/szero-wordmark.svg" alt="Szero"><p>Intent-scaled autonomy systems</p></div>
-      <ul class="footer-nav"><li><a href="#command">Human command</a></li><li><a href="#evidence">Evidence</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#method">Method</a></li><li><a href="#contact">Contact</a></li><li><a href="mailto:hello@szero.io">hello@szero.io</a></li></ul>
-      <div class="footer-end"><p>Delegate decisions.<br>Never delegate intent.</p><p>© 2026 Szero</p></div>
+      <div class="footer-brand"><img src="assets/szero-wordmark.svg" alt="Szero"><p>Practical Intelligence Systems</p></div>
+      <ul class="footer-nav"><li><a href="#offers">What we build</a></li><li><a href="#method">Why Szero</a></li><li><a href="#start">How we work</a></li><li><a href="#company">Company</a></li><li><a href="#contact">Contact</a></li><li><a href="mailto:hello@szero.io">hello@szero.io</a></li></ul>
+      <div class="footer-end"><p>Decisions / Operations<br>Discovery / Consulting</p><p>© 2026 Szero</p></div>
     </div>
   </footer>
 </body>
