@@ -4,24 +4,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" data-i18n="meta.description" data-i18n-attr="content" content="Szero builds intelligence systems for consequential decisions, capable operations, and technical discovery. Products, pilots, and applied AI consulting.">
-  <meta name="theme-color" content="#11110f">
+  <meta name="theme-color" content="#f2f0e9">
   <meta property="og:title" data-i18n="meta.ogtitle" data-i18n-attr="content" content="Szero — Better decisions. More agency. Faster knowledge.">
   <meta property="og:description" data-i18n="meta.ogdescription" data-i18n-attr="content" content="Intelligence systems for decisions, operations, and discovery, engineered around your objectives, constraints, and evidence.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://szero.io/">
+  <meta property="og:url" content="https://szero.io/szero2/">
   <title data-i18n="meta.title">Szero — Intelligence systems for decisions, operations, and discovery</title>
   <link rel="icon" href="assets/szero-mark.svg" type="image/svg+xml">
   <style>
     :root {
-      --ink: #11110f;
-      --paper: #f3f1eb;
-      --white: #fbfaf6;
-      --muted: #66645d;
-      --line: #cbc8be;
-      --dark-line: #3e3e39;
-      --lime: #d9ff43;
-      --max: 1280px;
-      --pad: clamp(1rem, 3vw, 2.5rem);
+      --ink: #0b0c0a;
+      --paper: #f2f0e9;
+      --white: #faf9f4;
+      --muted: #6a6861;
+      --line: #d2cfc5;
+      --dark-line: #33342f;
+      --lime: #d7ff18;
+      --max: 1440px;
+      --pad: clamp(1.25rem, 4vw, 4rem);
       --sans: Arial, Helvetica, sans-serif;
       --serif: Georgia, "Times New Roman", serif;
       --mono: "Courier New", Courier, monospace;
@@ -33,130 +33,149 @@
     img { display: block; max-width: 100%; }
     a { color: inherit; }
     a:focus-visible, button:focus-visible { outline: 3px solid var(--lime); outline-offset: 4px; }
-    p, h1, h2, h3, ul, ol, blockquote { margin-top: 0; }
+    p, h1, h2, h3, ul, ol, figure { margin-top: 0; }
     section { scroll-margin-top: 5rem; }
     .shell { width: min(100%, var(--max)); margin-inline: auto; padding-inline: var(--pad); }
-    .skip-link { position: fixed; top: .75rem; left: .75rem; z-index: 100; padding: .65rem 1rem; translate: 0 -200%; background: var(--lime); color: var(--ink); font-weight: 700; }
+    .skip-link { position: fixed; top: .75rem; left: .75rem; z-index: 100; padding: .7rem 1rem; translate: 0 -200%; background: var(--lime); color: var(--ink); font-weight: 700; }
     .skip-link:focus { translate: 0; }
 
-    .site-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: var(--paper); }
-    .nav { min-height: 76px; display: grid; grid-template-columns: 160px 1fr auto auto; align-items: center; gap: clamp(.75rem, 2vw, 2rem); }
-    .brand { width: 150px; }
+    .site-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: var(--paper); background: color-mix(in srgb, var(--paper) 94%, transparent); backdrop-filter: blur(12px); }
+    .nav { min-height: 76px; display: grid; grid-template-columns: 155px 1fr auto auto; align-items: center; gap: clamp(.75rem, 2vw, 2rem); }
+    .brand { width: 148px; min-height: 44px; display: flex; align-items: center; }
     .brand img { width: 100%; height: auto; }
-    .nav-list { display: flex; justify-content: center; gap: clamp(.9rem, 2vw, 2.2rem); margin: 0; padding: 0; list-style: none; }
-    .nav-list a { text-decoration: none; font: 700 .72rem/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
-    .nav-list a:hover, .text-link:hover { text-decoration: underline; text-underline-offset: .3em; }
-    .nav-cta, .button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; padding: .7rem 1rem; border: 1px solid var(--ink); background: var(--ink); color: var(--white); font: 700 .72rem/1.3 var(--mono); letter-spacing: .04em; text-align: center; text-decoration: none; text-transform: uppercase; }
+    .nav-list { display: flex; justify-content: center; gap: clamp(.8rem, 2vw, 2.2rem); margin: 0; padding: 0; list-style: none; }
+    .nav-list a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: none; font: 700 .65rem/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .nav-list a:hover, .footer-nav a:hover { text-decoration: underline; text-underline-offset: .3em; }
+    .nav-cta, .button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; padding: .75rem 1.1rem; border: 1px solid var(--ink); background: var(--ink); color: var(--white); font: 700 .67rem/1.3 var(--mono); letter-spacing: .06em; text-align: center; text-decoration: none; text-transform: uppercase; transition: background .18s, color .18s; }
     .nav-cta:hover, .button:hover { background: var(--lime); color: var(--ink); }
     .button-light { background: transparent; color: var(--ink); }
 
-    /* Language selector: hidden until the script enables it, so it is never a dead control. */
-    .lang { display: none; gap: .3rem; }
-    .lang-btn { min-width: 44px; min-height: 44px; padding: .4rem .55rem; border: 1px solid var(--line); background: transparent; color: var(--muted); font: 700 .7rem/1 var(--mono); letter-spacing: .06em; cursor: pointer; }
+    /* Hidden until JavaScript enables it, so it is never a dead control. */
+    .lang { display: none; gap: .25rem; }
+    .lang-btn { min-width: 44px; min-height: 44px; padding: .4rem; border: 1px solid var(--line); background: transparent; color: var(--muted); font: 700 .67rem/1 var(--mono); letter-spacing: .06em; cursor: pointer; }
     .lang-btn[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--white); }
     .lang-btn:hover { border-color: var(--ink); color: var(--ink); }
     .lang-btn[aria-pressed="true"]:hover { color: var(--white); }
 
-    .eyebrow, .kicker, .number, .label { font: 700 .7rem/1.35 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .eyebrow, .kicker, .number, .label { font: 700 .66rem/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
     .kicker, .label { color: var(--muted); }
     .hero { min-height: calc(100svh - 76px); display: grid; border-bottom: 1px solid var(--line); }
-    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(260px, .55fr); }
-    .hero-copy { min-width: 0; min-height: 600px; padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 6vw, 6rem) clamp(3rem, 6vw, 5rem) 0; display: flex; flex-direction: column; }
-    .eyebrow { margin-bottom: clamp(2rem, 4vw, 3.5rem); }
-    h1 { max-width: 980px; margin-bottom: 1.75rem; font-family: var(--serif); font-size: clamp(2.9rem, 6.4vw, 6rem); font-weight: 400; letter-spacing: -.055em; line-height: .92; text-wrap: balance; }
-    .hero-intro { max-width: 720px; margin-bottom: 1.25rem; font-size: clamp(1.05rem, 1.6vw, 1.35rem); line-height: 1.5; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
-    .hero-proof { margin: auto 0 0; padding-top: 3rem; color: var(--muted); font: .76rem/1.4 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
-    .hero-mark { min-width: 0; min-height: 600px; display: grid; align-content: space-between; padding: clamp(1.5rem, 4vw, 3.5rem); background: var(--ink); color: var(--white); }
-    .hero-mark img { width: min(100%, 390px); margin: auto; filter: invert(1); }
-    .state-line { display: flex; justify-content: space-between; gap: 1rem; color: #aaa89f; font: .7rem/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+    .hero-grid { display: grid; grid-template-columns: minmax(360px, .72fr) minmax(540px, 1.28fr); align-items: stretch; }
+    .hero-copy { min-width: 0; min-height: 700px; display: flex; flex-direction: column; padding: clamp(3.5rem, 7vw, 7rem) clamp(1.5rem, 3.5vw, 4rem) clamp(2.5rem, 5vw, 4.5rem) 0; }
+    .eyebrow { margin-bottom: clamp(2.5rem, 5vw, 5rem); }
+    h1 { max-width: 610px; margin-bottom: 1.7rem; font: 400 clamp(3rem, 5.1vw, 5.2rem)/.94 var(--serif); letter-spacing: -.055em; text-wrap: balance; }
+    .hero-intro { max-width: 570px; margin-bottom: .75rem; color: var(--muted); font-size: clamp(.92rem, 1.15vw, 1.08rem); line-height: 1.55; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
+    .hero-proof { margin: auto 0 0; padding-top: 2rem; color: var(--muted); font: .68rem/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+    .hero-visual { min-width: 0; min-height: 700px; display: flex; align-items: center; position: relative; margin: 0; }
+    .hero-visual img { width: 115%; max-width: none; margin-left: -8%; }
+    .state-line { position: absolute; right: 0; bottom: 2.5rem; left: 5%; display: flex; justify-content: space-between; gap: 1rem; color: var(--muted); font: .64rem/1.4 var(--mono); letter-spacing: .07em; text-transform: uppercase; }
+    .state-line p { margin: 0; }
+    .state-line p span { display: block; }
+    .state-line p:last-child { text-align: right; }
 
-    .section { padding-block: clamp(5rem, 10vw, 9rem); border-bottom: 1px solid var(--line); }
-    .section-head { display: grid; grid-template-columns: minmax(150px, .35fr) minmax(0, 1.65fr); gap: 2rem; margin-bottom: clamp(3rem, 7vw, 6rem); }
-    h2 { max-width: 950px; margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.5rem, 5.6vw, 5.6rem); font-weight: 400; letter-spacing: -.05em; line-height: .96; text-wrap: balance; }
-    h3 { margin-bottom: .75rem; font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 600; letter-spacing: -.025em; line-height: 1.1; }
-    .lead { max-width: 800px; font-size: clamp(1.25rem, 2.3vw, 1.9rem); letter-spacing: -.025em; line-height: 1.35; }
-    .section-head .lead { margin: 1.75rem 0 0; }
-
-    .progression { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .7rem; margin: 2.5rem 0 0; font: 700 clamp(1.1rem, 3.4vw, 2.1rem)/1 var(--mono); letter-spacing: .05em; }
+    .section { padding-block: clamp(5rem, 9vw, 9rem); border-bottom: 1px solid var(--line); }
+    .section-head { display: grid; grid-template-columns: minmax(145px, .36fr) minmax(0, 1.64fr); gap: 2rem; margin-bottom: clamp(3rem, 6vw, 6rem); }
+    h2 { max-width: 960px; margin-bottom: 0; font: 400 clamp(2.6rem, 5.4vw, 5.4rem)/.97 var(--serif); letter-spacing: -.05em; text-wrap: balance; }
+    h3 { margin-bottom: .8rem; font-size: clamp(1.15rem, 1.65vw, 1.45rem); font-weight: 600; letter-spacing: -.025em; line-height: 1.12; }
+    .lead { max-width: 830px; font-size: clamp(1.1rem, 2vw, 1.65rem); letter-spacing: -.025em; line-height: 1.38; }
+    .section-head .lead { margin: 1.6rem 0 0; }
+    .progression { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .8rem; margin: 2.25rem 0 0; font: 700 clamp(1rem, 2.8vw, 1.7rem)/1 var(--mono); letter-spacing: .05em; }
     .progression .arrow { color: var(--muted); }
 
-    .architecture { background: var(--ink); color: var(--white); }
-    .architecture .kicker { color: #aaa89f; }
-    .architecture .lead { max-width: 880px; color: var(--white); }
-    .architecture .progression .arrow { color: var(--lime); }
-    .layers { border-top: 1px solid var(--dark-line); }
-    .layer { display: grid; grid-template-columns: 90px minmax(180px, .55fr) minmax(0, 1.45fr); gap: clamp(1rem, 4vw, 4rem); padding-block: 2.5rem; border-bottom: 1px solid var(--dark-line); }
-    .layer .number { color: var(--lime); }
-    .layer p { max-width: 720px; margin-bottom: 1rem; color: #c7c5bd; }
-    .layer .tags { margin-bottom: 0; color: var(--white); font: .68rem/1.6 var(--mono); letter-spacing: .03em; text-transform: uppercase; }
+    .architecture { background: var(--white); }
+    .architecture-visual { display: grid; grid-template-columns: minmax(280px, 1.25fr) minmax(220px, .75fr); align-items: center; gap: clamp(2rem, 7vw, 7rem); margin-bottom: clamp(4rem, 8vw, 8rem); }
+    .architecture-visual img { width: 100%; max-height: 620px; object-fit: contain; }
+    .architecture-key { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .architecture-key li { display: grid; grid-template-columns: 15px 1fr; gap: 1rem; align-items: center; min-height: 60px; border-bottom: 1px solid var(--line); color: var(--muted); font: .68rem/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+    .architecture-key i { width: 9px; aspect-ratio: 1; border-radius: 50%; background: var(--ink); }
+    .architecture-key li:nth-child(2) i { background: #aaa79e; }
+    .architecture-key li:nth-child(3) i { background: #e5e2d9; border: 1px solid var(--line); }
+    .architecture-key li:nth-child(4) i { background: var(--lime); }
+    .layers { border-top: 1px solid var(--line); }
+    .layer { display: grid; grid-template-columns: 72px minmax(180px, .55fr) minmax(0, 1.45fr); gap: clamp(1rem, 4vw, 4rem); padding-block: 2.2rem; border-bottom: 1px solid var(--line); }
+    .layer .number { color: var(--muted); }
+    .layer p { max-width: 760px; margin-bottom: .8rem; color: var(--muted); }
+    .layer .tags { margin-bottom: 0; color: var(--ink); font: .65rem/1.6 var(--mono); letter-spacing: .035em; text-transform: uppercase; }
 
-    .offers { background: var(--white); }
-    .offer-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-    .offer-card { min-height: 340px; display: flex; flex-direction: column; padding: clamp(1.5rem, 3vw, 2.5rem); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .offer-card .number { margin-bottom: auto; color: var(--muted); }
-    .offer-card p { max-width: 570px; color: var(--muted); }
-    .offer-card .examples { margin-bottom: 0; color: var(--ink); font: .68rem/1.6 var(--mono); letter-spacing: .03em; text-transform: uppercase; }
+    .offers { background: var(--ink); color: var(--white); }
+    .offers .kicker { color: #9b9b94; }
+    .offer-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--dark-line); border-left: 1px solid var(--dark-line); }
+    .offer-card { min-width: 0; display: flex; flex-direction: column; padding: clamp(1.1rem, 2.2vw, 2rem); border-right: 1px solid var(--dark-line); border-bottom: 1px solid var(--dark-line); }
+    .offer-card img { width: 100%; aspect-ratio: 1; margin-bottom: 1.5rem; object-fit: contain; }
+    .offer-card .number { margin-bottom: 1.25rem; color: var(--lime); }
+    .offer-card p { color: #b9b9b2; font-size: .9rem; }
+    .offer-card .examples { margin-top: auto; margin-bottom: 0; padding-top: 1rem; color: var(--white); font: .62rem/1.6 var(--mono); letter-spacing: .035em; text-transform: uppercase; }
 
-    .method-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(3rem, 8vw, 8rem); }
-    .method-copy h2 { margin: 1.5rem 0 2rem; }
-    .method-copy p { max-width: 650px; color: var(--muted); }
-    .method-copy .lead { margin-bottom: 2rem; color: var(--ink); }
+    .method-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(3rem, 8vw, 8rem); }
+    .method-copy h2 { margin: 1.4rem 0 1.8rem; }
+    .method-copy p { max-width: 640px; color: var(--muted); }
+    .method-copy .lead { margin-bottom: 1.5rem; color: var(--ink); }
+    .method-visual { max-width: 520px; margin: 2rem auto 0; }
     .method-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
-    .method-list li { display: grid; grid-template-columns: 60px 1fr; gap: 1rem; padding: 1.35rem 0; border-bottom: 1px solid var(--line); }
-    .method-list strong { display: block; margin-bottom: .25rem; }
-    .method-list span:last-child { color: var(--muted); font-size: .95rem; }
+    .method-list li { display: grid; grid-template-columns: 54px 1fr; gap: 1rem; padding: 1.35rem 0; border-bottom: 1px solid var(--line); }
+    .method-list strong { display: block; margin-bottom: .3rem; }
+    .method-list span:last-child { color: var(--muted); font-size: .92rem; }
 
-    .principles { background: #d9d6cc; }
+    .principles { background: #dfdcd3; }
     .principle-grid { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid #aaa79e; }
-    .principle { min-height: 300px; padding: 1.5rem 1.25rem; border-right: 1px solid #aaa79e; }
+    .principle { min-height: 290px; padding: 1.5rem 1.25rem; border-right: 1px solid #aaa79e; }
     .principle:last-child { border-right: 0; }
-    .principle .number { display: block; margin-bottom: 4rem; }
-    .principle p { margin-bottom: 0; color: #55534d; font-size: .9rem; }
-    .principle-line { margin: clamp(3rem, 6vw, 5rem) 0 0; padding: 1.25rem 0; border-block: 1px solid #aaa79e; font: 700 clamp(.9rem, 2vw, 1.2rem)/1.4 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+    .principle .number { display: block; margin-bottom: 3.5rem; }
+    .principle p { margin-bottom: 0; color: #55534d; font-size: .88rem; }
+    .principle-line { margin: clamp(3rem, 6vw, 5rem) 0 0; padding: 1.3rem 0; border-block: 1px solid #aaa79e; font: 700 clamp(.88rem, 2vw, 1.15rem)/1.4 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
 
     .company { background: var(--white); }
     .company-grid { display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(3rem, 8vw, 8rem); }
-    .company-grid h2 { font-size: clamp(2.2rem, 4.2vw, 4rem); }
-    .company-copy { max-width: 880px; }
-    .company-copy > p:first-of-type { font-size: 1.15rem; }
-    .manifesto { margin-top: clamp(5rem, 10vw, 9rem); padding-top: clamp(3rem, 6vw, 6rem); border-top: 1px solid var(--line); }
-    .manifesto .lead { margin-bottom: 0; }
-    .manifesto-lines { margin: 2.5rem 0 0; font-family: var(--serif); font-size: clamp(2rem, 5vw, 4.6rem); letter-spacing: -.05em; line-height: 1; }
-    .manifesto-close { max-width: 760px; margin: 2.5rem 0 0; color: var(--muted); }
+    .company-grid h2 { font-size: clamp(2.5rem, 4.5vw, 4.5rem); }
+    .company-copy { max-width: 850px; }
+    .company-copy > p:first-of-type { font-size: 1.12rem; }
+    .state-grid { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(4rem, 8vw, 8rem); }
+    .state-card { min-width: 0; margin: 0; border-bottom: 1px solid var(--line); }
+    .state-card img { width: 100%; aspect-ratio: 1; object-fit: contain; }
+    .state-card figcaption { display: flex; align-items: center; gap: 1rem; margin-top: -1rem; padding: 0 1rem 1rem; font: 700 .73rem/1.4 var(--mono); }
+    .state-card figcaption::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+    .manifesto { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(3rem, 8vw, 8rem); margin-top: clamp(5rem, 10vw, 9rem); padding-top: clamp(3rem, 6vw, 6rem); border-top: 1px solid var(--line); }
+    .manifesto .lead { margin: 1.5rem 0 0; }
+    .manifesto-lines { margin: 0; font: 400 clamp(2.8rem, 6vw, 6rem)/.92 var(--serif); letter-spacing: -.055em; }
+    .manifesto-close { max-width: 690px; margin: 2.5rem 0 0; color: var(--muted); }
 
     .contact { background: var(--lime); }
     .contact-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(3rem, 8vw, 8rem); align-items: end; }
     .contact h2 { margin: 1rem 0 2rem; }
     .contact .button { background: var(--ink); }
+    .contact .button:hover { background: var(--white); }
     .contact-note { max-width: 500px; }
     .contact-note ul { margin-bottom: 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
-    .contact-note li { padding: .7rem 0; border-bottom: 1px solid var(--ink); font-size: .88rem; }
+    .contact-note li { padding: .75rem 0; border-bottom: 1px solid var(--ink); font-size: .88rem; }
 
     footer { padding-block: 2.5rem; background: var(--ink); color: var(--white); }
-    .footer-grid { display: grid; grid-template-columns: 200px 1fr auto; gap: 2rem; align-items: end; }
+    .footer-grid { display: grid; grid-template-columns: 220px 1fr auto; gap: 2rem; align-items: end; }
     .footer-brand img { width: 165px; filter: invert(1); }
-    .footer-brand p { margin: 1rem 0 0; color: #aaa89f; font-size: .75rem; }
+    .footer-brand p { margin: 1rem 0 0; color: #aaa89f; font-size: .72rem; }
     .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
-    .footer-nav a { color: #c7c5bd; font-size: .75rem; text-decoration: none; }
-    .footer-nav a:hover { color: var(--lime); text-decoration: underline; }
+    .footer-nav a { min-height: 44px; display: inline-flex; align-items: center; color: #c7c5bd; font-size: .72rem; text-decoration: none; }
     .footer-end { text-align: right; }
-    .footer-end p { margin: 0; color: #aaa89f; font: .65rem/1.5 var(--mono); text-transform: uppercase; }
+    .footer-end p { margin: 0; color: #aaa89f; font: .63rem/1.5 var(--mono); text-transform: uppercase; }
 
     @media (max-width: 1100px) {
+      .nav-list li:nth-child(2), .nav-list li:nth-child(4) { display: none; }
+      .offer-grid { grid-template-columns: repeat(2, 1fr); }
       .principle-grid { grid-template-columns: repeat(3, 1fr); }
       .principle { border-bottom: 1px solid #aaa79e; }
       .principle:nth-child(3n) { border-right: 0; }
     }
 
     @media (max-width: 900px) {
-      .nav { grid-template-columns: 140px 1fr auto auto; gap: .75rem; }
-      .brand { width: 132px; }
-      .nav-list li:nth-child(2), .nav-list li:nth-child(4) { display: none; }
+      .nav { grid-template-columns: 135px 1fr auto auto; gap: .65rem; }
+      .brand { width: 130px; }
       .hero-grid, .contact-grid { grid-template-columns: 1fr; }
       .hero-copy { min-height: auto; padding-right: 0; }
-      .hero-mark { min-height: 390px; }
+      .hero-visual { min-height: auto; padding-block: 1rem 4rem; }
+      .hero-visual img { width: 110%; margin-left: -5%; }
       .hero-proof { margin-top: 3rem; }
+      .state-line { bottom: 1.5rem; left: 0; }
+      .architecture-visual { grid-template-columns: 1fr 250px; }
       .principle-grid { grid-template-columns: repeat(2, 1fr); }
       .principle:nth-child(3n) { border-right: 1px solid #aaa79e; }
       .principle:nth-child(2n) { border-right: 0; }
@@ -164,27 +183,35 @@
       .footer-nav { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; }
     }
 
-    @media (max-width: 620px) {
-      .site-header { position: static; }
-      .nav { min-height: 66px; grid-template-columns: 1fr auto auto; }
+    @media (max-width: 680px) {
+      .site-header { position: static; backdrop-filter: none; }
+      .nav { min-height: 68px; grid-template-columns: 1fr auto auto; }
       .nav-list { display: none; }
-      .nav-cta { min-height: 40px; padding-inline: .6rem; font-size: .62rem; }
+      .brand { width: 112px; }
+      .nav-cta { max-width: 92px; min-height: 44px; padding-inline: .5rem; font-size: .56rem; }
+      .lang { gap: 0; }
+      .lang-btn { min-width: 42px; }
       .hero { min-height: 0; }
-      .hero-copy { padding-block: 3.5rem; }
-      .eyebrow { margin-bottom: 3rem; }
-      h1 { max-width: 100%; font-size: clamp(2.7rem, 13vw, 4.5rem); overflow-wrap: break-word; }
+      .hero-copy { padding-block: 3.5rem 2rem; }
+      .eyebrow { margin-bottom: 2.8rem; }
+      h1 { max-width: 100%; font-size: clamp(2.7rem, 13.2vw, 4.3rem); overflow-wrap: break-word; }
       .hero-actions .button { width: 100%; min-width: 0; white-space: normal; }
-      .hero-mark { min-height: 320px; }
-      .section-head, .method-grid, .company-grid { grid-template-columns: 1fr; }
+      .hero-visual { padding-bottom: 3.5rem; }
+      .hero-visual img { width: 125%; margin-left: -12%; }
+      .state-line { font-size: .55rem; }
+      .section-head, .architecture-visual, .method-grid, .company-grid, .manifesto { grid-template-columns: 1fr; }
       .section-head { gap: 1.25rem; }
-      .offer-grid { grid-template-columns: 1fr; }
-      .offer-card { min-height: 280px; }
-      .layer { grid-template-columns: 48px 1fr; }
+      .architecture-key { margin-top: -1rem; }
+      .layer { grid-template-columns: 46px 1fr; }
       .layer > div { grid-column: 2; }
+      .offer-grid { grid-template-columns: 1fr; }
+      .offer-card img { max-width: 330px; margin-inline: auto; }
       .principle-grid { grid-template-columns: 1fr; }
       .principle { min-height: 0; border-right: 0; }
       .principle:nth-child(3n) { border-right: 0; }
       .principle .number { margin-bottom: 2rem; }
+      .state-grid { grid-template-columns: repeat(2, 1fr); }
+      .manifesto-lines { grid-row: 1; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-nav { grid-column: auto; grid-row: auto; }
       .footer-end { text-align: left; }
@@ -192,6 +219,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
+      .nav-cta, .button { transition: none; }
     }
   </style>
 </head>
@@ -229,11 +257,13 @@
           </div>
           <p class="hero-proof" data-i18n="hero.proof">Products / Systems / Pilots / Consulting</p>
         </div>
-        <div class="hero-mark" aria-hidden="true">
-          <div class="state-line"><span data-i18n="hero.state1">S0 / Initial state</span><span data-i18n="hero.state2">A problem worth solving</span></div>
-          <img src="assets/szero-mark.svg" alt="">
-          <div class="state-line"><span data-i18n="hero.state3">S… / Evaluated system</span><span data-i18n="hero.state4">Decisions that hold up</span></div>
-        </div>
+        <figure class="hero-visual" aria-hidden="true">
+          <img src="assets/hero-system.webp" width="1672" height="941" alt="" fetchpriority="high">
+          <div class="state-line">
+            <p><span data-i18n="hero.state1">S0 / Initial state</span><span data-i18n="hero.state2">A problem worth solving</span></p>
+            <p><span data-i18n="hero.state3">S… / Evaluated system</span><span data-i18n="hero.state4">Decisions that hold up</span></p>
+          </div>
+        </figure>
       </div>
     </section>
 
@@ -246,6 +276,15 @@
             <p class="lead" data-i18n="arch.lead">S0 is the initial state: a real problem, a real environment, and nothing built for it yet. Each state after it adds capability that has already been tested against reality.</p>
             <p class="progression"><span>S0</span><span class="arrow">&#8594;</span><span>S1</span><span class="arrow">&#8594;</span><span>S2</span><span class="arrow">&#8594;</span><span>S3</span><span class="arrow">&#8594;</span><span>&#8230;</span></p>
           </div>
+        </div>
+        <div class="architecture-visual" aria-hidden="true">
+          <img src="assets/architecture-layers.webp" width="1279" height="853" alt="" loading="lazy">
+          <ul class="architecture-key">
+            <li><i></i><span data-i18n="arch.s0.title">Frame the problem</span></li>
+            <li><i></i><span data-i18n="arch.s1.title">Choose the method</span></li>
+            <li><i></i><span data-i18n="arch.s2.title">Connect it to real systems</span></li>
+            <li><i></i><span data-i18n="arch.s3.title">Evaluate against reality</span></li>
+          </ul>
         </div>
         <div class="layers">
           <article class="layer">
@@ -300,6 +339,7 @@
         </div>
         <div class="offer-grid">
           <article class="offer-card">
+            <img src="assets/capability-decide.webp" width="620" height="620" alt="" loading="lazy">
             <span class="number" data-i18n="offers.o1.label">01 / Decide</span>
             <div>
               <h3 data-i18n="offers.o1.title">Decision and optimization systems</h3>
@@ -308,6 +348,7 @@
             </div>
           </article>
           <article class="offer-card">
+            <img src="assets/capability-operate.webp" width="620" height="620" alt="" loading="lazy">
             <span class="number" data-i18n="offers.o2.label">02 / Operate</span>
             <div>
               <h3 data-i18n="offers.o2.title">AI and autonomous operations systems</h3>
@@ -316,6 +357,7 @@
             </div>
           </article>
           <article class="offer-card">
+            <img src="assets/capability-discover.webp" width="620" height="620" alt="" loading="lazy">
             <span class="number" data-i18n="offers.o3.label">03 / Discover</span>
             <div>
               <h3 data-i18n="offers.o3.title">Engineering and discovery systems</h3>
@@ -324,6 +366,7 @@
             </div>
           </article>
           <article class="offer-card">
+            <img src="assets/capability-advise.webp" width="620" height="620" alt="" loading="lazy">
             <span class="number" data-i18n="offers.o4.label">04 / Advise</span>
             <div>
               <h3 data-i18n="offers.o4.title">Applied AI consulting</h3>
@@ -342,6 +385,7 @@
           <h2 id="why-title" data-i18n="why.title">Engineered around your objective.</h2>
           <p class="lead" data-i18n="why.lead">We start from the decision, the environment it lives in, the constraints that bind it, and the outcome worth improving. That analysis chooses the methods — usually several, working together.</p>
           <p data-i18n="why.p">We are engineers and applied researchers, and we build the whole system: the method that decides, the software that acts, the evaluation that earns trust. We stay accountable to the outcome it produces.</p>
+          <img class="method-visual" src="assets/methods-network.webp" width="760" height="760" alt="" loading="lazy">
         </div>
         <ol class="method-list">
           <li><span class="number">01</span><span><strong data-i18n="why.m1.title">Optimization and control</strong><span data-i18n="why.m1.p">Constrained decisions, planning, allocation, scheduling, and real-time operational performance.</span></span></li>
@@ -401,12 +445,20 @@
             <p data-i18n="company.p2">Our work exists to widen what a person or a team can direct — more decisions handled well, more ground understood, and more of what is learned kept for the next time.</p>
           </div>
         </div>
+        <div class="state-grid" aria-hidden="true">
+          <figure class="state-card"><img src="assets/state-s0.webp" width="520" height="520" alt="" loading="lazy"><figcaption>S0</figcaption></figure>
+          <figure class="state-card"><img src="assets/state-s1.webp" width="520" height="520" alt="" loading="lazy"><figcaption>S1</figcaption></figure>
+          <figure class="state-card"><img src="assets/state-s2.webp" width="520" height="520" alt="" loading="lazy"><figcaption>S2</figcaption></figure>
+          <figure class="state-card"><img src="assets/state-s3.webp" width="520" height="520" alt="" loading="lazy"><figcaption>S3</figcaption></figure>
+        </div>
         <div class="manifesto">
-          <p class="kicker" data-i18n="manifesto.kicker">Manifesto / From S0</p>
-          <p class="lead" data-i18n="manifesto.lead">Every capable system was once a blank state. S0 is a problem worth solving with nothing built for it yet. Everything after S0 is earned: a method chosen, a system connected, an evaluation passed, an outcome learned from.</p>
+          <div>
+            <p class="kicker" data-i18n="manifesto.kicker">Manifesto / From S0</p>
+            <p class="lead" data-i18n="manifesto.lead">Every capable system was once a blank state. S0 is a problem worth solving with nothing built for it yet. Everything after S0 is earned: a method chosen, a system connected, an evaluation passed, an outcome learned from.</p>
+            <p class="progression"><span>S0</span><span class="arrow">&#8594;</span><span>S1</span><span class="arrow">&#8594;</span><span>S2</span><span class="arrow">&#8594;</span><span>S3</span><span class="arrow">&#8594;</span><span>&#8230;</span></p>
+            <p class="manifesto-close" data-i18n="manifesto.close">Human intent sets the direction. The system carries it further than one person could reach alone, and gives back what it learned as knowledge the whole team can use.</p>
+          </div>
           <p class="manifesto-lines" data-i18n="manifesto.lines">Frame.<br>Decide.<br>Act.<br>Verify.<br>Learn.</p>
-          <p class="progression"><span>S0</span><span class="arrow">&#8594;</span><span>S1</span><span class="arrow">&#8594;</span><span>S2</span><span class="arrow">&#8594;</span><span>S3</span><span class="arrow">&#8594;</span><span>&#8230;</span></p>
-          <p class="manifesto-close" data-i18n="manifesto.close">Human intent sets the direction. The system carries it further than one person could reach alone, and gives back what it learned as knowledge the whole team can use.</p>
         </div>
       </div>
     </section>
