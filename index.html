@@ -107,11 +107,13 @@
     .offer-card p { color: #b9b9b2; font-size: .9rem; }
     .offer-card .examples { margin-top: auto; margin-bottom: 0; padding-top: 1rem; color: var(--white); font: .62rem/1.6 var(--mono); letter-spacing: .035em; text-transform: uppercase; }
 
-    .method-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(3rem, 8vw, 8rem); }
-    .method-copy h2 { margin: 1.4rem 0 1.8rem; }
+    .method-intro, .method-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(3rem, 8vw, 8rem); }
+    .method-intro { margin-bottom: clamp(3rem, 6vw, 6rem); }
+    .method-heading h2 { margin-top: 1.4rem; }
     .method-copy p { max-width: 640px; color: var(--muted); }
     .method-copy .lead { margin-bottom: 1.5rem; color: var(--ink); }
-    .method-visual { max-width: 520px; margin: 2rem auto 0; }
+    .method-grid { align-items: center; }
+    .method-visual { width: min(100%, 520px); justify-self: center; }
     .method-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
     .method-list li { display: grid; grid-template-columns: 54px 1fr; gap: 1rem; padding: 1.35rem 0; border-bottom: 1px solid var(--line); }
     .method-list strong { display: block; margin-bottom: .3rem; }
@@ -199,7 +201,7 @@
       .hero-visual { padding-bottom: 3.5rem; }
       .hero-visual img { width: 125%; margin-left: -12%; }
       .state-line { font-size: .55rem; }
-      .section-head, .architecture-visual, .method-grid, .company-grid, .manifesto { grid-template-columns: 1fr; }
+      .section-head, .architecture-visual, .method-intro, .method-grid, .company-grid, .manifesto { grid-template-columns: 1fr; }
       .section-head { gap: 1.25rem; }
       .architecture-key { margin-top: -1rem; }
       .layer { grid-template-columns: 46px 1fr; }
@@ -379,20 +381,26 @@
     </section>
 
     <section class="section" id="why" aria-labelledby="why-title">
-      <div class="shell method-grid">
-        <div class="method-copy">
-          <p class="kicker" data-i18n="why.kicker">Why Szero</p>
-          <h2 id="why-title" data-i18n="why.title">Engineered around your objective.</h2>
-          <p class="lead" data-i18n="why.lead">We start from the decision, the environment it lives in, the constraints that bind it, and the outcome worth improving. That analysis chooses the methods — usually several, working together.</p>
-          <p data-i18n="why.p">We are engineers and applied researchers, and we build the whole system: the method that decides, the software that acts, the evaluation that earns trust. We stay accountable to the outcome it produces.</p>
-          <img class="method-visual" src="assets/methods-network.webp" width="760" height="760" alt="" loading="lazy">
+      <div class="shell">
+        <div class="method-intro">
+          <div class="method-heading">
+            <p class="kicker" data-i18n="why.kicker">Why Szero</p>
+            <h2 id="why-title" data-i18n="why.title">Engineered around your objective.</h2>
+          </div>
+          <div class="method-copy">
+            <p class="lead" data-i18n="why.lead">We start from the decision, the environment it lives in, the constraints that bind it, and the outcome worth improving. That analysis chooses the methods — usually several, working together.</p>
+            <p data-i18n="why.p">We are engineers and applied researchers, and we build the whole system: the method that decides, the software that acts, the evaluation that earns trust. We stay accountable to the outcome it produces.</p>
+          </div>
         </div>
-        <ol class="method-list">
-          <li><span class="number">01</span><span><strong data-i18n="why.m1.title">Optimization and control</strong><span data-i18n="why.m1.p">Constrained decisions, planning, allocation, scheduling, and real-time operational performance.</span></span></li>
-          <li><span class="number">02</span><span><strong data-i18n="why.m2.title">Reinforcement learning and adaptive policies</strong><span data-i18n="why.m2.p">Where actions produce measurable feedback and a policy can improve through experience.</span></span></li>
-          <li><span class="number">03</span><span><strong data-i18n="why.m3.title">Simulation and specialized models</strong><span data-i18n="why.m3.p">Digital twins, scenario testing, and models that carry the structure of a specific domain.</span></span></li>
-          <li><span class="number">04</span><span><strong data-i18n="why.m4.title">Foundation models, agents, and software engineering</strong><span data-i18n="why.m4.p">Language and multimodal reasoning, tool use, workflows, integrations, interfaces, and dependable execution.</span></span></li>
-        </ol>
+        <div class="method-grid">
+          <img class="method-visual" src="assets/methods-network.webp" width="760" height="760" alt="" loading="lazy">
+          <ol class="method-list">
+            <li><span class="number">01</span><span><strong data-i18n="why.m1.title">Optimization and control</strong><span data-i18n="why.m1.p">Constrained decisions, planning, allocation, scheduling, and real-time operational performance.</span></span></li>
+            <li><span class="number">02</span><span><strong data-i18n="why.m2.title">Reinforcement learning and adaptive policies</strong><span data-i18n="why.m2.p">Where actions produce measurable feedback and a policy can improve through experience.</span></span></li>
+            <li><span class="number">03</span><span><strong data-i18n="why.m3.title">Simulation and specialized models</strong><span data-i18n="why.m3.p">Digital twins, scenario testing, and models that carry the structure of a specific domain.</span></span></li>
+            <li><span class="number">04</span><span><strong data-i18n="why.m4.title">Foundation models, agents, and software engineering</strong><span data-i18n="why.m4.p">Language and multimodal reasoning, tool use, workflows, integrations, interfaces, and dependable execution.</span></span></li>
+          </ol>
+        </div>
       </div>
     </section>
 
