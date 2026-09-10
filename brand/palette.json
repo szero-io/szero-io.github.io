@@ -1,0 +1,24 @@
+{
+  "name": "S0 chart palette",
+  "version": 1,
+  "color_space": "sRGB",
+  "brand": {
+    "ink": "#0B0C0A",
+    "paper": "#F2F0E9",
+    "white": "#FAF9F4",
+    "muted": "#6A6861",
+    "line": "#D2CFC5",
+    "dark_line": "#33342F",
+    "lime": "#D7FF18"
+  },
+  "categorical": {
+    "blue": "#3B6FB6",
+    "orange": "#B8741A",
+    "green": "#26826C",
+    "purple": "#8064B4",
+    "red": "#C4515C",
+    "cyan": "#247F9E"
+  },
+  "default_order": ["blue", "orange", "green", "purple", "red", "cyan"],
+  "chart_backgrounds": ["paper", "white"]
+}
