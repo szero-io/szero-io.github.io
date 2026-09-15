@@ -1,5 +1,15 @@
 # Website typography
 
+## Candidate Status
+
+This document describes the preserved full-page all-serif candidate, not an
+approved visual direction. The separate [private mixed preview](../preview/mixed/README.md)
+evaluates Source Serif 4 in the Hero and Source Sans 3 in its header, body,
+controls, and one dark card. It does not change `index.html`, authorize
+publication, or extend the new typography to the whole site.
+
+## Full-Page Reference
+
 The bilingual website owns its typography in the `:root` and shared rules in
 [`index.html`](../index.html). It has no external fonts, dependencies, or build
 step. Keep text sizes on this scale instead of adding local near-duplicates.
