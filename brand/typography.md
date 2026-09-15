@@ -20,20 +20,26 @@ changes size at the existing 680px breakpoint. Other roles keep their token.
 
 ## Families and hierarchy
 
-- `--sans`: Arial, Helvetica, sans-serif for interface text and the Hero.
-- `--serif`: Georgia, "Times New Roman", serif for section headings and the
-  manifesto. Preserve their intentional 400 weight.
+- `--serif`: Georgia, "Times New Roman", serif for all website text, including
+  the Hero, body, navigation, controls, and metadata. Section headings and the
+  manifesto preserve their intentional 400 weight. The wordmark and artwork
+  remain image assets.
+- The stack uses locally available fonts; actual glyphs and wrapping depend on
+  the platform's installed serif fonts. No web font download is required.
 - Body text uses 400. Controls, labels, and component headings use 600. The Hero
   uses 700. The existing bold skip link remains 700.
 - Hero leading is 1.15. Its introduction is 1.55. Body and section introductions
   use 1.5. All `.button`, `.nav-cta`, and `.lang-btn` controls share
-  `600 1rem/1.2 var(--sans)`.
+  `600 1rem/1.2 var(--serif)`.
 - Reserve 14px for auxiliary information. Ordinary prose must remain at least
   16px. No current component needs monospace.
 
 ## Containment
 
 Keep the existing section order, colors, assets, grid breakpoints, and spacing.
+The two-column Hero keeps a 390px minimum text track so long serif words in
+either language fit without splitting at narrow desktop widths. The mobile
+heading retains its emergency word-wrap safeguard.
 The Hero clips its deliberately oversized artwork at the section boundary so it
 cannot expand the mobile viewport. Its right grid track can shrink without
 forcing captions past the viewport. At mobile widths, captions follow the image
