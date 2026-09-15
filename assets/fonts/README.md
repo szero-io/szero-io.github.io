@@ -1,6 +1,6 @@
-# Private Preview Font Assets
+# Website Font Assets
 
-These assets are intended only for this project's private mixed-typography preview, not public deployment. This is project scope, not an additional restriction on the fonts' SIL Open Font License (OFL) 1.1 permissions. No system font installation is required or performed.
+These assets are served with the production website: Source Serif 4 for editorial headings and the manifesto display, and Source Sans 3 for body and functional text. No system font installation is required.
 
 Both fonts are official Adobe variable upright fonts, downloaded directly from the pinned commits below on 2026-09-15. The WOFF2 binaries are unmodified upstream files: no subsetting, conversion, recompression, instancing, or internal name changes. Only the local filenames differ. Each accompanying complete upstream `LICENSE.md` was downloaded verbatim, without text or line-ending edits.
 
@@ -78,4 +78,4 @@ git hash-object --no-filters source-serif-4-roman.woff2 source-sans-3-upright.wo
 
 ## License Retention
 
-Both fonts are licensed under SIL Open Font License 1.1 (26 February 2007). Keep their respective full license files and copyright notices with any permitted redistribution. The private-preview scope above does not replace or amend the OFL. No public deployment, system installation, or changes to application code are part of this asset bundle.
+Both fonts are licensed under SIL Open Font License 1.1 (26 February 2007). Keep their respective full license files and copyright notices with any permitted redistribution.
