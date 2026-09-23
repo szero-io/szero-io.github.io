@@ -12,7 +12,7 @@ There is no build step or package dependency.
 - `brand/README.md` and `brand/palette.json` define the chart palette.
 - `CNAME` identifies the production domain for GitHub Pages.
 
-The page order is Hero, How we work, What we build, Why Szero, Principles, Company, Founders, and Contact.
+The page order is Hero, How we work, What we build, Why Szero, Principles, Company, Who we are, and Contact.
 The footer links to each named section. Contact links open the visitor's email application.
 
 ```mermaid
@@ -94,11 +94,12 @@ The supplied filenames establish the name-to-photo mapping:
 
 Bruno's WebP preserves the full source frame after proportional resizing to 640 pixels wide.
 The other three WebP assets use tighter 4:5 crops from the supplied originals, with Bruno as the face-size reference.
+Bryan's asset uses the replacement `foto_bryan.png` supplied in `foto_bryan.png.zip`. Its crop is specific to that photograph.
 Crop coordinates use source pixels as `(left, top, right, bottom)`, with exclusive right and bottom edges:
 
 | Name | Source dimensions | Crop coordinates |
 | --- | --- | --- |
-| Bryan de Oliveira | 1122 × 1402 | `(190, 45, 910, 945)` |
+| Bryan de Oliveira | 1122 × 1402 | `(170, 90, 930, 1040)` |
 | Luana Martins | 1086 × 1448 | `(85, 65, 805, 965)` |
 | Murilo Lopes | 1122 × 1402 | `(196, 85, 884, 945)` |
 
