@@ -169,9 +169,10 @@
     .founder-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.25rem, 2vw, 2rem); }
     .founder-card { min-width: 0; margin: 0; }
     .founder-card img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
-    .founder-card figcaption { padding-block: 1rem; border-bottom: 1px solid var(--line); font: 600 var(--font-card)/1.2 var(--sans); }
-    .founder-link { display: table; margin-top: .25rem; padding-block: .5rem; color: var(--muted); font: 400 var(--font-aux)/1.4 var(--sans); text-underline-offset: .2em; }
-    .founder-link:hover, .founder-link:focus-visible { color: var(--ink); }
+    .founder-card figcaption { display: flex; align-items: center; gap: .5em; padding-block: 1rem; border-bottom: 1px solid var(--line); font: 600 var(--font-card)/1.2 var(--sans); }
+    .founder-card svg { width: 1em; height: 1em; flex-shrink: 0; fill: currentColor; }
+    .founder-link { display: block; min-width: 0; text-decoration: none; text-underline-offset: .2em; }
+    .founder-link:hover span, .founder-link:focus-visible span { text-decoration: underline; }
 
     .contact { background: var(--lime); }
     .contact-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(3rem, 8vw, 8rem); align-items: end; }
@@ -519,30 +520,38 @@
           <h2 id="founders-title" data-i18n="founders.title">Founders</h2>
         </div>
         <div class="founder-grid">
-          <figure class="founder-card">
-            <img src="assets/founder-luana.webp" width="640" height="800" alt="Luana Martins" loading="lazy">
-            <figcaption>Luana Martins
-              <a class="founder-link" href="https://www.linkedin.com/in/luanagbmartins/" aria-label="Luana Martins — LinkedIn">LinkedIn</a>
-            </figcaption>
-          </figure>
-          <figure class="founder-card">
-            <img src="assets/founder-bryan.webp" width="640" height="800" alt="Bryan de Oliveira" loading="lazy">
-            <figcaption>Bryan de Oliveira
-              <a class="founder-link" href="https://www.linkedin.com/in/bryanoliveira/" aria-label="Bryan de Oliveira — LinkedIn">LinkedIn</a>
-            </figcaption>
-          </figure>
-          <figure class="founder-card">
-            <img src="assets/founder-bruno.webp" width="640" height="640" alt="Bruno Brandão" loading="lazy">
-            <figcaption>Bruno Brandão
-              <a class="founder-link" href="https://www.linkedin.com/in/bruno-bsm/" aria-label="Bruno Brandão — LinkedIn">LinkedIn</a>
-            </figcaption>
-          </figure>
-          <figure class="founder-card">
-            <img src="assets/founder-murilo.webp" width="640" height="800" alt="Murilo Lopes" loading="lazy">
-            <figcaption>Murilo Lopes
-              <a class="founder-link" href="https://www.linkedin.com/in/murilo-lopes-da-luz-b3749728/" aria-label="Murilo Lopes — LinkedIn">LinkedIn</a>
-            </figcaption>
-          </figure>
+          <a class="founder-link" href="https://www.linkedin.com/in/luanagbmartins/" target="_blank" rel="noopener noreferrer" aria-label="Luana Martins — LinkedIn">
+            <figure class="founder-card">
+              <img src="assets/founder-luana.webp" width="640" height="800" alt="Luana Martins" loading="lazy">
+              <figcaption><span>Luana Martins</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.74 1.36-1.52 2.79-1.52 2.98 0 3.58 1.96 3.58 4.5v5.27Z"/></svg>
+              </figcaption>
+            </figure>
+          </a>
+          <a class="founder-link" href="https://www.linkedin.com/in/bryanoliveira/" target="_blank" rel="noopener noreferrer" aria-label="Bryan de Oliveira — LinkedIn">
+            <figure class="founder-card">
+              <img src="assets/founder-bryan.webp" width="640" height="800" alt="Bryan de Oliveira" loading="lazy">
+              <figcaption><span>Bryan de Oliveira</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.74 1.36-1.52 2.79-1.52 2.98 0 3.58 1.96 3.58 4.5v5.27Z"/></svg>
+              </figcaption>
+            </figure>
+          </a>
+          <a class="founder-link" href="https://www.linkedin.com/in/bruno-bsm/" target="_blank" rel="noopener noreferrer" aria-label="Bruno Brandão — LinkedIn">
+            <figure class="founder-card">
+              <img src="assets/founder-bruno.webp" width="640" height="640" alt="Bruno Brandão" loading="lazy">
+              <figcaption><span>Bruno Brandão</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.74 1.36-1.52 2.79-1.52 2.98 0 3.58 1.96 3.58 4.5v5.27Z"/></svg>
+              </figcaption>
+            </figure>
+          </a>
+          <a class="founder-link" href="https://www.linkedin.com/in/murilo-lopes-da-luz-b3749728/" target="_blank" rel="noopener noreferrer" aria-label="Murilo Lopes — LinkedIn">
+            <figure class="founder-card">
+              <img src="assets/founder-murilo.webp" width="640" height="800" alt="Murilo Lopes" loading="lazy">
+              <figcaption><span>Murilo Lopes</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.74 1.36-1.52 2.79-1.52 2.98 0 3.58 1.96 3.58 4.5v5.27Z"/></svg>
+              </figcaption>
+            </figure>
+          </a>
         </div>
       </div>
     </section>

@@ -49,8 +49,11 @@ English content lives in HTML and remains available without JavaScript.
 The inline script shuffles complete founder cards once per page load with Fisher–Yates and `Math.random()`.
 An order can repeat by chance. Language changes preserve the current card order.
 Without JavaScript, all four cards remain visible in markup order.
-Each caption includes a LinkedIn link. Links open in the same tab and use the founder's name in their accessible label.
-The names and LinkedIn label are the same in both languages.
+Each card has one LinkedIn link around its photo, name, and logo, with one keyboard focus stop.
+The inline logo appears to the right of the name and uses the site's ink color.
+Links open in a new tab with `target="_blank"` and `rel="noopener noreferrer"` to isolate the opener and omit the referrer.
+Each accessible link label includes the founder's name and LinkedIn. The decorative logo is hidden from assistive technology.
+The names and accessible link labels are the same in both languages. Links also work without JavaScript.
 
 The language selector stores `en` or `pt-BR` under `szero-lang` in local storage.
 Only `pt-BR` selects Portuguese on load. Any other stored value selects English.
@@ -122,6 +125,8 @@ Follow the viewport and typography checks in `brand/typography.md`.
 - Check all four name-to-photo pairs, loaded images, and the accessible section heading.
 - Compare face sizes with Bruno's unchanged portrait. Check the three crop derivatives against their original photographs.
 - Check each LinkedIn destination, accessible name, keyboard focus, and association after shuffle and language changes.
+- Activate each photo, name, and logo. Confirm a new tab opens with the exact profile URL and no opener.
+- Check that each logo stays to the right of its name without overlap or clipping at narrow widths.
 - Check EN/PT selection, translated footer links, reload persistence, and blocked local storage.
 - Check that reloads allow different orders without duplicates or missing cards.
 - Check that language changes preserve card order and JavaScript-disabled pages show all four founders.
