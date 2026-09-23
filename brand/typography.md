@@ -13,7 +13,7 @@ Keep text sizes on this scale instead of adding local near-duplicates.
 | `--font-body` | 1rem | 16 | Body text, footer links, all buttons, Hero introduction |
 | `--font-emphasis` | 1.125rem | 18 | Company introduction and principle statement |
 | `--font-subtitle` | 1.25rem | 20 | Section introductions (`.lead`) |
-| `--font-card` | 1.5rem | 24 | Component headings and state progression |
+| `--font-card` | 1.5rem | 24 | Component headings, founder names, and state progression |
 | `--font-section` | 3rem | 48 | Section headings |
 | `--font-display` | 3rem | 48 | Manifesto display |
 | `--font-hero` | 4rem | 64 | Hero heading |

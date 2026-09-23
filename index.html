@@ -166,6 +166,11 @@
     .manifesto-lines { margin: 0; font: 400 var(--font-display)/1.15 var(--serif); }
     .manifesto-close { max-width: 690px; margin: 2.5rem 0 0; color: var(--muted); }
 
+    .founder-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.25rem, 2vw, 2rem); }
+    .founder-card { min-width: 0; margin: 0; }
+    .founder-card img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+    .founder-card figcaption { padding-block: 1rem; border-bottom: 1px solid var(--line); font: 600 var(--font-card)/1.2 var(--sans); }
+
     .contact { background: var(--lime); }
     .contact-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(3rem, 8vw, 8rem); align-items: end; }
     .contact h2 { margin: 1rem 0 2rem; }
@@ -196,6 +201,7 @@
       .nav { grid-template-columns: 135px 1fr auto auto; gap: .65rem; }
       .nav-list { flex-wrap: wrap; row-gap: 0; }
       .brand { width: 130px; }
+      .founder-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .hero-grid, .contact-grid { grid-template-columns: 1fr; }
       .hero-copy { min-height: auto; padding-right: 0; }
       .hero-visual { min-height: auto; padding-block: 1rem 4rem; }
@@ -239,6 +245,7 @@
       .principle:nth-child(3n) { border-right: 0; }
       .principle .number { margin-bottom: 2rem; }
       .state-grid { grid-template-columns: repeat(2, 1fr); }
+      .founder-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .manifesto-lines { grid-row: 1; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-nav { grid-column: auto; grid-row: auto; }
@@ -503,6 +510,33 @@
       </div>
     </section>
 
+    <section class="section" id="founders" aria-labelledby="founders-title">
+      <div class="shell">
+        <div class="section-head">
+          <p class="kicker" data-i18n="company.kicker">Company / Szero</p>
+          <h2 id="founders-title" data-i18n="founders.title">Founders</h2>
+        </div>
+        <div class="founder-grid">
+          <figure class="founder-card">
+            <img src="assets/founder-luana.webp" width="640" height="853" alt="Luana Martins" loading="lazy">
+            <figcaption>Luana Martins</figcaption>
+          </figure>
+          <figure class="founder-card">
+            <img src="assets/founder-bryan.webp" width="640" height="800" alt="Bryan de Oliveira" loading="lazy">
+            <figcaption>Bryan de Oliveira</figcaption>
+          </figure>
+          <figure class="founder-card">
+            <img src="assets/founder-bruno.webp" width="640" height="640" alt="Bruno Brandão" loading="lazy">
+            <figcaption>Bruno Brandão</figcaption>
+          </figure>
+          <figure class="founder-card">
+            <img src="assets/founder-murilo.webp" width="640" height="800" alt="Murilo Lopes" loading="lazy">
+            <figcaption>Murilo Lopes</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="shell contact-grid">
         <div>
@@ -537,6 +571,7 @@
         <li><a href="#principles" data-i18n="nav.principles">Principles</a></li>
         <li><a href="#company" data-i18n="nav.company">Company</a></li>
         <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        <li><a href="#founders" data-i18n="founders.title">Founders</a></li>
         <li><a href="mailto:hello@szero.io">hello@szero.io</a></li>
       </ul>
       <div class="footer-end">
@@ -549,6 +584,16 @@
   <script>
   (function () {
     "use strict";
+
+    var founderGrid = document.querySelector(".founder-grid");
+    var founders = Array.prototype.slice.call(founderGrid.children);
+    for (var i = founders.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var founder = founders[i];
+      founders[i] = founders[j];
+      founders[j] = founder;
+    }
+    founders.forEach(function (founder) { founderGrid.appendChild(founder); });
 
     var PT = {
       "meta.title": "Szero — Sistemas de inteligência para decisões, operações e descoberta",
@@ -643,6 +688,7 @@
       "company.title": "A inteligência começa em S0.",
       "company.p1": "A Szero é uma empresa de inteligência aplicada. Construímos o sistema completo em torno de uma decisão: como ela é enquadrada, o método que decide, o software que age, a avaliação que conquista confiança e o ciclo que torna a próxima decisão melhor.",
       "company.p2": "Nosso propósito é ajudar pessoas e máquinas a decidir melhor, ampliar a autonomia humana e acelerar o avanço científico.",
+      "founders.title": "Fundadores",
       "manifesto.kicker": "Manifesto / A partir de S0",
       "manifesto.lead": "Todo sistema capaz já foi um estado em branco. S0 é um problema que vale a pena resolver, sem nada construído ainda para ele. Tudo depois de S0 é conquistado: um método escolhido, um sistema conectado, uma avaliação superada, um resultado que ensinou algo.",
       "manifesto.lines": "Enquadrar.<br>Decidir.<br>Agir.<br>Verificar.<br>Aprender.",
