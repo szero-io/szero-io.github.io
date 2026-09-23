@@ -14,12 +14,15 @@ Keep text sizes on this scale instead of adding local near-duplicates.
 | `--font-emphasis` | 1.125rem | 18 | Company introduction and principle statement |
 | `--font-subtitle` | 1.25rem | 20 | Section introductions (`.lead`) |
 | `--font-card` | 1.5rem | 24 | Component headings and state progression |
-| `--font-section` | 2rem | 32 | Section headings and mobile Hero |
-| `--font-display` | 3rem | 48 | Desktop Hero and manifesto display |
+| `--font-section` | 3rem | 48 | Section headings |
+| `--font-display` | 3rem | 48 | Manifesto display |
+| `--font-hero` | 4rem | 64 | Hero heading |
 
 Pixel equivalents assume the browser's default 16px root. Do not fix the root
-size; rem values should respect the reader's font preference. Only the Hero
-changes size at the existing 680px breakpoint. Other roles keep their token.
+size; rem values should respect the reader's font preference. At 680px and below,
+`--font-hero` is 3rem (48px) and `--font-section` is 2.5rem (40px).
+The Hero has a separate token so its responsive scale does not change the
+manifesto display. All section headings share one token. Other roles keep their sizes.
 
 ## Families and hierarchy
 
@@ -76,6 +79,10 @@ heading, and manifesto display; other HTML text should render in Sans.
 Compare section order, column counts, artwork, and colors with the baseline.
 Typography changes natural wrapping and section heights; it must not conceal
 content or move components into unrelated layouts.
+
+Save readable Hero and section-heading captures in both languages at desktop
+and mobile widths before publication. Confirm 64px/48px Hero and 48px/40px section
+sizes at the default root size. The manifesto must remain 48px at all widths.
 
 There is no build command. `git diff --check` checks patch whitespace. Browser
 checks remain necessary because source searches cannot detect clipping or
