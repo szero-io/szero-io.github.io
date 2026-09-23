@@ -170,6 +170,8 @@
     .founder-card { min-width: 0; margin: 0; }
     .founder-card img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
     .founder-card figcaption { padding-block: 1rem; border-bottom: 1px solid var(--line); font: 600 var(--font-card)/1.2 var(--sans); }
+    .founder-link { display: table; margin-top: .25rem; padding-block: .5rem; color: var(--muted); font: 400 var(--font-aux)/1.4 var(--sans); text-underline-offset: .2em; }
+    .founder-link:hover, .founder-link:focus-visible { color: var(--ink); }
 
     .contact { background: var(--lime); }
     .contact-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(3rem, 8vw, 8rem); align-items: end; }
@@ -518,20 +520,28 @@
         </div>
         <div class="founder-grid">
           <figure class="founder-card">
-            <img src="assets/founder-luana.webp" width="640" height="853" alt="Luana Martins" loading="lazy">
-            <figcaption>Luana Martins</figcaption>
+            <img src="assets/founder-luana.webp" width="640" height="800" alt="Luana Martins" loading="lazy">
+            <figcaption>Luana Martins
+              <a class="founder-link" href="https://www.linkedin.com/in/luanagbmartins/" aria-label="Luana Martins — LinkedIn">LinkedIn</a>
+            </figcaption>
           </figure>
           <figure class="founder-card">
             <img src="assets/founder-bryan.webp" width="640" height="800" alt="Bryan de Oliveira" loading="lazy">
-            <figcaption>Bryan de Oliveira</figcaption>
+            <figcaption>Bryan de Oliveira
+              <a class="founder-link" href="https://www.linkedin.com/in/bryanoliveira/" aria-label="Bryan de Oliveira — LinkedIn">LinkedIn</a>
+            </figcaption>
           </figure>
           <figure class="founder-card">
             <img src="assets/founder-bruno.webp" width="640" height="640" alt="Bruno Brandão" loading="lazy">
-            <figcaption>Bruno Brandão</figcaption>
+            <figcaption>Bruno Brandão
+              <a class="founder-link" href="https://www.linkedin.com/in/bruno-bsm/" aria-label="Bruno Brandão — LinkedIn">LinkedIn</a>
+            </figcaption>
           </figure>
           <figure class="founder-card">
             <img src="assets/founder-murilo.webp" width="640" height="800" alt="Murilo Lopes" loading="lazy">
-            <figcaption>Murilo Lopes</figcaption>
+            <figcaption>Murilo Lopes
+              <a class="founder-link" href="https://www.linkedin.com/in/murilo-lopes-da-luz-b3749728/" aria-label="Murilo Lopes — LinkedIn">LinkedIn</a>
+            </figcaption>
           </figure>
         </div>
       </div>
