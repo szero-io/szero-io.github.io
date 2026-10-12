@@ -107,7 +107,7 @@ The original files remain unchanged. Crop derivatives resize proportionally to 6
 Conversion uses Pillow LANCZOS resampling and WebP quality 90, method 6. It does not copy source metadata.
 No aesthetic retouching, color filters, or invented roles accompany the photos.
 CSS displays each photo in a centered 4:5 frame with `object-fit: cover`.
-The grid uses four columns above 900px, two from 681px through 900px, and one at 680px or below.
+The grid uses four columns above 900px and two from 900px and below, so at least two photos stay on each row at every width.
 Images load lazily, declare their dimensions, and use the supplied names as alternative text.
 
 | Name | LinkedIn profile |
